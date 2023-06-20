@@ -1,0 +1,660 @@
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2><span>
+              <%= translation.projectManagement.title.module %>              
+            </span></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-card mb-3 card">
+          <div class="card-header staff_header">
+            <div class="header_title">
+              <h2>
+                <%= title %>
+              </h2>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="projectdetails_sec">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="projectd_box">
+                            <div class="projectd_txt">
+                                <p><span><i class="fa-solid fa-user-tie"></i></span> Client
+                                    Name</p>
+                                <h6><span>-</span> <%= contructData?.clientInfo?.first_name+" "+contructData?.clientInfo?.last_name %></h6>
+                            </div>
+                            <div class="projectd_txt">
+                                <p><span><i
+                                            class="fa-solid fa-mobile-screen-button"></i></span>
+                                    Contact Number</p>
+                                <h6><span>-</span> <%= contructData?.clientInfo?.phone %></h6>
+                            </div>
+                            <div class="projectd_txt">
+                                <p><span><i class="fa-regular fa-envelope"></i></span> Email
+                                    ID</p>
+                                <h6><span>-</span> <%= contructData?.clientInfo?.email %></h6>
+                            </div>
+                             <div class="projectd_txt">
+                                <p><span><i class="fa fa-check"></i></span> Client Type</p>
+                                <h6><span>-</span> <%= contructData?.clientInfo?.clientType?.name %></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="projectd_box">
+                            <div class="projectd_txt">
+                                <p><span><i class="fa fa-user"></i></span>Preparer Name
+                                </p>
+                                <h6><span>-</span><%= contructData?.preparer_name %> </h6>
+                            </div>
+                             <div class="projectd_txt">
+                                <p><span><i class="fa fa-envelope"></i></span>Preparer Email
+                                </p>
+                                <h6><span>-</span><%= contructData?.preparer_email %> </h6>
+                            </div>
+                             <div class="projectd_txt">
+                                <p><span><i class="fa fa-window-maximize"></i></span>Contruct Name
+                                </p>
+                                <h6><span>-</span><%= contructData?.contract_name %> </h6>
+                            </div>
+                             <div class="projectd_txt">
+                                <p><span><i class="fa fa-tag"></i></span>Contruct No
+                                </p>
+                                <h6><span>-</span><%= contructData?.contruct_no %> </h6>
+                            </div>
+                            <div class="projectd_txt">
+                                <p><span><i class="fa fa-credit-card"></i></span>Budget
+                                </p>
+                                <h6><span>-</span><%= contructData?.budget %> </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="add_newstaff">
+              <form class="adminFrm" id="projectAddFrm" data-action="project-create" method="post">
+                <input type="hidden" name="_csrf" value="<%=_csrfToken%>">
+                <input type="hidden" name="updateId" value="<%=(oldData)?oldData.id:""%>">
+                <input type="hidden" name="saveType" id="saveType" value="">
+                <input type="hidden" name="countructId"  value="<%=contructId??""%>">
+                <div class="row">
+                    <div class="col-md-3">
+                    <div class="single-login">
+                      <label class="login-label">
+                       Project Sub Type
+                        <span class="text-danger">*</span></label>
+                      <select name="project_sub_type_id" id="project_sub_type_id" class="form-control requiredCheck"
+                        data-check="Project Sub Type">
+                        <option value="">-Project Sub Type-</option>
+                        <% if (contructData?.projectType?.length) { Object.entries(contructData.projectType).forEach(([key, value])=> { %>
+                          <option value="<%= value.id %>" <%= (oldData && oldData?.project_sub_type_id==value.id?"selected":"") %>
+                            ><%= value.name %>
+                          </option>
+                          <% }) }else{ %>
+                            <option value="">
+                              <%= translation.projectManagement.addEditSection.noDataFound %>
+                            </option>
+                          <% } %>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-9">
+                      <div class="single-login">
+                        <label class="login-label">
+                          <%= translation.projectManagement.addEditSection.projectNameLabel %>
+                          <span class="text-danger">*</span>
+                        </label>
+                        <input class="form-control requiredCheck allowOnlyLetterSpace" type="text" name="name" id="name"
+                          placeholder="<%= translation.projectManagement.addEditSection.projectNamePlaceholder %>" data-check="<%= translation.projectManagement.addEditSection.projectNameCheck %>"
+                          value="<%=(oldData)?oldData.name:""%>" />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="single-login">
+                        <label class="login-label">
+                          Project Code
+                          <span class="text-danger">*</span>
+                        </label>
+                        <input class="form-control requiredCheck" type="text" name="project_alt_id" id="project_alt_id"
+                          placeholder="Enter Project Code" data-check="Project Code"
+                          value="<%=(oldData)?oldData.project_alt_id:""%>" />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="single-login">
+                        <label class="login-label">
+                          <%= translation.projectManagement.addEditSection.npmoProjectLabel %>
+                          <span class="text-danger">*</span>
+                        </label>
+                        <input class="form-control requiredCheck" type="text" name="npmo_no" id="npmo_no"
+                          placeholder=" <%= translation.projectManagement.addEditSection.npmoProjectPlaceholder %>" data-check=" <%= translation.projectManagement.addEditSection.npmoProjectCheck %>"
+                          value="<%=(oldData)?oldData.npmo_no:""%>" />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="single-login">
+                        <label class="login-label">
+                          <%= translation.projectManagement.addEditSection.entityNameLabel %>
+                          <span class="text-danger">*</span>
+                        </label>
+                        <input class="form-control requiredCheck allowOnlyLetterSpace" type="text" name="entity_name" id="entity_name"
+                          placeholder="<%= translation.projectManagement.addEditSection.entityNamePlaceholder %>" data-check="<%= translation.projectManagement.addEditSection.entityNameCheck %>"
+                          value="<%=(oldData)?oldData.entity_name:""%>" />
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="single-login">
+                        <label class="login-label">
+                          <%= translation.projectManagement.addEditSection.projectObjectivesLabel %>
+                           <span class="text-danger">*</span>
+                        </label>
+                        <textarea name="objectives" id="objectives" class="form-control requiredCheck ckeditor" data-check="<%= translation.projectManagement.addEditSection.projectObjectivesCheck %>"><%=(oldData)?oldData.objectives:""%></textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="single-login">
+                        <label class="login-label">
+                          <%= translation.projectManagement.addEditSection.projectScopeLabel %>
+                          <span class="text-danger">*</span>
+                        </label>
+                        <textarea name="scope" id="scope" class="form-control requiredCheck ckeditor" data-check="<%= translation.projectManagement.addEditSection.projectScopeCheck %>"><%=(oldData)?oldData.scope:""%></textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="single-login">
+                        <label class="login-label">
+                          <%= translation.projectManagement.addEditSection.projectStrategicLabel %>
+                          <span class="text-danger">*</span>
+                        </label>
+                        <textarea name="strategic_context" id="strategic_context" class="form-control requiredCheck ckeditor" data-check="<%= translation.projectManagement.addEditSection.projectStrategicCheck %>"><%=(oldData)?oldData.strategic_context:""%></textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="single-login">
+                        <label class="login-label">
+                          <%= translation.projectManagement.addEditSection.projectStudiesLabel %> <span class="text-danger">*</span>
+                        </label>
+                        <textarea name="studies" id="studies" class="form-control requiredCheck ckeditor" data-check="<%= translation.projectManagement.addEditSection.projectStudiesCheck %>"><%=(oldData)?oldData.studies:""%></textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="single-login">
+                        <label class="login-label">
+                          <%= translation.projectManagement.addEditSection.projectSiteLabel %> <span class="text-danger">*</span>
+                        </label>
+                        <textarea name="route_detail" id="route_detail" class="form-control requiredCheck ckeditor" data-check="<%= translation.projectManagement.addEditSection.projectSiteCheck %>"><%=(oldData)?oldData.route_detail:""%></textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="single-login">
+                        <label class="login-label">
+                          <%= translation.projectManagement.addEditSection.projectPotentialImpactLabel %> <span class="text-danger">*</span>
+                        </label>
+                        <textarea name="potential_impact" id="potential_impact" class="form-control requiredCheck ckeditor" data-check="<%= translation.projectManagement.addEditSection.projectPotentialImpactCheck %>"><%=(oldData)?oldData.potential_impact:""%></textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="single-login">
+                        <label class="login-label">
+                          <%= translation.projectManagement.addEditSection.descriptionLabel %>
+                          <span class="text-danger">*</span>
+                        </label>
+                        <textarea name="description" id="description" class="form-control requiredCheck ckeditor" data-check="<%= translation.projectManagement.addEditSection.descriptionCheck %>"><%=(oldData)?oldData.description:""%></textarea>
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-5">
+                      <div class="single-login">
+                        <label class="login-label"> <%= translation.projectManagement.addEditSection.locationLabel %> <span class="text-danger">*</span></label>
+                        <input class="form-control requiredCheck" type="text" name="location" id="location"
+                          placeholder="<%= translation.projectManagement.addEditSection.locationPlaceholder %>" data-check="Location"
+                          value="<%=(oldData)?oldData.location:""%>" />
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-2">
+                      <div class="single-login">
+                        <label class="login-label"> <%= translation.projectManagement.addEditSection.startDateLabel %> <span class="text-danger">*</span></label>
+                        <input class="form-control requiredCheck" type="date" name="start_date" id="start_date"
+                          placeholder="<%= translation.projectManagement.addEditSection.startDatePlaceholder %>" data-check="<%= translation.projectManagement.addEditSection.startDateCheck %>"
+                          value="<%=(oldData)?oldData.start_date:""%>" />
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="single-login">
+                        <label class="login-label"> <%= translation.projectManagement.addEditSection.endDateLabel %> <span class="text-danger">*</span></label>
+                        <input class="form-control requiredCheck" type="date" name="end_date" id="end_date"
+                          placeholder="<%= translation.projectManagement.addEditSection.endDatePlaceholder %>" data-check="<%= translation.projectManagement.addEditSection.endDateCheck %>" value="<%=(oldData)?oldData.end_date:""%>" />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="single-login">
+                        <label class="login-label"> Project Status <span class="text-danger">*</span></label>
+                        <!-- <input class="form-control requiredCheck" type="date" name="end_date" id="end_date"
+                          placeholder="<%= translation.projectManagement.addEditSection.endDatePlaceholder %>" data-check="<%= translation.projectManagement.addEditSection.endDateCheck %>" value="<%=(oldData)?oldData.end_date:""%>" /> -->
+                          <select name="project_status" id="project_status" class="form-control"> 
+                            <option value>--Select Status--</option>
+                            <option value="1" <%=(oldData && oldData.project_status=="1")?"selected":""%>>Running Projects</option>
+                            <option value="2" <%=(oldData && oldData.project_status=="2")?"selected":""%>>Preliminary Handed Over Projects</option>
+                            <option value="3" <%=(oldData && oldData.project_status=="3")?"selected":""%>>Finally Handed Over Projects</option>
+                            <option value="4" <%=(oldData && oldData.project_status=="4")?"selected":""%>>Withdrawn Projects</option>
+                          </select>
+                      </div>
+                    </div>
+                    <% 
+                      function getExtension(path) {
+                        var basename = path.split(/[\\/]/).pop(), // extract file name from full path ...
+                          // (supports `\\` and `/` separators)
+                          pos = basename.lastIndexOf("."); // get last position of `.`
+                        if (basename === "" || pos < 1){
+                          // if file name is empty or ...
+                          return ""; //  `.` not found (-1) or comes first (0)
+                        }
+                        return basename.slice(pos + 1); // extract extension ignoring `.`
+                      }
+
+                    if(oldData){ %>
+                      <div class="col-md-12 upload_docs">
+                            <div  class="row">
+                                <% oldData.projectDocument.forEach((item, index)=>{
+                                      var fileTypeImage = "/assets/images/icon-img/img_icon.png";
+                                      var fileExtension = getExtension(item.filename);
+                                      if(fileExtension.toLowerCase()==="pdf"){
+                                        fileTypeImage = "/assets/images/icon-img/pdf_icon.png";
+                                      }
+                                      if(fileExtension.toLowerCase()==="txt"){
+                                        fileTypeImage = "/assets/images/icon-img/txt_icon.png";
+                                      }
+                                      if(fileExtension.toLowerCase()==="xls"){
+                                        fileTypeImage = "/assets/images/icon-img/xls_icon.png";
+                                      }
+                                      if(fileExtension.toLowerCase()==="xlsx"){
+                                        fileTypeImage = "/assets/images/icon-img/xlsx_icon.png";
+                                      }
+                                      if(fileExtension.toLowerCase()==="ppt"){
+                                        fileTypeImage = "/assets/images/icon-img/ppt_icon.png";
+                                      }
+                                      if(fileExtension.toLowerCase()==="pptx"){
+                                        fileTypeImage = "/assets/images/icon-img/pptx_icon.png";
+                                      }
+                                      if(fileExtension.toLowerCase()==="doc"){
+                                        fileTypeImage = "/assets/images/icon-img/doc_icon.png";
+                                      }
+                                      if(fileExtension.toLowerCase()==="docx"){
+                                        fileTypeImage = "/assets/images/icon-img/docx_icon.png";
+                                      }
+                                  %>
+                                      <%-`<div class="col-md-3">
+                                          <div class="docs_img">
+                                              <img class="profile-pic img-fluid"
+                                                  src="${fileTypeImage}">
+                                              <div class="docs_imgoverlay">
+                                                  <a href="${baseUrl}uploads/project_documents/${item.filename}" target="_blank">
+                                                      <i class="fa-regular fa-eye"></i>
+                                                  </a>
+                                                  <a href="javascript:void(0)" data-id="${item.id}" class="deleteProjectDocumentFile">
+                                                      <i class="fa-regular fa-trash-can"></i>
+                                                  </a>
+                                              </div>
+                                          </div>
+                                          <h6>${item.document_name}</h6>
+                                      </div>`%>  
+                                <% }) %>
+                                
+                            </div>
+                        </div>
+                    <% } %>
+                     <div class="col-md-12 upload_docs">
+                        <div  class="row" id="uploadedFiles">
+
+                        </div>
+                    </div>
+                    <div class="col-12 mt-4 text-right">
+                      <% if(!oldData){ %>
+                      <button type="button" class="btn-shadow btn btn-info btn_dashboard saveBtn" data-val="save">Save & Add New</button>
+                      <button type="button" class="btn-shadow btn btn-info btn_dashboard saveBtn" data-val="exit">Save & Exit</button>
+                      <% }else{ %>
+                        <button type="button" class="btn-shadow btn btn-info btn_dashboard saveBtn" data-val="save">Update & Add New</button>
+                        <button type="button" class="btn-shadow btn btn-info btn_dashboard saveBtn" data-val="exit">Update & Exit</button>
+                      <% } %>
+                    </div>
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%-contentFor('modal')%>
+   <!-- upload document modal -->
+    <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadModalLabel"><%= translation.projectManagement.uploadProjectModal.modalTitle %></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form class="adminFrm" data-action="upload-temp-files" method="post" id="fileUploadModal" data-class="requiredCheckModal">
+                  <input type="hidden" name="_csrf" value="<%=_csrfToken%>">
+                  <input type="hidden" name="event" value="<%=(oldData)?"edit":"add"%>">
+                  <input type="hidden" name="reference" value="projects">
+                  <div class="modal-body uploaddoc_body"> 
+                    
+                      <div class="single-login upload_pdf">
+                          <label class="login-label"><%= translation.projectManagement.uploadProjectModal.uploadDocLabel %></label>
+                          <input data-check="<%= translation.projectManagement.uploadProjectModal.uploadDocCheck %>" class="requiredCheckModal" name="document" type='file' id="file" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" />
+                      </div>
+
+                      <div class="single-login">
+                          <label class="login-label"><%= translation.projectManagement.uploadProjectModal.docNameLabel %></label>
+                          <input class="form-control requiredCheckModal" type="text" name="document_name" id="" placeholder="<%= translation.projectManagement.uploadProjectModal.docNamePlaceholder %>" data-check="<%= translation.projectManagement.uploadProjectModal.docNameCheck %>">
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%= translation.projectManagement.uploadProjectModal.closeBtn %></button>
+                      <button type="submit" class="btn btn-primary" ><%= translation.projectManagement.uploadProjectModal.uploadBtn %></button>
+                  </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<script crossorigin="anonymous" src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js" ></script>
+<script type="text/javascript">
+    var event = '<%=(oldData)?"edit":"add"%>';
+    var  uploadModal = new bootstrap.Modal(document.getElementById("uploadModal"), {});
+    CKEDITOR.replaceClass='ckeditor';
+    CKEDITOR.config.allowedContent=true;
+    $(document).ready(function() {
+       $('#contact_no_client').val($("#client_id").find('option:selected').attr('client-phone'));
+       $('#email_client').val($("#client_id").find('option:selected').attr('client-email'));
+    })
+    clearTempFiles();
+    function clearTempFiles() {
+      $.ajax({
+        type:"POST",
+        url:baseUrl+"clear-temp-files",
+        data:{_csrf:_token,event:event,reference:"projects"},
+        dataType:"JSON",
+        success:function(resp){
+            // $("#uploadedFiles").html('');
+            $("#uploadedFiles").append(`<div class="col-md-3">
+                  <div class="p-image" data-bs-toggle="modal"
+                      data-bs-target="#uploadModal">
+                      <div class="upload_imgbox">
+                          <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                          <p>Upload Documents</p>
+                      </div>
+                  </div>
+              </div>`);
+        }
+      })
+    }
+    function tempfileListing() {
+      
+      $("#fileUploadModal")[0].reset();
+      uploadModal.hide();
+      $.ajax({
+        type:"POST",
+        url:baseUrl+"temp-file-list",
+        data:{_csrf:_token,event:event,reference:"projects"},
+        dataType:"JSON",
+        success:function(resp){
+            
+            if(resp.status){
+              $("#uploadedFiles").html('');
+              $.each(resp.data, function(k, v) {
+                var fileTypeImage = "/assets/images/icon-img/img_icon.png";
+                var fileExtension = getExtension(v.file);
+                if(fileExtension.toLowerCase()==="pdf"){
+                  fileTypeImage = "/assets/images/icon-img/pdf_icon.png";
+                }
+                if(fileExtension.toLowerCase()==="txt"){
+                  fileTypeImage = "/assets/images/icon-img/txt_icon.png";
+                }
+                if(fileExtension.toLowerCase()==="xls"){
+                  fileTypeImage = "/assets/images/icon-img/xls_icon.png";
+                }
+                if(fileExtension.toLowerCase()==="xlsx"){
+                  fileTypeImage = "/assets/images/icon-img/xlsx_icon.png";
+                }
+                if(fileExtension.toLowerCase()==="ppt"){
+                  fileTypeImage = "/assets/images/icon-img/ppt_icon.png";
+                }
+                if(fileExtension.toLowerCase()==="pptx"){
+                  fileTypeImage = "/assets/images/icon-img/pptx_icon.png";
+                }
+                if(fileExtension.toLowerCase()==="doc"){
+                  fileTypeImage = "/assets/images/icon-img/doc_icon.png";
+                }
+                if(fileExtension.toLowerCase()==="docx"){
+                  fileTypeImage = "/assets/images/icon-img/docx_icon.png";
+                }
+                $("#uploadedFiles").append(`
+                     <div class="col-md-3">
+                        <div class="docs_img">
+                            <img class="profile-pic img-fluid"
+                                src="${fileTypeImage}">
+                            <div class="docs_imgoverlay">
+                                <a href="${baseUrl}uploads/project_documents/${v.file}" target="_blank">
+                                    <i class="fa-regular fa-eye"></i>
+                                </a>
+                                <a href="javascript:void(0)" data-id="${v.id}" class="deleteTempFile">
+                                    <i class="fa-regular fa-trash-can"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <h6>${v.document_name}</h6>
+                    </div>
+                `);
+              });
+              $("#uploadedFiles").append(`<div class="col-md-3">
+                  <div class="p-image" data-bs-toggle="modal"
+                      data-bs-target="#uploadModal">
+                      <div class="upload_imgbox">
+
+                          <i
+                              class="fa-solid fa-arrow-up-from-bracket"></i>
+                          <p>Upload Documents</p>
+                      </div>
+                  </div>
+              </div>`);
+            }
+        }
+      })
+    }
+    $(document).on('click','.deleteTempFile',function(e) {
+        e.preventDefault()
+        var rtl = false;
+        var title = "Confirm!";
+        var content = "Do you really want to do this ?";
+        var btnTextConfirm = "Confirm";
+        var btnTextCancel = "Cancel";
+        var id = $(this).attr('data-id');
+        if (lang === "ar") {
+          rtl = true;
+          title = "يتأكد";
+          content = "هل تريد حقا أن تفعل هذا";
+          btnTextConfirm="تایید";
+          btnTextCancel="انصراف";
+        }
+        $.confirm({
+          icon: "fa fa-spinner fa-spin",
+          title: title,
+          content: content,
+          type: "orange",
+          rtl:rtl,
+          typeAnimated: true,
+          buttons: {
+            confirm: {
+              text: btnTextConfirm,
+              btnClass: 'btn-blue',
+              action:function () {
+              
+                  $.ajax({
+                    type: "POST",
+                    url: baseUrl + "temp-file-delete",
+                    data: {_csrf:_token,id:id},
+                    dataType: "JSON",
+                    success: function (data) {
+                      var rtl = false;
+                      var warning = "Warning!";
+                      var success = "Success!";
+                      var deleteContent = "Data has been deleted !";
+                      if (lang === "ar") {
+                        rtl = true;
+                        warning = "!تحذير";
+                        success = "!نجاح";
+                        deleteContent = "تم حذف البيانات!";
+                      }
+                      if (data.status) {
+                        tempfileListing();
+                        $.alert({
+                            icon: "fa fa-check",
+                            title: success,
+                            rtl: rtl,
+                            content: deleteContent,
+                            type: "green",
+                            typeAnimated: true,
+                          
+                          });
+                      }
+                    },
+                  });
+                
+              },
+            },
+            cancel:{
+              text: btnTextCancel,
+              btnClass: 'btn-red',
+              action:function () {
+                  var rtl = false;
+                  var title = "Canceled!";
+                  var content = "Process canceled!";
+                  if (lang === "ar") {
+                    rtl = true;
+                    title = "ألغيت!";
+                    content = "تم إلغاء العملية!";
+                  }
+                  $.alert({
+                    icon: "fa fa-times",
+                    title: title,
+                    content: content,
+                    type: "purple",
+                    rtl: rtl,
+                    typeAnimated: true,
+                  });
+              }
+            }
+          },
+        });
+    })
+    $(document).on('click','.deleteProjectDocumentFile',function(e) {
+        e.preventDefault()
+        var rtl = false;
+        var title = "Confirm!";
+        var content = "Do you really want to do this ?";
+        var btnTextConfirm = "Confirm";
+        var btnTextCancel = "Cancel";
+        var id = $(this).attr('data-id');
+        if (lang === "ar") {
+          rtl = true;
+          title = "يتأكد";
+          content = "هل تريد حقا أن تفعل هذا";
+          btnTextConfirm="تایید";
+          btnTextCancel="انصراف";
+        }
+        $.confirm({
+          icon: "fa fa-spinner fa-spin",
+          title: title,
+          content: content,
+          type: "orange",
+          rtl:rtl,
+          typeAnimated: true,
+          buttons: {
+            confirm: {
+              text: btnTextConfirm,
+              btnClass: 'btn-blue',
+              action:function () {
+              
+                  $.ajax({
+                    type: "POST",
+                    url: baseUrl + "project-file-delete",
+                    data: {_csrf:_token,id:id},
+                    dataType: "JSON",
+                    success: function (data) {
+                      var rtl = false;
+                      var warning = "Warning!";
+                      var success = "Success!";
+                      var deleteContent = "Data has been deleted !";
+                      if (lang === "ar") {
+                        rtl = true;
+                        warning = "!تحذير";
+                        success = "!نجاح";
+                        deleteContent = "تم حذف البيانات!";
+                      }
+                      if (data.status) {
+                        
+                        $.alert({
+                            icon: "fa fa-check",
+                            title: success,
+                            rtl: rtl,
+                            content: deleteContent,
+                            type: "green",
+                            typeAnimated: true,
+                          
+                          });
+                          setTimeout(function () {
+                            location.reload();
+                          }, 2000);
+                      }
+                    },
+                  });
+                
+              },
+            },
+            cancel:{
+              text: btnTextCancel,
+              btnClass: 'btn-red',
+              action:function () {
+                  var rtl = false;
+                  var title = "Canceled!";
+                  var content = "Process canceled!";
+                  if (lang === "ar") {
+                    rtl = true;
+                    title = "ألغيت!";
+                    content = "تم إلغاء العملية!";
+                  }
+                  $.alert({
+                    icon: "fa fa-times",
+                    title: title,
+                    content: content,
+                    type: "purple",
+                    rtl: rtl,
+                    typeAnimated: true,
+                  });
+              }
+            }
+          }
+        });
+    });
+    $(document).on('click','.saveBtn',function(e) {
+      e.preventDefault();
+      $("#saveType").val($(this).attr("data-val"));
+      for ( instance in CKEDITOR.instances ) {
+          CKEDITOR.instances[instance].updateElement();
+      }
+      $("#projectAddFrm").submit();
+    })
+    // window.onbeforeunload = () => '';
+  </script>

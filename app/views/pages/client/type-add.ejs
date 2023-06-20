@@ -1,0 +1,60 @@
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2><span>Client Type Management</span></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-card mb-3 card">
+          <div class="card-header staff_header">
+            <div class="header_title">
+              <h2><%= title %></h2>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="add_newstaff">
+              <form class="adminFrm" data-action="client-type-create" method="post">
+                <input type="hidden" name="_csrf" value="<%=_csrfToken%>">
+                <input type="hidden" name="updateId" value="<%=(oldData)?oldData.id:""%>">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="single-login">
+                      <label class="login-label">
+                         Name <span class="text-danger">*</span></label
+                      >
+                      <input
+                        class="form-control requiredCheck allowOnlyLetterSpace"
+                        type="text"
+                        name="name"
+                        id="name"
+                        placeholder="Enter Client Type Name"
+                        data-check="Client Type Name"
+                        value="<%=(oldData)?oldData.name:""%>"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12 mt-4 text-right">
+                    <button
+                      type="submit"
+                      class="btn-shadow btn btn-info btn_dashboard"
+                    >
+                      <%=(oldData)?"UPDATE":"SAVE"%> CLIENT TYPE
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

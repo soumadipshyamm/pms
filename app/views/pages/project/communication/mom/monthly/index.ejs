@@ -1,0 +1,146 @@
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2><span>Project Management</span></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-card mb-3 card">
+          <div class="card-header staff_header">
+            <div class="header_title">
+              <h2><%= title %> Of <%= projectDetails?projectDetails.name+" [ #"+projectDetails?.project_alt_id+" ]" :"" %></h2>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="projectn_box">
+              <!-- <div class="project_boxhead">
+                    <h4>Project Name:</h4>
+                </div> -->
+              <div class="projectnew_box">
+                <div class="addnew_project">
+                  <form
+                    class="adminFrm"
+                    data-action="project-communication/mom/save/<%=projectId%>"
+                    method="post"
+                    data-class="requiredCheck"
+                  >
+                    <input type="hidden" name="type" value="monthly">
+                    <input type="hidden" name="_csrf" value="<%=_csrfToken%>" />
+                    <div class="row align-items-center">
+                      <div class="col-md-6">
+                        <div class="single-login">
+                          <label class="login-label">Document Name</label>
+                          <input
+                            class="form-control requiredCheck allowOnlyLetterSpace"
+                            type="text"
+                            name="document_name"
+                            id="document_name"
+                            placeholder="Enter Document Name"
+                            data-check="Document Name"
+                          />
+                        </div>
+                      </div>
+                        <div class="col-md-6 uploaddoc_body">
+                            <div class="single-login upload_pdf">
+                                <label class="login-label">Choose file</label>
+                                <input data-check="File" class="requiredCheck" name="document" type="file" id="file" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="single-login">
+                            <label class="login-label">MOM Date</label>
+                            <input
+                                class="form-control requiredCheck "
+                                type="date"
+                                name="mom_date"
+                                id="mom_date"
+                                placeholder="Enter MOM Date"
+                                data-check="MOM Date"
+                            />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="single-login">
+                            <label class="login-label">MOM Time</label>
+                            <input
+                                class="form-control requiredCheck "
+                                type="time"
+                                name="mom_time"
+                                id="mom_time"
+                                placeholder="Enter MOM Time"
+                                data-check="MOM Time"
+                            />
+                            </div>
+                        </div>
+                      <div class="col-md-3 mt-5">
+                        <button class="btn btn-primary">
+                          <span><i class="fa-solid fa-plus"></i></span> Add
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- project box -->
+            <div class="projectr_box mt-4">
+             
+              <div class="projectr_boxtable">
+                <div class="table-responsive">
+                  <table class="table table-bordered table-hover">
+                    <thead class="thead-blue">
+                      <tr>
+                        <th scope="col">SL No.</th>
+                        <th scope="col">Document Name</th>
+                        <th scope="col">MOM Date</th>
+                        <th scope="col">MOM time</th>
+                        <th scope="col">MOM Document</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        
+                      <%  if(docs.length){
+                      Object.entries(docs).forEach(([key2, value2])=>
+                      { %>
+                      <tr>
+                        <th scope="row"><%=(Number(key2)+1)%></th>
+                        <td>
+                          <%=value2?.document_name %>
+                        </td>
+                        <td><%=value2?.mom_date %></td>
+                        <td><%=value2?.mom_time %></td>
+                        <td><a href="/uploads/project_mom_<%=value2?.type%>/<%=value2?.file_name%>" class="" target="_blank">
+                            <i class="fa-solid fa-eye"></i>
+                            </a>
+                        </td>
+                        <td>
+                          <a class="text-danger change-status" href="javascript:void(0)" id="<%=value2?.id%>" data-table="project_moms" data-status="3" data-key="id" data-id="<%=value2?.id%>" >
+                            <i class="fa-regular fa-trash-can"></i>
+                          </a>
+                        </td>
+                      </tr>
+                      <% }) }%>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+ 
+</div>

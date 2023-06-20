@@ -1,0 +1,190 @@
+<div class="app-header__content">
+  <div class="app-header-left">
+    <div class="search-wrapper">
+      <div class="input-holder">
+        <input type="text" class="search-input" placeholder="Type to search" />
+        <button class="search-icon"><span></span></button>
+      </div>
+      <button class="close"></button>
+    </div>
+  </div>
+  <div class="app-header-right">
+    <div class="header-btn-lg pr-0">
+      <div class="widget-content p-0">
+        <div class="widget-content-wrapper">
+          <div class="widget_langbox">
+            <div class="widget_lang">
+              <select name="lang" id="lang" class="form-control">
+                 <option value="en" <%=(lang=="en"?"selected":"")%>>English</option>
+                  <option value="ar"  <%=(lang=="ar"?"selected":"")%>>عربي</option>
+              </select>
+            </div>
+            <div class="widget_dropbox dropdown-action">
+              <button class="dropbtn-action">
+                <span>
+                  <img
+                    src="/assets/images/topdrop-icon.png"
+                    class="img-fluid"
+                    alt=""
+                  />
+                </span>
+              </button>
+              <ul class="dropdown-action-content">
+                <li><a class="dropdown_item_hier" href="#">Action</a></li>
+                <li>
+                  <a class="dropdown_item_hier" href="#">Another action</a>
+                </li>
+                <li>
+                  <a class="dropdown_item_hier" href="#">Something else here</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="widget_dropbox dropdown">
+              <button
+                class="top_toggle dropdown-toggle setting_btn"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <span>
+                  <i class="fa-solid fa-gear"></i>
+                </span>
+              </button>
+              <div
+                class="dropdown-menu setting_dropdown"
+                aria-labelledby="dropdownMenuButton1"
+              >
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="setting_head">
+                      <h6><%= translation.topBar.settings.generalSetting %> </h6>
+                      <ul>
+                        <li class="active">
+                          <a class="dropdown_item_hier" href="#"><%= translation.topBar.settings.action %></a>
+                        </li>
+                        <li>
+                          <a class="dropdown_item_hier" href="#"
+                            ><%= translation.topBar.settings.anotherAction %></a
+                          >
+                        </li>
+                        <li>
+                          <a class="dropdown_item_hier" href="#"
+                            ><%= translation.topBar.settings.somethingElseHere %></a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="setting_head">
+                      <h6><%= translation.topBar.settings.administrativeSetting %></h6>
+                      <ul>
+                        <% if(_sessionUser?.menuAccess?.includes("profile-and-permission")){ %>
+                        <li
+                          class="<%= (currentUrl==='profile-list' || currentUrl==='profile-add' || currentUrl==='profile-edit')?'active':'' %>"
+                        >
+                          <a class="dropdown_item_hier" href="/profile-list"
+                            ><%= translation.topBar.settings.profilePermissions %></a
+                          >
+                        </li>
+                         <% } if(_sessionUser?.menuAccess?.includes("role")){ %>
+                        <li
+                          class="<%= (currentUrl==='role-list')?'active':'' %>"
+                        >
+                          <a class="dropdown_item_hier" href="/role-list"
+                            ><%= translation.topBar.settings.roles %></a
+                          >
+                        </li>
+                         <% } if(_sessionUser?.menuAccess?.includes("material-management")){ %>
+                        <li
+                          class="<%= (currentUrl==='material-list')?'active':'' %>"
+                        >
+                          <a class="dropdown_item_hier" href="/material-list"
+                            ><%= translation.topBar.settings.materialManagement %></a
+                          >
+                        </li>
+                        <% } if(_sessionUser?.menuAccess?.includes("client-type-management")){ %>
+                        <li
+                          class="<%= (currentUrl==='client-type-list')?'active':'' %>"
+                        >
+                          <a class="dropdown_item_hier" href="/client-type-list"
+                            ><%= translation?.topBar?.settings?.ClientTypeManagement??"Client Type Management" %></a
+                          >
+                        </li>
+                        
+                        <% } if(_sessionUser?.menuAccess?.includes("project-type-management")){ %>
+                          <li class="<%= (currentUrl==='project-type-list')?'active':'' %>">
+                            <a class="dropdown_item_hier" href="/project-type-list">
+                              <%= translation?.topBar?.settings?.ProjectTypeManagement??"Project Type Management"
+                                %>
+                            </a>
+                          </li>
+                        <% } %>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="widget-content-left ml-3 header-user-info">
+            <div class="widget-heading"><%= _sessionUser?.name %></div>
+            <div class="widget-subheading"><%= _sessionUser?.email %></div>
+          </div>
+          <div class="widget-content-left widget_profile">
+            <div class="btn-group">
+              <a
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                class="p-0 btn"
+              >
+                <img
+                  width="42"
+                  class="rounded-circle"
+                  src="<%=_sessionUser?.profileImage?"/uploads/profile_images/"+_sessionUser?.profileImage:"/assets/images/no-image.jpg"%>"
+                  alt=""
+                />
+                <i class="fa fa-angle-down ml-2 opacity-8"></i>
+              </a>
+              <div
+                tabindex="-1"
+                role="menu"
+                aria-hidden="true"
+                class="dropdown-menu dropdown-menu-right"
+              >
+                <a href="/my-profile" class="dropdown-item">
+                  My Profile
+                </a>
+                <!-- <button type="button" tabindex="0" class="dropdown-item">
+                  Settings
+                </button>
+                <h6 tabindex="-1" class="dropdown-header">Header</h6>
+                <button type="button" tabindex="0" class="dropdown-item">
+                  Actions
+                </button> -->
+                <div tabindex="-1" class="dropdown-divider"></div>
+                <a href="/log-out" class="dropdown-item">
+                 Log Out
+                </a>
+              </div>
+            </div>
+
+            <div class="top_notibox">
+              <a href="#">
+                <img
+                  src="/assets/images/noti-top.png"
+                  class="img-fluid"
+                  alt=""
+                />
+                <span class="notification_no">1</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

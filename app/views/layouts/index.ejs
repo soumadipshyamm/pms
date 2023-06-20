@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+
+    <!-- font awesome css -->
+    <!-- <link rel="stylesheet" href="assets/css/all.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"> -->
+    <title><%= title?? "" %></title>
+    <!-- font family -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+
+    <!-- bootstrap multi select -->
+    <!-- <link href="assets/css/bootstrap-multiselect.css" rel="stylesheet"> -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/1.1.2/css/bootstrap-multiselect.css"
+        rel="stylesheet">
+
+    <!-- custom css -->
+    <% if(lang==='en'){ %>
+          <!-- dashboard css -->
+        <link href="/assets/css/main.css" rel="stylesheet">
+        <!-- LTR  -->
+        <link rel="stylesheet" href="/assets/css/style.css">
+       
+    <% }else{ %>
+        <!-- RTL -->
+          <!-- dashboard css remove it after completing the rtl.css -->
+        <link href="/assets/css/main.css" rel="stylesheet">
+        
+        <!-- RTL please replace this style.css with rtl.css   -->
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/assets/css/rtl.css">
+       
+    <% } %>
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <link rel="stylesheet" href="/assets/css/dev.css">
+    <!-- fav icon -->
+    <link rel="icon" type="image/png" href="/assets/images/fav-icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <%- style %>
+    
+    <script>
+        let baseUrl = "<%=baseUrl%>";
+        let _token  = "<%=_csrfToken%>";
+        let lang    ="<%=lang%>";
+    </script>
+    
+</head>
+
+<body>
+    <section class="dashboard_sec">
+        <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+            <!-- dahboard top bar -->
+            <div class="app-header header-shadow">
+                <div class="app-header__logo">
+                    <div class="logo-src">
+                        <img src="/assets/images/AAW-logo.png" class="img-fluid" alt="">
+                    </div>
+                    <div class="header__pane ml-auto">
+                        <div>
+                            <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
+                                data-class="closed-sidebar">
+                                <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="app-header__mobile-menu">
+                    <div>
+                        <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="app-header__menu">
+                    <span>
+                        <button type="button"
+                            class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                            <span class="btn-icon-wrapper">
+                                <i class="fa fa-ellipsis-v fa-w-6"></i>
+                            </span>
+                        </button>
+                    </span>
+                </div>
+                <%- include('./topbar') %>
+            </div>
+            <div class="app-main">
+                <!-- dashboard side bar -->
+                <div class="app-sidebar sidebar-shadow">
+                    <div class="app-header__logo">
+                        <div class="logo-src"></div>
+                        <div class="header__pane ml-auto">
+                            <div>
+                                <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
+                                    data-class="closed-sidebar">
+                                    <span class="hamburger-box">
+                                        <span class="hamburger-inner"></span>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-header__mobile-menu">
+                        <div>
+                            <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
+                                <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="app-header__menu">
+                        <span>
+                            <button type="button"
+                                class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                                <span class="btn-icon-wrapper">
+                                    <i class="fa fa-ellipsis-v fa-w-6"></i>
+                                </span>
+                            </button>
+                        </span>
+                    </div>
+                    <%- include('./leftbar') %>
+                </div>
+                <!-- dashboard main body -->
+                <%- body %>
+                <!-- dashboard main footer -->
+                <div class="app-wrapper-footer">
+                    <div class="app-footer">
+                    <div class="app-footer__inner">
+                        <div class="designby_dashboard">
+                        <p><%= translation.login.loginBox.designedBy %></p>
+                        <img src="/assets/images/designby.png" class="img-fluid" alt="" />
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<%-defineContent('modal')%>
+    <div  id="preloader">
+        <span class="ripple-effect" ></span>
+    </div>
+    <!-- JS Files -->
+    <!-- bootstrap JS -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <!-- font aawesome kit -->
+    <script src="https://kit.fontawesome.com/c7890550ed.js" crossorigin="anonymous"></script>
+    <!-- dashboard script -->
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+    <!-- bootstrap select 2 -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/1.1.2/js/bootstrap-multiselect.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/assets/js/custom.js"></script>
+    <script src="/assets/js/common.js"></script>
+    <script>
+        const uris = ["project","project-dashboard","project-financial-management","project-boq","project-communication","project-edit","project-details","project-time-table-and-schedule","project-resources","project-safety-and-security","project-cost","project-stakeholder-and-risk"];
+        var currentUrl = "<%=currentUrl%>";
+        $(document).on('change','#lang',function(e) {
+            let url = window.location.pathname+"?clang="+$(this).val()
+            window.location.href = url;
+        })
+        $(document).on('change','#progressProjectlist', function(e) {
+            let encryptedID = $(this).find(":selected").val();
+            if(uris.includes(currentUrl)){
+                window.location.assign(`/${currentUrl}/${encryptedID}`);
+            }
+            
+            if(encryptedID!=""){
+                $("#projectOpions").html('');
+                $("#projectOpions").append(`
+                        <li><a class="${currentUrl==="project-dashboard"?'active':''}" href="/project-dashboard/${encryptedID}"><span><i class="fa fa-dashboard"></i></span> Dashboard</a></li>
+                        <li><a class="${currentUrl==="project-communication"?'active':''}" href="/project-communication/${encryptedID}"><span><i class="fa fa-folder"></i></span> Communication</a></li>
+                        <li><a class="${currentUrl==="project-details"?'active':''}" href="javascript:void(0)"><span><i class="fa fa-folder"></i></span> Documents</a></li>
+                        <li><a class="${currentUrl==="project-details"?'active':''}" href="javascript:void(0)"><span><i class="fa fa-folder"></i></span> Material Approval</a></li>
+                        <li><a class="${currentUrl==="project-details"?'active':''}" href="javascript:void(0)"><span><i class="fa fa-folder"></i></span> Material Inspection</a></li>
+                        <li><a class="${currentUrl==="project-details"?'active':''}" href="javascript:void(0)"><span><i class="fa fa-folder"></i></span> PMM</a></li>
+                        <li><a class="${currentUrl==="project-details"?'active':''}" href="javascript:void(0)"><span><i class="fa fa-folder"></i></span> Request For Inspection</a></li>
+                        <li><a class="${currentUrl==="project-details"?'active':''}" href="javascript:void(0)"><span><i class="fa fa-folder"></i></span> Financial</a></li>
+                        <li><a class="${currentUrl==="project-details"?'active':''}" href="javascript:void(0)"><span><i class="fa fa-folder"></i></span> Schedule</a></li>
+                        <li><a class="${currentUrl==="project-details"?'active':''}" href="javascript:void(0)"><span><i class="fa fa-folder"></i></span> Safty & Security</a></li>
+                        <li><a class="${currentUrl==="project-details"?'active':''}" href="javascript:void(0)"><span><i class="fa fa-folder"></i></span> Quality</a></li>
+                        <li><a class="${currentUrl==="project-details"?'active':''}" href="javascript:void(0)"><span><i class="fa fa-folder"></i></span> Handover</a></li>
+                        
+                        
+                    `);
+            }
+            
+        })
+        $(document).ready(function(params) {
+            let encryptedID = $("#progressProjectlist").find(":selected").val();
+            if(uris.includes(currentUrl)){
+                var projectId = window.location.pathname.split('/')[2];
+                if(window?.location?.pathname?.split('/')[3]){
+                    projectId = window?.location?.pathname?.split('/')[3]
+                }
+                if(window?.location?.pathname?.split('/')[4]){
+                    projectId = window?.location?.pathname?.split('/')[4]
+                }
+                $("#progressProjectlist").val(projectId);
+                $("#progressProjectlist").multiselect("refresh");
+            }
+            if(encryptedID!=""){
+                $("#projectOpions").html('');
+                $("#projectOpions").append(`
+                        <li><a class="${currentUrl==="project-dashboard"?'active':''}" href="/project-dashboard/${encryptedID}"><span><i class="fa fa-dashboard"></i></span> Dashboard</a></li>
+                        <li><a class="${currentUrl==="project"?'active':''}"  href="/project/Communication/${encryptedID}"><span><i class="fa fa-folder"></i></span> Communication</a></li>
+                        <li><a class="${currentUrl==="project-details"?'active':''}" href="javascript:void(0)"><span><i class="fa fa-folder"></i></span> Documents</a></li>
+                        <li><a class="${currentUrl==="project-details"?'active':''}" href="javascript:void(0)"><span><i class="fa fa-folder"></i></span> Material Approval</a></li>
+                        <li><a class="${currentUrl==="project-details"?'active':''}" href="javascript:void(0)"><span><i class="fa fa-folder"></i></span> Material Inspection</a></li>
+                        <li><a class="${currentUrl==="project-details"?'active':''}" href="javascript:void(0)"><span><i class="fa fa-folder"></i></span> PMM</a></li>
+                        <li><a class="${currentUrl==="project-details"?'active':''}" href="javascript:void(0)"><span><i class="fa fa-folder"></i></span> Request For Inspection</a></li>
+                        <li><a class="${currentUrl==="project-details"?'active':''}" href="javascript:void(0)"><span><i class="fa fa-folder"></i></span> Financial</a></li>
+                        <li><a class="${currentUrl==="project-details"?'active':''}" href="javascript:void(0)"><span><i class="fa fa-folder"></i></span> Schedule</a></li>
+                        <li><a class="${currentUrl==="project-details"?'active':''}" href="javascript:void(0)"><span><i class="fa fa-folder"></i></span> Safty & Security</a></li>
+                        <li><a class="${currentUrl==="project-details"?'active':''}" href="javascript:void(0)"><span><i class="fa fa-folder"></i></span> Quality</a></li>
+                        <li><a class="${currentUrl==="project-details"?'active':''}" href="javascript:void(0)"><span><i class="fa fa-folder"></i></span> Handover</a></li>
+                        
+
+                       
+                    `);
+            }
+        })
+    </script>
+    <%- script  %>   
+</body>
+</html>

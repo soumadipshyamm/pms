@@ -1,0 +1,341 @@
+<div class="scrollbar-sidebar">
+  <div class="app-sidebar__inner">
+    <ul class="vertical-nav-menu">
+      <% if(_sessionUser?.menuAccess?.includes("dashboard")){ %>
+      <li
+        class="app-sidebar__heading <%= (currentUrl==='dashboard')?'mm-active':'' %>"
+      >
+        <a href="/dashboard">
+          <img
+            src="/assets/images/menu-items/home.png"
+            class="img-fluid metismenu-icon"
+            alt=""
+          />
+          <%= translation.leftBar.Dashboard %>   
+        </a>
+      </li>
+      <% } if(_sessionUser?.menuAccess?.includes("project-management")){ 
+        const uris = ["project","project-dashboard","project-financial-management","project-boq","project-communication","project-edit","project-details","project-time-table-and-schedule","project-resources","project-safety-and-security","project-cost","project-stakeholder-and-risk"];
+        
+        %>
+      <li
+        class="app-sidebar__heading <%= (uris.includes(currentUrl))?'mm-active':'' %>"
+      >
+        <a href="javascript:void(0)">
+          <img
+            src="/assets/images/menu-items/sm.png"
+            class="img-fluid metismenu-icon"
+            alt=""
+          />
+          <%= translation.leftBar.Project.ProjectManagement %>  
+          <img
+            src="/assets/images/menu-items/dropdown.png"
+            class="img-fluid metismenu-state-icon"
+            alt=""
+          />
+        </a>
+        <ul>
+           <% if(_sessionUser?.profileId ===1 ||  _sessionUser?.profileId ===10){ %>
+          
+              <li class="<%= (currentUrl==='project-add')?'sub_active':'' %>">
+                 
+                 
+                     <a href="/project-add">
+                      <i class="fa-regular fa-rectangle-list"></i>
+                      <%= translation.leftBar.Project.AddNewProject %> 
+                  </a>
+                  <a href="/project-list">
+                      <i class="fa-regular fa-rectangle-list"></i>
+                      <%= translation.leftBar.Project.ProjectList %> 
+                  </a>
+                  
+                  </li>
+            <% } %>
+                  
+             
+
+        </ul>
+      </li>
+      <% } if(_sessionUser?.menuAccess?.includes("financial1-management")){ %>
+      <li class="app-sidebar__heading">
+        <a href="#">
+          <img
+            src="/assets/images/menu-items/fm.png"
+            class="img-fluid metismenu-icon"
+            alt=""
+          />
+          <%= translation.leftBar.FinancialManagement %>   
+          <img
+            src="/assets/images/menu-items/dropdown.png"
+            class="img-fluid metismenu-state-icon"
+            alt=""
+          />
+        </a>
+        <!-- <ul>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-coins"></i>
+              Financial Management 1
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-coins"></i>
+              Financial Management 1
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-coins"></i>
+              Financial Management 1
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-coins"></i>
+              Financial Management 1
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-coins"></i>
+              Financial Management 1
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-coins"></i>
+              Financial Management 1
+            </a>
+          </li>
+        </ul> -->
+      </li>
+       <% } if(_sessionUser?.menuAccess?.includes("order-management")){ %>
+      <li class="app-sidebar__heading">
+        <a href="#">
+          <img
+            src="/assets/images/menu-items/om.png"
+            class="img-fluid metismenu-icon"
+            alt=""
+          />
+          <%= translation.leftBar.OrderManagement %>  
+          <img
+            src="/assets/images/menu-items/dropdown.png"
+            class="img-fluid metismenu-state-icon"
+            alt=""
+          />
+        </a>
+        <!-- <ul>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-coins"></i>
+              Order Management 1
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-coins"></i>
+              Order Management 1
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-coins"></i>
+              Order Management 1
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-coins"></i>
+              Order Management 1
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-coins"></i>
+              Order Management 1
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-coins"></i>
+              Order Management 1
+            </a>
+          </li>
+        </ul> -->
+      </li>
+      <% } if(_sessionUser?.menuAccess?.includes("user-management")){ %>
+      <li
+        class="app-sidebar__heading <%= (currentUrl==='user-list' || currentUrl==='user-add' || currentUrl==='user-edit')?'mm-active':'' %>"
+      >
+        <a href="javascript:void(0)">
+          <img
+            src="/assets/images/menu-items/sm.png"
+            class="img-fluid metismenu-icon"
+            alt=""
+          />
+          <%= translation.leftBar.User.UserManagement %>   
+          <img
+            src="/assets/images/menu-items/dropdown.png"
+            class="img-fluid metismenu-state-icon"
+            alt=""
+          />
+        </a>
+        <ul>
+          <li class="<%= (currentUrl==='user-list')?'sub_active':'' %>">
+            <a href="/user-list">
+              <i class="fa-solid fa-coins"></i>
+              <%= translation.leftBar.User.UserList %>  
+            </a>
+          </li>
+          <li class="<%= (currentUrl==='user-add')?'sub_active':'' %>">
+            <a href="/user-add">
+              <i class="fa-solid fa-coins"></i>
+              <%= translation.leftBar.User.AddNewUser %> 
+            </a>
+          </li>
+        </ul>
+      </li>
+      <% } if(_sessionUser?.menuAccess?.includes("client-management")){ %>
+      <li
+        class="app-sidebar__heading <%= (currentUrl==='client-list' || currentUrl==='client-add' || currentUrl==='client-edit')?'mm-active':'' %>"
+      >
+        <a href="javascript:void(0)">
+          <img
+            src="/assets/images/menu-items/sm.png"
+            class="img-fluid metismenu-icon"
+            alt=""
+          />
+          <%= translation.leftBar.Client.ClientManagement %>   
+          <img
+            src="/assets/images/menu-items/dropdown.png"
+            class="img-fluid metismenu-state-icon"
+            alt=""
+          />
+        </a>
+        <ul>
+          <li class="<%= (currentUrl==='client-list')?'sub_active':'' %>">
+            <a href="/client-list">
+              <i class="fa-solid fa-coins"></i>
+              <%= translation.leftBar.Client.ClientList %>    
+            </a>
+          </li>
+          <li class="<%= (currentUrl==='client-add')?'sub_active':'' %>">
+            <a href="/client-add">
+              <i class="fa-solid fa-coins"></i>
+              <%= translation.leftBar.Client.AddNewClient %> 
+            </a>
+          </li>
+        </ul>
+      </li>
+      <% } if(_sessionUser?.menuAccess?.includes("vendor-management")){ %>
+      <li
+        class="app-sidebar__heading <%= (currentUrl==='vendor-list' || currentUrl==='vendor-add' || currentUrl==='vendor-edit')?'mm-active':'' %>"
+      >
+        <a href="javascript:void(0)">
+          <img
+            src="/assets/images/menu-items/sm.png"
+            class="img-fluid metismenu-icon"
+            alt=""
+          />
+          <%= translation.leftBar.Contractor_Consultant.Management %>  
+          <img
+            src="/assets/images/menu-items/dropdown.png"
+            class="img-fluid metismenu-state-icon"
+            alt=""
+          />
+        </a>
+        <ul>
+          <li class="<%= (currentUrl==='contractor-and-consultant-list')?'sub_active':'' %>">
+            <a href="/vendor-list">
+              <i class="fa-solid fa-coins"></i>
+              <%= translation.leftBar.Contractor_Consultant.List %>   
+            </a>
+          </li>
+          <li class="<%= (currentUrl==='contractor-and-consultant-add')?'sub_active':'' %>">
+            <a href="/vendor-add">
+              <i class="fa-solid fa-coins"></i>
+              <%= translation.leftBar.Contractor_Consultant.AddNew %> 
+            </a>
+          </li>
+        </ul>
+      </li>
+      <% } if(_sessionUser?.menuAccess?.includes("report")){ %>
+      <li class="app-sidebar__heading">
+        <a href="#">
+          <img
+            src="/assets/images/menu-items/report.png"
+            class="img-fluid metismenu-icon"
+            alt=""
+          />
+          <%= translation.leftBar.Report %>   
+          <img
+            src="/assets/images/menu-items/dropdown.png"
+            class="img-fluid metismenu-state-icon"
+            alt=""
+          />
+        </a>
+        <ul>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-coins"></i>
+              Report 1
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-coins"></i>
+              Report 1
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-coins"></i>
+              Report 1
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-coins"></i>
+              Report 1
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-coins"></i>
+              Report 1
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa-solid fa-coins"></i>
+              Report 1
+            </a>
+          </li>
+        </ul>
+      </li>
+       <% } if(_sessionUser?.menuAccess?.includes("notification")){ %>
+      <li class="app-sidebar__heading">
+        <a href="dashboard-boxes.html">
+          <img
+            src="/assets/images/menu-items/notification.png"
+            class="img-fluid metismenu-icon"
+            alt=""
+          />
+          <%= translation.leftBar.Notification %>      
+        </a>
+      </li>
+      <% }  %>
+      <li class="app-sidebar__heading">
+        <a href="/log-out">
+          <img
+            src="/assets/images/menu-items/logout.png"
+            class="img-fluid metismenu-icon"
+            alt=""
+          />
+          <%= translation.leftBar.LogOut %> 
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

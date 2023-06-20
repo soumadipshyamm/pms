@@ -1,0 +1,126 @@
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2><span>Organization Hierarchy</span></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-card mb-3 card">
+          <div class="card-body">
+            <div class="hierarchy_box">
+              <ul class="tree">
+                <li class="branch">
+                  <p class="hierarchy_con">AAW</p>
+
+                  <ul class="">
+                    <%- roleList %>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- dashboard main footer -->
+
+  <%-contentFor('modal')%>
+  <div
+    class="modal"
+    id="addEditRoleModal"
+    tabindex="-1"
+    aria-labelledby="addModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addModalLabel">Modal title</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="add_newstaff" id="formRender">
+            
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-primary" id="SaveRole">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+<script>
+  var roleModal = new bootstrap.Modal(document.getElementById("addEditRoleModal"), {});
+  $(document).on("click", ".addModal", function (event) {
+    let hierarchyId = $(this).attr('data-id');
+    let html = `<form class="adminFrm"  data-action="role-create" method="post">
+              <input type="hidden" name="_csrf" value="<%=_csrfToken%>" />
+              <input type="hidden" name="updateId" value="">
+              <input type="hidden" name="hierarchy_id" value="${hierarchyId}">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="single-login">
+                    <label class="login-label">
+                      Role Name <span class="text-danger">*</span></label>
+                    <input class="form-control requiredCheck
+                    allowOnlyLetterSpace" type="text" name="name" id="name"
+                    placeholder="Enter Role Name" data-check="Role Name"
+                    value="" />
+                  </div>
+                </div>
+              </div>
+            </form>`;
+    $("#formRender").html(html);
+    roleModal.show();
+  });
+  $(document).on("click", ".editModal", function (event) {
+    let hierarchyId = $(this).attr('data-hierarchy-id');
+    let updateId = $(this).attr('data-id');
+    let name = $(this).attr('data-name');
+    let html = `<form class="adminFrm"  data-action="role-create" method="post">
+              <input type="hidden" name="_csrf" value="<%=_csrfToken%>" />
+              <input type="hidden" name="updateId" value="${updateId}">
+              <input type="hidden" name="hierarchy_id" value="${hierarchyId}">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="single-login">
+                    <label class="login-label">
+                      Role Name <span class="text-danger">*</span></label
+                    >
+                    <input class="form-control requiredCheck
+                    allowOnlyLetterSpace" type="text" name="name" id="name"
+                    placeholder="Enter Role Name" data-check="Role Name"
+                    value="${name}" />
+                  </div>
+                </div>
+              </div>
+            </form>`;
+    $("#formRender").html(html);
+    roleModal.show();
+  });
+  $(document).on('click','#SaveRole',function(event) {
+      $('.adminFrm').submit();
+  })
+</script>

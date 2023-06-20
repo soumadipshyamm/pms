@@ -1,0 +1,227 @@
+<div class="app-main__outer">
+<div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+                    <h2 class="text_skyblue"><span>Safety and security -</span> (<%=oldData?.name%>)</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+
+                    <!-- project box -->
+                    <div class="projectr_box">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-blue">
+                                    <tr>
+                                        <th scope="col">SL No.</th>
+                                        <th scope="col">Document Label</th>
+                                        <th scope="col">Document</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% 
+                                        function getExtension(path) {
+                                            var basename = path.split(/[\\/]/).pop(), // extract file name from full path ...
+                                            // (supports `\\` and `/` separators)
+                                            pos = basename.lastIndexOf("."); // get last position of `.`
+                                            if (basename === "" || pos < 1){
+                                            // if file name is empty or ...
+                                            return ""; //  `.` not found (-1) or comes first (0)
+                                            }
+                                            return basename.slice(pos + 1); // extract extension ignoring `.`
+                                        }
+                                        if(oldData.projectDocument.length){ 
+                                            Object.entries(oldData.projectDocument).forEach(([key, value]) => {
+                                                var fileTypeImage = "/assets/images/icon-img/img_icon.png";
+                                                var fileExtension = getExtension(value.filename);
+                                                if(fileExtension.toLowerCase()==="pdf"){
+                                                    fileTypeImage = "/assets/images/icon-img/pdf_icon.png";
+                                                }
+                                                if(fileExtension.toLowerCase()==="txt"){
+                                                    fileTypeImage = "/assets/images/icon-img/txt_icon.png";
+                                                }
+                                                if(fileExtension.toLowerCase()==="xls"){
+                                                    fileTypeImage = "/assets/images/icon-img/xls_icon.png";
+                                                }
+                                                if(fileExtension.toLowerCase()==="xlsx"){
+                                                    fileTypeImage = "/assets/images/icon-img/xlsx_icon.png";
+                                                }
+                                                if(fileExtension.toLowerCase()==="ppt"){
+                                                    fileTypeImage = "/assets/images/icon-img/ppt_icon.png";
+                                                }
+                                                if(fileExtension.toLowerCase()==="pptx"){
+                                                    fileTypeImage = "/assets/images/icon-img/pptx_icon.png";
+                                                }
+                                                if(fileExtension.toLowerCase()==="doc"){
+                                                    fileTypeImage = "/assets/images/icon-img/doc_icon.png";
+                                                }
+                                                if(fileExtension.toLowerCase()==="docx"){
+                                                    fileTypeImage = "/assets/images/icon-img/docx_icon.png";
+                                                }
+                                                
+                                    %>
+                                    <tr>
+                                        <th scope="row"><%=(Number(key)+1)%></th>
+                                        <td><%=value.document_name%></td>
+                                        <td>
+                                            <div class="safetytable_img">
+                                                 <img class="profile-pic img-fluid"
+                                                  src="<%=fileTypeImage%>">
+                                                </div>
+                                           </td>
+                                        <td>
+                                            <a href="<%=`${baseUrl}uploads/project_documents/${value.filename}`%>" class="" target="_blank">
+                                                      <i class="fa-solid fa-eye"></i>
+                                            </a>
+                                            <a href="javascript:void(0)" data-id="<%=value.id%>" class="text-danger deleteProjectDocumentFile">
+                                                <i class="fa-regular fa-trash-can"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <%
+                                            })
+                                        }
+                                %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- project name (add) -->
+                    <div class="projectn_box">
+                        <div class="projectnew_box">
+                            <form class="adminFrm" data-action="upload-project-safety-and-security-document/<%=projectId%>" method="post" data-class="requiredCheck">
+                                <input type="hidden" name="_csrf" value="<%=_csrfToken%>">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6">
+                                        <div class="single-login">
+                                            <label class="login-label">Document Label</label>
+                                            <input class="form-control requiredCheck" type="text" name="document_name" id="document_name"
+                                                placeholder="Enter Document Name" data-check="Document Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mt-5">
+                                        <div class="safety_uploadbtn">
+                                            <div class="upload_file">
+                                                <label for=""><span><i
+                                                            class="fa-solid fa-arrow-up-from-bracket"></i></span>Upload
+                                                    File</label>
+                                                <input name="document" class="requiredCheck" type="file" id="document"
+                                                    accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" data-check="Document File">
+                                            </div>
+                                            <button class="btn btn-primary">
+                                                UPLOAD
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).on('click','.deleteProjectDocumentFile',function(e) {
+        e.preventDefault()
+        var rtl = false;
+        var title = "Confirm!";
+        var content = "Do you really want to do this ?";
+        var btnTextConfirm = "Confirm";
+        var btnTextCancel = "Cancel";
+        var id = $(this).attr('data-id');
+        if (lang === "ar") {
+          rtl = true;
+          title = "يتأكد";
+          content = "هل تريد حقا أن تفعل هذا";
+          btnTextConfirm="تایید";
+          btnTextCancel="انصراف";
+        }
+        $.confirm({
+          icon: "fa fa-spinner fa-spin",
+          title: title,
+          content: content,
+          type: "orange",
+          rtl:rtl,
+          typeAnimated: true,
+          buttons: {
+            confirm: {
+              text: btnTextConfirm,
+              btnClass: 'btn-blue',
+              action:function () {
+              
+                  $.ajax({
+                    type: "POST",
+                    url: baseUrl + "project-file-delete",
+                    data: {_csrf:_token,id:id},
+                    dataType: "JSON",
+                    success: function (data) {
+                      var rtl = false;
+                      var warning = "Warning!";
+                      var success = "Success!";
+                      var deleteContent = "Data has been deleted !";
+                      if (lang === "ar") {
+                        rtl = true;
+                        warning = "!تحذير";
+                        success = "!نجاح";
+                        deleteContent = "تم حذف البيانات!";
+                      }
+                      if (data.status) {
+                        
+                        $.alert({
+                            icon: "fa fa-check",
+                            title: success,
+                            rtl: rtl,
+                            content: deleteContent,
+                            type: "green",
+                            typeAnimated: true,
+                          
+                          });
+                          setTimeout(function () {
+                            location.reload();
+                          }, 2000);
+                      }
+                    },
+                  });
+                
+              },
+            },
+            cancel:{
+              text: btnTextCancel,
+              btnClass: 'btn-red',
+              action:function () {
+                  var rtl = false;
+                  var title = "Canceled!";
+                  var content = "Process canceled!";
+                  if (lang === "ar") {
+                    rtl = true;
+                    title = "ألغيت!";
+                    content = "تم إلغاء العملية!";
+                  }
+                  $.alert({
+                    icon: "fa fa-times",
+                    title: title,
+                    content: content,
+                    type: "purple",
+                    rtl: rtl,
+                    typeAnimated: true,
+                  });
+              }
+            }
+          }
+        });
+    })
+</script>

@@ -1,0 +1,99 @@
+
+<div class="app-main__outer">
+    <div class="app-main__inner">
+        <!-- dashboard main header -->
+        <div class="app-page-title">
+            <div class="page-title-wrapper">
+                <div class="page-title-heading">
+                    <div>
+                        <h2><span>User Management</span></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main-card mb-3 card">
+                    <div class="card-header staff_header">
+                        <div class="header_title">
+                            <h2>
+                                Permissions for <%= userData.first_name+" "+userData.last_name+" ["+userData.email+" ]" %>
+                            </h2>
+                        </div>
+
+                    </div>
+                    <div class="staffmanage_table">
+                        <form class="adminFrm" data-action="user-permission-save" method="post">
+                            <input type="hidden" name="_csrf" value="<%=_csrfToken%>">
+                            <input type="hidden" name="user_id" value="<%= userId %>">
+                            
+                            <% if(menus.length){ menus.forEach((item, index)=>{ %>
+                                <% if(item.slug==='dashboard' ){ %> 
+                                    <div class="addstaff_rolebox">
+                                        <div class="staff_rolecheckbox">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="staff_checkleft">
+                                                        <h6><%= item.name %></h6>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="staff_checkright">
+                                                        <div class="staff_checkrbox">
+                                                            <input type="checkbox" id="" name="permission[<%= item.id %>][view]" value="view" <%= (permissArray[item.id] &&  permissArray[item.id].includes('view'))?"checked":"" %>>
+                                                            <label> View</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            <% }else{ %>
+                                <div class="addstaff_rolebox">
+                                    <div class="staff_rolecheckbox">
+                                            <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="staff_checkleft">
+                                                    <h6><%= item.name %></h6>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="staff_checkright">
+                                                    <div class="staff_checkrbox">
+                                                        <input type="checkbox" id="" name="permission[<%= item.id %>][add]" value="add" <%= (permissArray[item.id] &&  permissArray[item.id].includes('add'))?"checked":"" %>>
+                                                        <label for=""> Create</label>
+                                                    </div>
+                                                    <div class="staff_checkrbox">
+                                                        <input type="checkbox" id="" name="permission[<%= item.id %>][edit]" value="edit" <%= (permissArray[item.id] &&  permissArray[item.id].includes('edit'))?"checked":"" %>>
+                                                        <label for=""> Edit</label>
+                                                    </div>
+                                                    <div class="staff_checkrbox">
+                                                        <input type="checkbox"  name="permission[<%= item.id %>][view]" value="view" <%= (permissArray[item.id] &&  permissArray[item.id].includes('view'))?"checked":"" %>>
+                                                        <label for=""> View</label>
+                                                    </div>
+                                                    <div class="staff_checkrbox">
+                                                        <input type="checkbox"  name="permission[<%= item.id %>][delete]" value="delete" <%= (permissArray[item.id] &&  permissArray[item.id].includes('delete'))?"checked":"" %>>
+                                                        <label for=""> Delete</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% } }) } %>
+                            <div class="row">
+                                <div class="col-md-12 m-4">
+                                    <button type="submit" class="btn btn-info">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- dashboard main footer -->
+
+    

@@ -1,0 +1,117 @@
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2><span><%= translation.materialManagement.title.module %>  </span></h2>
+          </div>
+        </div>
+        <div class="page-title-actions">
+          <div class="d-inline-block dropdown">
+            <a href="/material-list" class="btn-shadow btn btn-info btn_dashboard">
+              <%= translation.materialManagement.title.list %> <span><i class="fa-solid fa-list"></i></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-card mb-3 card">
+          <div class="card-header staff_header">
+            <div class="header_title">
+              <h2><%= translation.materialManagement.title.add %></h2>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="add_newstaff">
+              <form class="adminFrm" data-action="material-create" method="post">
+                <input type="hidden" name="_csrf" value="<%=_csrfToken%>">
+                <input type="hidden" name="updateId" value="<%=(oldData)?oldData.id:""%>">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="single-login">
+                      <label class="login-label">
+                        <%= translation.materialManagement.add_edit_box.materialNameLabel%> <span class="text-danger">*</span></label
+                      >
+                      <input
+                        class="form-control requiredCheck restrictSpecial"
+                        type="text"
+                        name="name"
+                        id="name"
+                        placeholder=" <%= translation.materialManagement.add_edit_box.materialNamePlaceholder%>"
+                        data-check="<%= translation.materialManagement.add_edit_box.materialNameCheck%>"
+                        value="<%=(oldData)?oldData.name:""%>"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="single-login">
+                      <label class="login-label">
+                        <%= translation.materialManagement.add_edit_box.materialCodeLabel%> <span class="text-danger">*</span></label
+                      >
+                      <input
+                        class="form-control requiredCheck restrictSpecial"
+                        type="text"
+                        name="code"
+                        id="code"
+                        placeholder="<%= translation.materialManagement.add_edit_box.materialCodePlaceholder%>"
+                        data-check="<%= translation.materialManagement.add_edit_box.materialCodeCheck%>"
+                        value="<%=(oldData)?oldData.code:""%>"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="single-login">
+                      <label class="login-label">
+                        <%= translation.materialManagement.add_edit_box.materiaUnitLabel%> <span class="text-danger">*</span></label
+                      >
+                      <input
+                        class="form-control requiredCheck allowOnlyLetter"
+                        type="text"
+                        name="unit"
+                        id="unit"
+                        placeholder="<%= translation.materialManagement.add_edit_box.materialUnitPlaceholder%>"
+                        data-check="<%= translation.materialManagement.add_edit_box.materiaUnitCheck%>"
+                        value="<%=(oldData)?oldData.unit:""%>"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="single-login">
+                      <label class="login-label">
+                        <%= translation.materialManagement.add_edit_box.materialRateLabel%> <span class="text-danger">*</span></label
+                      >
+                      <input
+                        class="form-control requiredCheck checkDecimal"
+                        type="text"
+                        name="rate"
+                        id="rate"
+                        placeholder="<%= translation.materialManagement.add_edit_box.materialRatePlaceholder%>"
+                        data-check="<%= translation.materialManagement.add_edit_box.materialRateCheck%>"
+                        value="<%=(oldData)?oldData.rate:""%>"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12 mt-4 text-right">
+                    <button
+                      type="submit"
+                      class="btn-shadow btn btn-info btn_dashboard"
+                    >
+                    
+                 <%=(oldData)?translation.materialManagement.add_edit_box.updateButton:translation.materialManagement.add_edit_box.saveButton%>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

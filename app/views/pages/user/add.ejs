@@ -1,0 +1,132 @@
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2><span><%= translation.UserManagement.title.module %></span></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-card mb-3 card">
+          <div class="card-header staff_header">
+            <div class="header_title">
+              <h2>
+                <%= translation.UserManagement.title.add %> 
+              </h2>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="add_newstaff">
+              <form class="adminFrm" data-action="user-create" method="post">
+                <input type="hidden" name="_csrf" value="<%=_csrfToken%>">
+                <input type="hidden" name="updateId" value="<%=(oldData)?oldData.id:""%>">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="single-login">
+                      <label class="login-label">
+                        <%= translation.UserManagement.add_edit_box.FirstNameLabel %>  <span class="text-danger">*</span>
+                      </label>
+                      <input class="form-control requiredCheck allowOnlyLetter" type="text" name="first_name"
+                        id="first_name" placeholder="<%= translation.UserManagement.add_edit_box.FirstNamePlaceholder %>" 
+                        data-check="<%= translation.UserManagement.add_edit_box.FirstNameCheck %>"
+                        value="<%=(oldData)?oldData.first_name:""%>" />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="single-login">
+                      <label class="login-label">
+                        <%= translation.UserManagement.add_edit_box.LastNameLabel %>  <span class="text-danger">*</span>
+                      </label>
+                      <input class="form-control requiredCheck allowOnlyLetter" type="text" name="last_name"
+                        id="last_name" placeholder="<%= translation.UserManagement.add_edit_box.LastNamePlaceholder %>" 
+                        data-check="<%= translation.UserManagement.add_edit_box.LastNameCheck %>"
+                        value="<%=(oldData)?oldData.last_name:""%>" />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="single-login">
+                      <label class="login-label">
+                        <%= translation.UserManagement.add_edit_box.EmailLabel %> <span class="text-danger">*</span></label>
+                      <input class="form-control requiredCheck" type="email" name="email" id="email"
+                        placeholder="<%= translation.UserManagement.add_edit_box.EmailPlaceholder %> " 
+                        data-check="<%= translation.ClientManagement.add_edit_box.EmailCheck %>" value="<%=(oldData)?oldData.email:""%>" />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="single-login">
+                      <label class="login-label">
+                        <%= translation.UserManagement.add_edit_box.PhoneLabel %>   <span class="text-danger">*</span>
+                      </label>
+                      <input class="form-control requiredCheck" type="text" name="phone" id="phone"
+                        placeholder="<%= translation.UserManagement.add_edit_box.PhonePlaceholder %>" 
+                        data-check="<%= translation.UserManagement.add_edit_box.PhoneCheck %>" value="<%=(oldData)?oldData.phone:""%>"
+                        onkeypress="return isNumber()" />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="single-login">
+                      <label class="login-label">
+                        <%= translation.UserManagement.add_edit_box.DepartmentLabel %>  <span class="text-danger">*</span>
+                      </label>
+                      <input class="form-control requiredCheck allowOnlyLetterSpace" type="text" name="department"
+                        id="department" placeholder=" <%= translation.UserManagement.add_edit_box.DepartmentPlaceholder %> " 
+                        data-check="<%= translation.UserManagement.add_edit_box.DepartmentCheck %>"
+                        value="<%=(oldData)?oldData.department:""%>" />
+                    </div>
+                  </div>
+                 
+                 
+                  <div class="col-md-4">
+                    <div class="single-login">
+                      <label class="login-label"><%= translation.UserManagement.add_edit_box.SelectProfile %>  </label>
+                      <select name="profile_id" id="profile_id" class="form-control requiredCheck"
+                        data-check="Profile selection">
+                        <% if (profileList.length) { Object.entries(profileList).forEach(([key, value])=> {
+                          %>
+                          <option value="<%= value.id %>" <%=(oldData && oldData.profile_id==value.id)?"selected":""%>>
+                            <%= value.name %>
+                          </option>
+                          <% }) }else{ %>
+                            <option value="">No Data Found!</option>
+                            <% } %>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="single-login">
+                      <label class="login-label"><%= translation.UserManagement.add_edit_box.SelectRole %>  </label>
+                      <select name="role_id" id="role_id" class="form-control requiredCheck"
+                        data-check="Role selection">
+                        <% if (roleList.length) { Object.entries(roleList).forEach(([key, value])=> {
+                          %>
+                          <option value="<%= value.id %>" <%=(oldData && oldData.role_id==value.id)?"selected":""%>
+                            <%=(!oldData && value.id==2)?"selected":""%>><%= value.name %>
+                          </option>
+                          <% }) }else{ %>
+                            <option value="">No Data Found!</option>
+                            <% } %>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 mt-4 text-right">
+                    <button type="submit" class="btn-shadow btn btn-info btn_dashboard">
+                  
+                      <%=(oldData)?translation.UserManagement.add_edit_box.updateButton:translation.UserManagement.add_edit_box.saveButton%>
+                       
+                    
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

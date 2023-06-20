@@ -1,0 +1,178 @@
+/* =============================
+        Login Page
+================================*/
+.designby {
+    flex-direction: row-reverse;
+}
+
+select.form-control {
+    direction: rtl;
+}
+
+.login-rightbox {
+    direction: rtl;
+    text-align: right;
+}
+
+.login-rightbox h3 {
+    text-align: right;
+}
+
+.single-login .eye-icon {
+    right: 92%;
+}
+
+.line-around-flex span {
+    width: 12%;
+}
+
+.line-around-flex:after {
+    width: 2%;
+    margin-right: 8px;
+}
+
+.line-around-flex:before {
+    margin-left: 10px;
+}
+
+
+.single-login input.form-control{
+    padding: 0.375rem 0.75rem 0.375rem 2.5rem;
+}
+
+.checkbox-inlines {
+    flex-direction: row-reverse;
+}
+
+.login-rheadlogo {
+    transition: transform 0.8s;
+    transform: rotateY(180deg);
+}
+
+/* =============================
+        dashboard body design
+================================*/
+body {
+    direction: rtl;
+}
+
+
+.app-header__logo .header__pane.ml-auto {
+    margin-right: auto;
+    margin-left: 0 !important;
+}
+
+
+.fixed-sidebar .app-main .app-main__outer {
+    padding-right: 280px;
+    padding-left: 0;
+}
+
+.closed-sidebar.fixed-sidebar .app-main__outer {
+    padding-right: 80px;
+    padding-left: 0;
+
+}
+
+.app-header .app-header__content .app-header-right {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+.app-sidebar__heading:before {
+    left: 98%;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    right: 0;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.widget_profile .dropdown-menu.dropdown-menu-right {
+    right: auto !important;
+}
+
+.widget-content-wrapper .widget-content-left.header-user-info {
+    text-align: left;
+}
+
+.app-sidebar__heading {
+    text-align: right;
+}
+
+.app-page-title .page-title-actions {
+    margin-right: auto;    
+    margin-left: 0;
+}
+
+.vertical-nav-menu img.metismenu-icon{
+    left: 88%;
+}
+
+.app-sidebar__inner ul>li>a{
+    padding: 0 45px 0 0;
+}
+
+.vertical-nav-menu img.metismenu-state-icon{
+    right: 100%;
+    top: 0;
+}
+
+.dash_recenttable h6{
+    text-align: right;
+}
+
+.single-login{
+    text-align: right;
+}
+
+.adminFrm .text-right{
+    text-align: left!important;
+}
+
+.app-header__logo .logo-src{
+    transition: transform 0.8s;
+    transform: rotateY(180deg);
+}
+
+.search-wrapper.active .close{
+    left: 0;
+}
+
+.modal .modal-content button.btn-close{
+    margin: -0.5rem auto -0.5rem -0.5rem;
+}
+
+.setting_head ul li:before{
+    left: 100%;
+    right: 0;
+}
+.setting_head h6{
+    text-align: right;
+}
+/* =============================
+   Project Management Page
+================================*/
+button.Fbtn.btn-subscribe{
+    right: 84%;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+}
+
+button.Fbtn.btn-subscribe i{
+    transition: transform 0.8s;
+    transform: rotateY(180deg);
+}
+
+/* ============================================================
+                    User Management Page
+===============================================================*/
+.staff_header .form-group{
+    text-align: right;
+}
+
+.stafftable_select .btn-group span.form-check .form-check-label{
+    margin-right: 30px;
+}

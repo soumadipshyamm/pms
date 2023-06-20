@@ -1,0 +1,37 @@
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2>Communication: <%=`${projectDetails?.name} [ #${projectDetails?.project_alt_id} ]`%></h2>
+          </div>
+        </div>
+        <div class="page-title-actions">
+          <div class="dashboard_time">
+            <p><i class="fa-regular fa-calendar-days pr-1"></i><%=projectDetails?.start_date%></p>
+            <p><i class="fa-regular fa-clock pr-1"></i> <%=projectDetails?.end_date%></p>
+          </div>
+        </div>
+      </div>
+   
+      <!-- dashboard projects and staff table -->
+      <div class="dashboard_projectbox">
+        <div class="row  mb-5">
+            <div class="card">
+                <div class="folder-wrapper card-body">
+                    <div class="folder-box">
+                        <i class="fa-solid fa-folder"></i>
+                        <p><a href="/project-communication/mom/weekly/<%= projectId %>"> Weekly</a></p>
+                    </div>
+                    <div class="folder-box">
+                        <i class="fa-solid fa-folder"></i>
+                        <p><a href="/project-communication/mom/monthly/<%= projectId %>"> Monthly</a></p>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>

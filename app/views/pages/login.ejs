@@ -1,0 +1,67 @@
+<div class="login-rightbox">
+  <h3><%= translation.login.loginBox.header %></h3>
+  <div class="line-around-flex"><span></span></div>
+
+  <form class="adminFrm" data-action="user-check" method="post">
+    <div class="single-login">
+      <input type="hidden" name="_csrf" value="<%=_csrfToken%>">
+      <label class="login-label"> <%= translation.login.loginBox.emailLabel %></label>
+      <input
+        class="form-control requiredCheck"
+        type="text"
+        name="email"
+        id="email"
+        placeholder="<%= translation.login.loginBox.emailPlaceHolder %>"
+        data-check="<%= translation.login.loginBox.emailDataCheck %>"
+      />
+    </div>
+    <div class="single-login">
+      <label class="login-label"> <%= translation.login.loginBox.passwordLabel %></label>
+      <input
+        id="password-eye"
+        type="password"
+        placeholder="<%= translation.login.loginBox.passwordPlaceHolder %>"
+        class="form-control requiredCheck"
+        name="password"
+        value="password"
+        data-check="<%= translation.login.loginBox.passwordDataCheck %>"
+      />
+      <span
+        toggle="#password-eye"
+        class="fa fa-fw fa-eye eye-icon toggle-eye"
+      ></span>
+    </div>
+
+    <div class="signup-checkbox">
+      <div class="checkbox-inlines">
+        <label for="remenberme"> <%= translation.login.loginBox.rememberMe %></label>
+        <input
+          class="check-input"
+          type="checkbox"
+          id="remenberme"
+          name="remenberme"
+          value=""
+        />
+      </div>
+      <div class="forgot-btn">
+        <a href="/reset-password" class="forgot-pass"><%= translation.login.loginBox.resetPassword %></a>
+      </div>
+    </div>
+    <a href="">
+      <button class="btn btn-primary btn-effect btn-effect-arrow mt-4" type="submit">
+        <%= translation.login.loginBox.loginButton %>
+      </button>
+    </a>
+  </form>
+</div>
+<div class="login-rightfooter">
+  <div class="signup-link">
+    <p>
+      <%= translation.login.loginBox.dontHaveAccount %> <span><a href=""><%= translation.login.loginBox.signUpButton %></a></span>
+    </p>
+  </div>
+  <div class="designby">
+    <p><%= translation.login.loginBox.designedBy %></p>
+    <img src="assets/images/designby.png" class="img-fluid" alt="" />
+  </div>
+</div>

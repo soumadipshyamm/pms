@@ -1,0 +1,170 @@
+
+<style>
+canvas#pieChart {
+    height: 424px!important;
+}
+</style>
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2><%=`${projectDetails?.name} [ #${projectDetails?.project_alt_id} ]`%></h2>
+          </div>
+        </div>
+        <div class="page-title-actions">
+          <div class="dashboard_time">
+            <p><i class="fa-regular fa-calendar-days pr-1"></i><%=projectDetails?.start_date%></p>
+            <p><i class="fa-regular fa-clock pr-1"></i> <%=projectDetails?.end_date%></p>
+          </div>
+        </div>
+      </div>
+      <!-- dashboard active box -->
+      <div class="dashboard_head">
+        <div class="row">
+          <div class="col-md-6 col-12">
+            <div class="dahboard_activebox">
+              <div class="dahboard_boxleft">
+                <p><%= "No of " %> </p>
+                <h6><%= "Resources" %></h6>
+                <h4><%=allActiveCount?.totalResource%></h4>
+              </div>
+
+              <div class="dahboard_boxright">
+                <i class="fa-solid fa-users"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-12">
+            <div class="dahboard_activebox">
+              <div class="dahboard_boxleft">
+                <p><%= "Total " %></p>
+                <h6><%= "Progress" %> </h6>
+                <h4><%=allActiveCount?.totalProgress??0%>%</h4>
+              </div>
+
+              <div class="dahboard_boxright">
+                <i class="fa fa-line-chart"></i>
+              </div>
+            </div>
+          </div>
+        
+        </div>
+      </div>
+      <!-- dashboard projects and staff table -->
+      <div class="dashboard_projectbox">
+        <div class="row  mb-5">
+          <div class="col-md-6">
+            <div class="card new-crd">
+              <div class="card-header">
+                <div class="card-title">
+                  Service request Chart
+                </div>
+              </div>
+              <div class="card-body" >
+                <canvas id="barChart"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card new-crd">
+              <div class="card-header">
+                <div class="card-title">
+                  Complaints Chart
+                </div>
+              </div>
+              <div class="card-body">
+                <canvas id="pieChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+       
+       
+      </div>
+    </div>
+    <!-- dashboard main footer -->
+  
+
+<script src="
+https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js
+"></script>
+<script>
+const barChart =document.getElementById('barChart')
+const pieChart =document.getElementById('pieChart')
+
+const barChartData = {
+  labels: ["January","February","March","April","May","June","July",
+            "August","September","October","November","December"],
+  datasets: [{
+    label: 'SERVICE REQUEST',
+    data: [300, 250, 280, 150, 285, 270, 278,279, 230, 85, 81, 56],
+    backgroundColor: [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(255, 159, 64, 0.2)',
+      'rgba(255, 205, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(153, 102, 255, 0.2)',
+      'rgba(201, 203, 207, 0.2)',
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(255, 159, 64, 0.2)',
+      'rgba(255, 205, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+    
+    ],
+    borderColor: [
+      'rgb(255, 99, 132)',
+      'rgb(255, 159, 64)',
+      'rgb(255, 205, 86)',
+      'rgb(75, 192, 192)',
+      'rgb(54, 162, 235)',
+      'rgb(153, 102, 255)',
+      'rgb(201, 203, 207)',
+      'rgb(255, 99, 132)',
+      'rgb(255, 159, 64)',
+      'rgb(255, 205, 86)',
+      'rgb(75, 192, 192)',
+      'rgb(54, 162, 235)'
+    
+    ],
+    borderWidth: 1
+  }]
+};
+const bar = new Chart(barChart, {
+    type: 'bar',
+    data: barChartData,
+    options: {
+        maintainAspectRatio: false,
+    }
+   
+});
+const pieChartData = {
+  labels: [
+    'Red',
+    'Blue',
+    'Yellow'
+  ],
+  datasets: [{
+    label: 'COMPLAINTS CHART',
+    data: [300, 50, 100],
+    backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)'
+    ],
+    hoverOffset: 4
+  }]
+};
+const pie = new Chart(pieChart, {
+    type: 'pie',
+    data: pieChartData,
+     options: {
+        maintainAspectRatio: false,
+    }
+   
+});
+</script>

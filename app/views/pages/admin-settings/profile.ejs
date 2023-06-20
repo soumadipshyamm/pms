@@ -1,0 +1,209 @@
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2><span> <%= translation.myProfile.title %>   </span></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-card mb-3 card">
+          <div class="card-body">
+            <div class="profile_sec">
+              <div class="profile_sechead">
+                <a
+                  href="javascript:void(0)"
+                  class="btn-shadow btn btn-info btn_dashboard profilebtn_arrow"
+                >
+                <%= translation.myProfile.details %>  
+                </a>
+              </div>
+              <div class="profile_secbody">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="profile_bodyleft">
+                      <div class="profile_leftimg">
+                        <img
+                        src="<%=profileData?.profile_image?"/uploads/profile_images/"+profileData?.profile_image:"/assets/images/no-image.jpg"%>"
+                        class="img-fluid" alt="">
+                      </div>
+                      <div class="profile_leftbtn">
+                        <a href="javascript:void(0)" id="uploadProfileImage">
+                          Change Photo
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-8">
+                    <div class="profile_bodyright">
+                      <form
+                        class="adminFrm"
+                        data-action="profile-update"
+                        method="post"
+                        data-class="requiredcheck"
+                      >
+                        <input type="hidden" name="_csrf" value="<%=_csrfToken%>">
+
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="profile-form profile_name">
+                              <label class="login-label">First Name:</label>
+                              <input
+                                class="form-control requiredcheck allowOnlyLetter"
+                                type="text"
+                                name="first_name"
+                                id="first_name"
+                                placeholder="Enter Your Name"
+                                data-check="First Name"
+                                value="<%= _sessionUser?.name.split(" ")[0] %>"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="profile-form profile_name">
+                              <label class="login-label">Last Name:</label>
+                              <input
+                                class="form-control requiredcheck allowOnlyLetter"
+                                type="text"
+                                name="last_name"
+                                id="last_name"
+                                placeholder="Enter Your Last Name"
+                                data-check="Last Name"
+                                value="<%= _sessionUser?.name.split(" ")[1] %>"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <div class="profile-form">
+                              <label class="login-label">Phone:</label>
+                              <input
+                                class="form-control requiredcheck"
+                                type="text"
+                                name="phone"
+                                id="phone"
+                                placeholder="Enter Your Mobile No"
+                                data-check="Phone"
+                                value="<%= _sessionUser?.phone %>"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <div class="profile-form">
+                              <label class="login-label">Email:</label>
+                              <input
+                                class="form-control requiredcheck"
+                                type="text"
+                                name="email"
+                                id="phone"
+                                placeholder="Enter Your Mobile No"
+                                data-check="Email"
+                                value="<%= _sessionUser?.email %>"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-12">
+                            <div class="profile-form profile_add">
+                              <label class="login-label">Address:</label>
+                              <input
+                                id="address"
+                                name="address"
+                                type="text"
+                                placeholder="Enter Your Address"
+                                class="form-control requiredcheck"
+                                data-check="Address"
+                                value="<%= _sessionUser?.address %>"
+
+                              />
+                            </div>
+                          </div>
+                          <div class="col-12 mt-4 text-right">
+                                <button type="submit" class="btn-shadow btn btn-info btn_dashboard">
+                                    UPDATE
+                                </button>
+                                </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%-contentFor('modal')%>
+  <!-- upload document modal -->
+  <div
+    class="modal fade"
+    id="uploadModal"
+    tabindex="-1"
+    aria-labelledby="uploadModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="uploadModalLabel">
+            Upload Project Document
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <form
+          class="adminFrm"
+          data-action="update-profile-pic"
+          method="post"
+          id="fileUploadModal"
+          data-class="requiredCheckModalfileUploadModal"
+        >
+          <input type="hidden" name="_csrf" value="<%=_csrfToken%>" />
+          <div class="modal-body uploaddoc_body">
+            <div class="single-login upload_pdf">
+              <label class="login-label">Choose Image</label>
+              <input
+                data-check="File"
+                class="requiredCheckModalfileUploadModal"
+                name="document"
+                type="file"
+                id="file"
+                accept="image/*"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary">Upload</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script>
+    var uploadModal = new bootstrap.Modal(
+      document.getElementById("uploadModal"),
+      {}
+    );
+    $(document).on("click", "#uploadProfileImage", function (e) {
+      uploadModal.show();
+    });
+  </script>
+</div>

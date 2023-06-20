@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <title><%= translation.login.title %></title>
+  <!-- font awesome css -->
+  <!-- <link rel="stylesheet" href="assets/css/all.min.css"> -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"> -->
+
+
+  <!-- font family -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+    rel="stylesheet">
+
+
+    <!-- custom css -->
+    <% if(lang==='en'){ %>
+      <!-- dashboard css -->
+    <link href="/assets/css/main.css" rel="stylesheet">
+    <!-- LTR  -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+   
+<% }else{ %>
+    <!-- RTL -->
+      <!-- dashboard css remove it after completing the rtl.css -->
+    <link href="/assets/css/main.css" rel="stylesheet">
+    <!-- RTL please replace this style.css with rtl.css   -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/rtl.css">
+   
+<% } %>
+  <link rel="stylesheet" href="assets/css/responsive.css">
+
+  <!-- fav icon -->
+  <link rel="icon" type="image/png" href="assets/images/fav-icon.png">
+  <script>
+    let baseUrl = "<%=baseUrl%>";
+    let lang    ="<%=lang%>";
+
+  </script>
+</head>
+
+<body>
+
+  <!-- login page -->
+  <section class="login-sec">
+    <div class="container-fluid p-0">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="login-secleft">
+            <div class="login-leftup">
+              <img src="assets/images/aaw-login.png" class="img-fluid" alt="">
+            </div>
+            <div class="login-leftdown">
+              <img src="assets/images/aaw-logindown.png" class="img-fluid" alt="">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="login-secright">
+            <div class="login-righthead">
+              <div class="login-rheadlang">
+                <select name="lang" id="lang" class="form-control">
+                  <option value="en" <%=(lang=="en"?"selected":"")%>>English</option>
+                  <option value="ar"  <%=(lang=="ar"?"selected":"")%>>عربي</option>
+                </select>
+              </div>
+              <div class="login-rheadlogo">
+                <img src="assets/images/AAW-logo.png" class="img-fluid" alt="">
+              </div>
+            </div>
+            <%- body  %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- JS Files -->
+  <!-- bootstrap JS -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <!-- common JS -->
+
+  <!-- font aawesome kit -->
+  <script src="https://kit.fontawesome.com/c7890550ed.js" crossorigin="anonymous"></script>
+
+  <!-- Custom JS -->
+  <script src="assets/js/custom.js"></script>
+  <script src="assets/js/common.js"></script>
+
+  <script>
+    $(document).on('change','#lang',function(e) {
+      window.location.href=baseUrl+"?clang="+$(this).val();
+    })
+  </script>
+
+
+</body>
+
+</html>

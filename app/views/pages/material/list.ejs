@@ -1,0 +1,84 @@
+<link href="/assets/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="/assets/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2><span><%= translation.materialManagement.title.module %> </span></h2>
+          </div>
+        </div>
+        <div class="page-title-actions">
+          <div class="d-inline-block dropdown">
+            <a href="/material-add" class="btn-shadow btn btn-info btn_dashboard">
+              <%= translation.materialManagement.title.addmaterial %><span><i class="fa-solid fa-plus"></i></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-card mb-3 card">
+          <div class="card-header staff_header">
+            <div class="header_title">
+              <h2><%= translation.materialManagement.title.list %> </h2>
+            </div>
+
+          </div>
+
+          <div class="staffmanage_table">
+            <table id="materialManage" class="stripe row-border order-column" style="width: 100%">
+              <thead>
+                <tr>
+                  <th><%= translation.materialManagement.table.slNo %> </th>
+                  <th><%= translation.materialManagement.table.name %></th>
+                  <th><%= translation.materialManagement.table.code %> </th>
+                  <th><%= translation.materialManagement.table.unit %> </th>
+                  <th><%= translation.materialManagement.table.rate %> </th>
+                  <th><%= translation.materialManagement.table.status %> </th>
+                  <th><%= translation.materialManagement.table.createdOn %> </th>
+                  <th><%= translation.materialManagement.table.action %> </th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- dashboard main footer -->
+
+  <script type="text/javascript" src="/assets/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="/assets/js/dataTables.fixedColumns.min.js"></script>
+  <script>
+    $("#materialManage").DataTable().destroy();
+    var table = $("#materialManage").DataTable({
+      dom: "Bfrtip",
+      processing: true,
+      serverSide: true,
+      searching: false,
+
+      ajax: {
+        url: baseUrl + "material-ajax-datatable",
+        type: "post",
+        data: function (data) {
+          data._csrf = _token;
+        },
+      },
+      columns: [
+        { data: "id" },
+        { data: "name" },
+        { data: "code" },
+        { data: "unit" },
+        { data: "rate" },
+        { data: "status" },
+        { data: "created_at" },
+        { data: "action" },
+      ],
+      columnDefs: [{ orderable: false, targets: [5,7] }],
+    });
+  </script>

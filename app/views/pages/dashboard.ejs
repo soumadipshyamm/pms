@@ -1,0 +1,965 @@
+<link href="assets/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="assets/css/fixedColumns.dataTables.min.css" rel="stylesheet">
+<style>
+canvas#pieChart {
+    height: 424px!important;
+}
+</style>
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2><%= translation.dashboard.box.header %> <span>John</span></h2>
+          </div>
+        </div>
+        <div class="page-title-actions">
+          <div class="dashboard_time">
+            <p><i class="fa-regular fa-calendar-days pr-1"></i>10-2-2023</p>
+            <p><i class="fa-regular fa-clock pr-1"></i> 10-2-2023</p>
+          </div>
+        </div>
+      </div>
+      <!-- dashboard active box -->
+      <div class="dashboard_head">
+        <div class="row">
+          <div class="col-md-4 col-12">
+            <div class="dahboard_activebox">
+              <div class="dahboard_boxleft">
+                <p><%= translation.dashboard.box.batch.NoOfActive %> </p>
+                <h6><%= translation.dashboard.box.batch.project %></h6>
+                <h4><%=allActiveCount?.totalProjectCount%></h4>
+              </div>
+
+              <div class="dahboard_boxright">
+                <i class="fa-solid fa-chart-column"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-12">
+            <div class="dahboard_activebox">
+              <div class="dahboard_boxleft">
+                <p><%= translation.dashboard.box.batch1.NoOfActive %></p>
+                <h6><%= translation.dashboard.box.batch1.Client %> </h6>
+                <h4><%=allActiveCount?.totalClientCount%></h4>
+              </div>
+
+              <div class="dahboard_boxright">
+                <i class="fa-solid fa-user-tie"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-12">
+            <div class="dahboard_activebox">
+              <div class="dahboard_boxleft">
+                <p><%= translation.dashboard.box.batch2.NoOfActive %> </p>
+                <h6><%= translation.dashboard.box.batch2.ServiceRequest %> </h6>
+                <h4>N/A</h4>
+              </div>
+
+              <div class="dahboard_boxright">
+                <i class="fa-solid fa-gears"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- dashboard projects and staff table -->
+      <div class="dashboard_projectbox">
+        <div class="row  mb-5">
+          <div class="col-md-6">
+            <div class="card new-crd">
+              <div class="card-header">
+                <div class="card-title">
+                  Service request Chart
+                </div>
+              </div>
+              <div class="card-body" >
+                <canvas id="barChart"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card new-crd">
+              <div class="card-header">
+                <div class="card-title">
+                  Complaints Chart
+                </div>
+              </div>
+              <div class="card-body">
+                <canvas id="pieChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-7 col-12">
+            <div class="dash_recenttable">
+              <div class="dash_recenthed">
+                <div class="row d-flex align-items-center">
+                  <div class="col-md-5">
+                    <h6><%= translation.dashboard.table1.RecentProjects %> </h6>
+                  </div>
+
+                  <div class="col-md-7">
+                    <div class="dahproject_head">
+                      <p class="text_skyblue"><%= translation.dashboard.table1.Status %> </p>
+                      <div class="dropdown">
+                        <button
+                          class="dropdown-toggle projectac_drop"
+                          type="button"
+                          id="dropdownMenuButton1"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                        <%= translation.dashboard.table1.DropdownMenu %>   
+                        </button>
+                        <ul
+                          class="dropdown-menu"
+                          aria-labelledby="dropdownMenuButton1"
+                        >
+                          <li><a class="dropdown-item" href="#"> <%= translation.dashboard.table1.DropdownItem1 %> </a></li>
+                          <li>
+                            <a class="dropdown-item" href="#"><%= translation.dashboard.table1.DropdownItem2 %> </a>
+                          </li>
+                          <li><a class="dropdown-item" href="#"></a></li>
+                        </ul>
+                      </div>
+
+                      <a href=""
+                        ><%= translation.dashboard.table1.ViewAll %> 
+                        <span><i class="fa-solid fa-arrow-right"></i></span
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="recent_protable">
+                <table
+                  id="recentProject"
+                  class="stripe row-border order-column"
+                  style="width: 100%"
+                >
+                  <thead>
+                    <tr>
+                      <th>Project ID</th>
+                      <th>Client Name</th>
+                      <th>Start Date</th>
+                      <th>End Date</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                      <th>Extn.</th>
+                      <th>E-mail</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>#1234</p>
+                      </td>
+                      <td>
+                        <div class="staff_name">
+                          <div class="staff_nameimg">
+                            <h2>J</h2>
+                          </div>
+                          <div class="staff_nametext">
+                            <h2>ABC Pvt Ltd</h2>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p>11-02-2023</p>
+                      </td>
+                      <td>
+                        <p>15-02-2023</p>
+                      </td>
+                      <td>
+                        <div class="recent_status">
+                          <p class="status_active">
+                            <i class="fa-solid fa-circle"></i>Active
+                          </p>
+                        </div>
+                      </td>
+
+                      <td>5421</td>
+                      <td>5421</td>
+                      <td>t.nixon@datatables.net</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <p>#1234</p>
+                      </td>
+                      <td>
+                        <div class="staff_name">
+                          <div class="staff_nameimg">
+                            <h2>J</h2>
+                          </div>
+                          <div class="staff_nametext">
+                            <h2>ABC Pvt Ltd</h2>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p>11-02-2023</p>
+                      </td>
+                      <td>
+                        <p>15-02-2023</p>
+                      </td>
+                      <td>
+                        <div class="recent_status">
+                          <p class="status_inactive">
+                            <i class="fa-solid fa-circle"></i>Inactive
+                          </p>
+                        </div>
+                      </td>
+
+                      <td>5421</td>
+                      <td>5421</td>
+                      <td>t.nixon@datatables.net</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <p>#1234</p>
+                      </td>
+                      <td>
+                        <div class="staff_name">
+                          <div class="staff_nameimg">
+                            <h2>J</h2>
+                          </div>
+                          <div class="staff_nametext">
+                            <h2>ABC Pvt Ltd</h2>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p>11-02-2023</p>
+                      </td>
+                      <td>
+                        <p>15-02-2023</p>
+                      </td>
+                      <td>
+                        <div class="recent_status">
+                          <p class="status_active">
+                            <i class="fa-solid fa-circle"></i>Active
+                          </p>
+                        </div>
+                      </td>
+
+                      <td>5421</td>
+                      <td>5421</td>
+                      <td>t.nixon@datatables.net</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <p>#1234</p>
+                      </td>
+                      <td>
+                        <div class="staff_name">
+                          <div class="staff_nameimg">
+                            <h2>J</h2>
+                          </div>
+                          <div class="staff_nametext">
+                            <h2>ABC Pvt Ltd</h2>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p>11-02-2023</p>
+                      </td>
+                      <td>
+                        <p>15-02-2023</p>
+                      </td>
+                      <td>
+                        <div class="recent_status">
+                          <p class="status_active">
+                            <i class="fa-solid fa-circle"></i>Active
+                          </p>
+                        </div>
+                      </td>
+
+                      <td>5421</td>
+                      <td>5421</td>
+                      <td>t.nixon@datatables.net</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <p>#1234</p>
+                      </td>
+                      <td>
+                        <div class="staff_name">
+                          <div class="staff_nameimg">
+                            <h2>J</h2>
+                          </div>
+                          <div class="staff_nametext">
+                            <h2>ABC Pvt Ltd</h2>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p>11-02-2023</p>
+                      </td>
+                      <td>
+                        <p>15-02-2023</p>
+                      </td>
+                      <td>
+                        <div class="recent_status">
+                          <p class="status_active">
+                            <i class="fa-solid fa-circle"></i>Active
+                          </p>
+                        </div>
+                      </td>
+
+                      <td>5421</td>
+                      <td>5421</td>
+                      <td>t.nixon@datatables.net</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <p>#1234</p>
+                      </td>
+                      <td>
+                        <div class="staff_name">
+                          <div class="staff_nameimg">
+                            <h2>J</h2>
+                          </div>
+                          <div class="staff_nametext">
+                            <h2>ABC Pvt Ltd</h2>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p>11-02-2023</p>
+                      </td>
+                      <td>
+                        <p>15-02-2023</p>
+                      </td>
+                      <td>
+                        <div class="recent_status">
+                          <p class="status_active">
+                            <i class="fa-solid fa-circle"></i>Active
+                          </p>
+                        </div>
+                      </td>
+
+                      <td>5421</td>
+                      <td>5421</td>
+                      <td>t.nixon@datatables.net</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <p>#1234</p>
+                      </td>
+                      <td>
+                        <div class="staff_name">
+                          <div class="staff_nameimg">
+                            <h2>J</h2>
+                          </div>
+                          <div class="staff_nametext">
+                            <h2>ABC Pvt Ltd</h2>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p>11-02-2023</p>
+                      </td>
+                      <td>
+                        <p>15-02-2023</p>
+                      </td>
+                      <td>
+                        <div class="recent_status">
+                          <p class="status_active">
+                            <i class="fa-solid fa-circle"></i>Active
+                          </p>
+                        </div>
+                      </td>
+
+                      <td>5421</td>
+                      <td>5421</td>
+                      <td>t.nixon@datatables.net</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <p>#1234</p>
+                      </td>
+                      <td>
+                        <div class="staff_name">
+                          <div class="staff_nameimg">
+                            <h2>J</h2>
+                          </div>
+                          <div class="staff_nametext">
+                            <h2>ABC Pvt Ltd</h2>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p>11-02-2023</p>
+                      </td>
+                      <td>
+                        <p>15-02-2023</p>
+                      </td>
+                      <td>
+                        <div class="recent_status">
+                          <p class="status_active">
+                            <i class="fa-solid fa-circle"></i>Active
+                          </p>
+                        </div>
+                      </td>
+
+                      <td>5421</td>
+                      <td>5421</td>
+                      <td>t.nixon@datatables.net</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <p>#1234</p>
+                      </td>
+                      <td>
+                        <div class="staff_name">
+                          <div class="staff_nameimg">
+                            <h2>J</h2>
+                          </div>
+                          <div class="staff_nametext">
+                            <h2>ABC Pvt Ltd</h2>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p>11-02-2023</p>
+                      </td>
+                      <td>
+                        <p>15-02-2023</p>
+                      </td>
+                      <td>
+                        <div class="recent_status">
+                          <p class="status_active">
+                            <i class="fa-solid fa-circle"></i>Active
+                          </p>
+                        </div>
+                      </td>
+
+                      <td>5421</td>
+                      <td>5421</td>
+                      <td>t.nixon@datatables.net</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <p>#1234</p>
+                      </td>
+                      <td>
+                        <div class="staff_name">
+                          <div class="staff_nameimg">
+                            <h2>J</h2>
+                          </div>
+                          <div class="staff_nametext">
+                            <h2>ABC Pvt Ltd</h2>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p>11-02-2023</p>
+                      </td>
+                      <td>
+                        <p>15-02-2023</p>
+                      </td>
+                      <td>
+                        <div class="recent_status">
+                          <p class="status_active">
+                            <i class="fa-solid fa-circle"></i>Active
+                          </p>
+                        </div>
+                      </td>
+
+                      <td>5421</td>
+                      <td>5421</td>
+                      <td>t.nixon@datatables.net</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <p>#1234</p>
+                      </td>
+                      <td>
+                        <div class="staff_name">
+                          <div class="staff_nameimg">
+                            <h2>J</h2>
+                          </div>
+                          <div class="staff_nametext">
+                            <h2>ABC Pvt Ltd</h2>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p>11-02-2023</p>
+                      </td>
+                      <td>
+                        <p>15-02-2023</p>
+                      </td>
+                      <td>
+                        <div class="recent_status">
+                          <p class="status_active">
+                            <i class="fa-solid fa-circle"></i>Active
+                          </p>
+                        </div>
+                      </td>
+
+                      <td>5421</td>
+                      <td>5421</td>
+                      <td>t.nixon@datatables.net</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-5 col-12">
+            <div class="dash_recenttable">
+              <div class="dash_recenthed">
+                <div class="row d-flex align-items-center">
+                  <div class="col-md-3">
+                    <h6><%= translation.dashboard.table2.Staffs %> </h6>
+                  </div>
+
+                  <div class="col-md-9">
+                    <div class="dahproject_head">
+                      <form>
+                        <input
+                          class="form-control"
+                          type="text"
+                          name=""
+                          id=""
+                          placeholder="<%= translation.dashboard.table2.SearchPlaceholder %> "
+                        />
+                      </form>
+
+                      <a href=""
+                        ><%= translation.dashboard.table2.ViewAll %> 
+                        <span><i class="fa-solid fa-arrow-right"></i></span
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="recent_protable">
+                <table
+                  id="staffsDash"
+                  class="stripe row-border order-column"
+                  style="width: 100%"
+                >
+                  <thead>
+                    <tr>
+                      <th>Staff ID</th>
+                      <th>Name</th>
+                      <th>Contact Number</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                      <th>Extn.</th>
+                      <th>E-mail</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>#1234</p>
+                      </td>
+                      <td>
+                        <div class="staff_name">
+                          <div class="staff_nameimg">
+                            <h2>A</h2>
+                          </div>
+                          <div class="staff_nametext">
+                            <h2>Aron Smith</h2>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p>9876543210</p>
+                      </td>
+
+                      <td>
+                        <div class="recent_status">
+                          <p class="status_active">
+                            <i class="fa-solid fa-circle"></i>Active
+                          </p>
+                        </div>
+                      </td>
+
+                      <td>5421</td>
+                      <td>5421</td>
+                      <td>t.nixon@datatables.net</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <p>#1234</p>
+                      </td>
+                      <td>
+                        <div class="staff_name">
+                          <div class="staff_nameimg">
+                            <h2>A</h2>
+                          </div>
+                          <div class="staff_nametext">
+                            <h2>Aron Smith</h2>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p>9876543210</p>
+                      </td>
+
+                      <td>
+                        <div class="recent_status">
+                          <p class="status_active">
+                            <i class="fa-solid fa-circle"></i>Active
+                          </p>
+                        </div>
+                      </td>
+
+                      <td>5421</td>
+                      <td>5421</td>
+                      <td>t.nixon@datatables.net</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <p>#1234</p>
+                      </td>
+                      <td>
+                        <div class="staff_name">
+                          <div class="staff_nameimg">
+                            <h2>A</h2>
+                          </div>
+                          <div class="staff_nametext">
+                            <h2>Aron Smith</h2>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p>9876543210</p>
+                      </td>
+
+                      <td>
+                        <div class="recent_status">
+                          <p class="status_active">
+                            <i class="fa-solid fa-circle"></i>Active
+                          </p>
+                        </div>
+                      </td>
+
+                      <td>5421</td>
+                      <td>5421</td>
+                      <td>t.nixon@datatables.net</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <p>#1234</p>
+                      </td>
+                      <td>
+                        <div class="staff_name">
+                          <div class="staff_nameimg">
+                            <h2>A</h2>
+                          </div>
+                          <div class="staff_nametext">
+                            <h2>Aron Smith</h2>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p>9876543210</p>
+                      </td>
+
+                      <td>
+                        <div class="recent_status">
+                          <p class="status_active">
+                            <i class="fa-solid fa-circle"></i>Active
+                          </p>
+                        </div>
+                      </td>
+
+                      <td>5421</td>
+                      <td>5421</td>
+                      <td>t.nixon@datatables.net</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <p>#1234</p>
+                      </td>
+                      <td>
+                        <div class="staff_name">
+                          <div class="staff_nameimg">
+                            <h2>A</h2>
+                          </div>
+                          <div class="staff_nametext">
+                            <h2>Aron Smith</h2>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p>9876543210</p>
+                      </td>
+
+                      <td>
+                        <div class="recent_status">
+                          <p class="status_active">
+                            <i class="fa-solid fa-circle"></i>Active
+                          </p>
+                        </div>
+                      </td>
+
+                      <td>5421</td>
+                      <td>5421</td>
+                      <td>t.nixon@datatables.net</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <p>#1234</p>
+                      </td>
+                      <td>
+                        <div class="staff_name">
+                          <div class="staff_nameimg">
+                            <h2>A</h2>
+                          </div>
+                          <div class="staff_nametext">
+                            <h2>Aron Smith</h2>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p>9876543210</p>
+                      </td>
+
+                      <td>
+                        <div class="recent_status">
+                          <p class="status_active">
+                            <i class="fa-solid fa-circle"></i>Active
+                          </p>
+                        </div>
+                      </td>
+
+                      <td>5421</td>
+                      <td>5421</td>
+                      <td>t.nixon@datatables.net</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <p>#1234</p>
+                      </td>
+                      <td>
+                        <div class="staff_name">
+                          <div class="staff_nameimg">
+                            <h2>A</h2>
+                          </div>
+                          <div class="staff_nametext">
+                            <h2>Aron Smith</h2>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p>9876543210</p>
+                      </td>
+
+                      <td>
+                        <div class="recent_status">
+                          <p class="status_active">
+                            <i class="fa-solid fa-circle"></i>Active
+                          </p>
+                        </div>
+                      </td>
+
+                      <td>5421</td>
+                      <td>5421</td>
+                      <td>t.nixon@datatables.net</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <p>#1234</p>
+                      </td>
+                      <td>
+                        <div class="staff_name">
+                          <div class="staff_nameimg">
+                            <h2>A</h2>
+                          </div>
+                          <div class="staff_nametext">
+                            <h2>Aron Smith</h2>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p>9876543210</p>
+                      </td>
+
+                      <td>
+                        <div class="recent_status">
+                          <p class="status_active">
+                            <i class="fa-solid fa-circle"></i>Active
+                          </p>
+                        </div>
+                      </td>
+
+                      <td>5421</td>
+                      <td>5421</td>
+                      <td>t.nixon@datatables.net</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <p>#1234</p>
+                      </td>
+                      <td>
+                        <div class="staff_name">
+                          <div class="staff_nameimg">
+                            <h2>A</h2>
+                          </div>
+                          <div class="staff_nametext">
+                            <h2>Aron Smith</h2>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p>9876543210</p>
+                      </td>
+
+                      <td>
+                        <div class="recent_status">
+                          <p class="status_active">
+                            <i class="fa-solid fa-circle"></i>Active
+                          </p>
+                        </div>
+                      </td>
+
+                      <td>5421</td>
+                      <td>5421</td>
+                      <td>t.nixon@datatables.net</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- dashboard main footer -->
+  
+<script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="assets/js/dataTables.fixedColumns.min.js"></script>
+<script>
+     $('#staffsDash').DataTable({
+			scrollY: "400px",
+			scrollX: true,
+			scrollCollapse: true,
+			paging: false,
+			fixedColumns: {
+				left: 2,
+			},
+			searching: false,
+		});
+        $('#recentProject').DataTable({
+			scrollY: "400px",
+			scrollX: true,
+			scrollCollapse: true,
+			paging: false,
+			// fixedColumns: {
+			// 	left: 2,
+			// },
+			searching: false,
+		});
+</script>
+<script src="
+https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js
+"></script>
+<script>
+const barChart =document.getElementById('barChart')
+const pieChart =document.getElementById('pieChart')
+
+const barChartData = {
+  labels: ["January","February","March","April","May","June","July",
+            "August","September","October","November","December"],
+  datasets: [{
+    label: 'SERVICE REQUEST',
+    data: [300, 250, 280, 150, 285, 270, 278,279, 230, 85, 81, 56],
+    backgroundColor: [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(255, 159, 64, 0.2)',
+      'rgba(255, 205, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(153, 102, 255, 0.2)',
+      'rgba(201, 203, 207, 0.2)',
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(255, 159, 64, 0.2)',
+      'rgba(255, 205, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+    
+    ],
+    borderColor: [
+      'rgb(255, 99, 132)',
+      'rgb(255, 159, 64)',
+      'rgb(255, 205, 86)',
+      'rgb(75, 192, 192)',
+      'rgb(54, 162, 235)',
+      'rgb(153, 102, 255)',
+      'rgb(201, 203, 207)',
+      'rgb(255, 99, 132)',
+      'rgb(255, 159, 64)',
+      'rgb(255, 205, 86)',
+      'rgb(75, 192, 192)',
+      'rgb(54, 162, 235)'
+    
+    ],
+    borderWidth: 1
+  }]
+};
+const bar = new Chart(barChart, {
+    type: 'bar',
+    data: barChartData,
+    options: {
+        maintainAspectRatio: false,
+    }
+   
+});
+const pieChartData = {
+  labels: [
+    'Red',
+    'Blue',
+    'Yellow'
+  ],
+  datasets: [{
+    label: 'COMPLAINTS CHART',
+    data: [300, 50, 100],
+    backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)'
+    ],
+    hoverOffset: 4
+  }]
+};
+const pie = new Chart(pieChart, {
+    type: 'pie',
+    data: pieChartData,
+     options: {
+        maintainAspectRatio: false,
+    }
+   
+});
+</script>

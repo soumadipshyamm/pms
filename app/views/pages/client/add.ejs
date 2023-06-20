@@ -1,0 +1,234 @@
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2><span><%= translation.ClientManagement.title.add %> </span></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-card mb-3 card">
+          <div class="card-header staff_header">
+            <div class="header_title">
+              <h2><%= title %></h2>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="add_newstaff">
+              <form class="adminFrm" data-action="client-create" method="post">
+                <input type="hidden" name="_csrf" value="<%=_csrfToken%>">
+                <input type="hidden" name="updateId" value="<%=(oldData)?oldData.id:""%>">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="single-login">
+                      <label class="login-label"
+                        >Client Type <span class="text-danger">*</span>
+                      </label>
+                      <select name="client_type_id" id="client_type_id" class="form-control requiredCheck" data-check="Client Type">
+                            <option value="">-Choose Client Type-</option>
+                            <% if(clientTypes.length){ 
+                              clientTypes.forEach(element => {
+                              %>
+                            <option value="<%= element.id %>" <%=(oldData && element.id==oldData.client_type_id)?"selected":""%>><%= element.name %></option>
+                            <% }); }else{ %>
+                            <option value=""><%= "No data Found" %></option>
+                          <% } %>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="single-login">
+                      <label class="login-label">
+                        <%= translation.ClientManagement.add_edit_box.FirstNameLabel %>    <span class="text-danger">*</span></label
+                      >
+                      <input
+                        class="form-control requiredCheck allowOnlyLetter"
+                        type="text"
+                        name="first_name"
+                        id="first_name"
+                        placeholder="<%= translation.ClientManagement.add_edit_box.FirstNamePlaceholder %>"  
+                        data-check="<%= translation.ClientManagement.add_edit_box.FirstNameCheck %>"
+                        value="<%=(oldData)?oldData.first_name:""%>"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="single-login">
+                      <label class="login-label">
+                        <%= translation.ClientManagement.add_edit_box.LastNameLabel %>  <span class="text-danger">*</span>
+                      </label>
+                      <input
+                        class="form-control requiredCheck allowOnlyLetter"
+                        type="text"
+                        name="last_name"
+                        id="last_name"
+                        placeholder="<%= translation.ClientManagement.add_edit_box.LastNamePlaceholder %>"
+                        data-check="<%= translation.ClientManagement.add_edit_box.LastNameCheck %>"
+                        value="<%=(oldData)?oldData.last_name:""%>"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="single-login">
+                      <label class="login-label">
+                        <%= translation.ClientManagement.add_edit_box.EmailLabel %>  <span class="text-danger">*</span></label
+                      >
+                      <input
+                        class="form-control requiredCheck"
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="<%= translation.ClientManagement.add_edit_box.EmailPlaceholder %> "
+                        data-check="<%= translation.ClientManagement.add_edit_box.EmailCheck %> "
+                        value="<%=(oldData)?oldData.email:""%>"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="single-login">
+                      <label class="login-label">
+                        <%= translation.ClientManagement.add_edit_box.PhoneLabel %>   <span class="text-danger">*</span>
+                      </label>
+                      <input
+                        class="form-control requiredCheck"
+                        type="text"
+                        name="phone"
+                        id="phone"
+                        placeholder="<%= translation.ClientManagement.add_edit_box.PhonePlaceholder %> "
+                        data-check="<%= translation.ClientManagement.add_edit_box.PhoneCheck %> "
+                        value="<%=(oldData)?oldData.phone:""%>"
+                        onkeypress="return isNumber()"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-4">
+                    <div class="single-login">
+                      <label class="login-label"><%= translation.ClientManagement.add_edit_box.OrganizationLabel %>   <span class="text-danger">*</span> </label>
+                      <input
+                        class="form-control requiredCheck allowOnlyLetterSpace"
+                        type="text"
+                        name="organization"
+                        id="organization"
+                        placeholder="<%= translation.ClientManagement.add_edit_box.DobPlaceholder %> "
+                        data-check="<%= translation.ClientManagement.add_edit_box.DobCheck %> "
+                        value="<%=(oldData)?oldData?.clientInfo?.organization:""%>"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="single-login">
+                      <label class="login-label"
+                        ><%= translation.ClientManagement.add_edit_box.CountryLabel %> <span class="text-danger">*</span>
+                      </label>
+                      <select name="country_id" id="country" class="form-control requiredCheck" data-check="<%= translation.ClientManagement.add_edit_box.CountryCheck %> ">
+                            <option value=""> <%= translation.ClientManagement.add_edit_box.CountryChoose %>  </option>
+                            <option value="<%= countries.id %>" <%=(oldData && countries.id==oldData.country_id)?"selected":""%>><%= countries.name %></option>
+                      </select>
+                    </div>
+                  </div>
+                   <div class="col-md-4">
+                    <div class="single-login">
+                      <label class="login-label"
+                        ><%= translation.ClientManagement.add_edit_box.ProvinceLabel %>  <span class="text-danger">*</span>
+                      </label>
+                      <select name="state_id" id="state" class="form-control requiredCheck" data-check="<%= translation.ClientManagement.add_edit_box.ProvinceCheck %> ">
+                        <option value=""><%= translation.ClientManagement.add_edit_box.ProvinceChoose %> </option>
+                      </select>
+                    </div>
+                  </div>
+                   <div class="col-md-4">
+                    <div class="single-login">
+                      <label class="login-label"
+                        ><%= translation.ClientManagement.add_edit_box.CityLabel %> <span class="text-danger">*</span>
+                      </label>
+                      <select name="city_id" id="city" class="form-control" data-check="<%= translation.ClientManagement.add_edit_box.CityCheck %> ">
+                        <option value=""><%= translation.ClientManagement.add_edit_box.CityChoose %> </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 mt-4 text-right">
+                    <button
+                      type="submit"
+                      class="btn-shadow btn btn-info btn_dashboard"
+                    >
+                      <%=(oldData)?translation.ClientManagement.add_edit_box.updateButton :translation.ClientManagement.add_edit_box.saveButton %> 
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ <script>
+  $(document).ready(function() {
+    var oldCountry = "<%=(oldData)?oldData.country_id:''%>";
+    var oldState = "<%=(oldData)?oldData.state_id:''%>";
+    var oldCity = "<%=(oldData)?oldData.city_id:''%>";
+    if(oldCountry!=""){
+        getStates(oldCountry,oldState);
+    }
+    if(oldState!=""){
+        getCities(oldState,oldCity);
+    }
+  })
+  $(document).on('change','#country',function() {
+      getStates($(this).find('option:selected').val());
+  })
+  $(document).on('change','#state',function() {
+      getCities($(this).find('option:selected').val());
+  })
+  const getStates = (countryId,oldState)=>{
+    $.ajax({
+      type:"POST",
+      url:"/get-states-by-country",
+      data:{_csrf:_token,countryId:countryId},
+      dataType:"JSON",
+      beforeSend:function(){
+        $("#state").html(`<option value="">Processing...</option>`);
+      },
+      success:function(resp){
+        let html =``;
+        if(resp.status){
+            resp.data.forEach(element => {
+              html+=`<option value="${element.id}" ${(element.id==oldState)?"selected":""}>${element.name}</option>`;
+            });
+        }else{
+            html+=`<option value="">No Data Found!</option>`
+        }
+        $("#state").html(html);
+      }
+    })
+  };
+  const getCities = (stateId,oldCity)=>{
+    $.ajax({
+      type:"POST",
+      url:"/get-city-by-state",
+      data:{_csrf:_token,stateId:stateId},
+      dataType:"JSON",
+      beforeSend:function(){
+        $("#city").html(`<option value="">Processing...</option>`);
+      },
+      success:function(resp){
+       let html =``;
+        if(resp.status){
+            resp.data.forEach(element => {
+              html+=`<option value="${element.id}" ${(element.id==oldCity)?"selected":""}>${element.name}</option>`;
+            });
+        }else{
+            html+=`<option value="">No Data Found!</option>`
+        }
+        $("#city").html(html);
+      }
+    })
+  }
+ </script>

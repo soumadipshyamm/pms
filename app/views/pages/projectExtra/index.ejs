@@ -1,0 +1,416 @@
+<link id="themelink" href="https://ej2.syncfusion.com/demos/styles/material.css" rel="stylesheet">
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2>
+              <%=`${projectDetails?.name} [ #${projectDetails?.project_alt_id} ]`%>
+            </h2>
+          </div>
+        </div>
+        <div class="page-title-actions">
+          <div class="dashboard_time">
+            <p><i class="fa-regular fa-calendar-days pr-1"></i>
+              <%=projectDetails?.start_date%>
+            </p>
+            <p><i class="fa-regular fa-clock pr-1"></i>
+              <%=projectDetails?.end_date%>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- *************************************************** -->
+      <div class="projectdetails_sec">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="projectd_box">
+              <div class="projectd_txt">
+                <p><span><i class="fa-solid fa-user-tie"></i></span> Client
+                  Name</p>
+                <h6><span>-</span>
+                  <%= projectDetails?.contructData?.clientInfo?.first_name+" "+projectDetails?.contructData?.clientInfo?.last_name %></h6>
+                </div>
+                <div class=" projectd_txt">
+                    <p><span><i class="fa-solid fa-mobile-screen-button"></i></span>
+                      Contact Number</p>
+                    <h6><span>-</span>
+                      <%= projectDetails?.contructData?.clientInfo?.phone %>
+                    </h6>
+              </div>
+              <div class="projectd_txt">
+                <p><span><i class="fa-regular fa-envelope"></i></span> Email
+                  ID</p>
+                <h6><span>-</span>
+                  <%= projectDetails?.contructData?.clientInfo?.email %>
+                </h6>
+              </div>
+              <div class="projectd_txt">
+                <p><span><i class="fa fa-check"></i></span> Client Type</p>
+                <h6><span>-</span>
+                  <%= projectDetails?.contructData?.clientInfo?.clientType?.name %>
+                </h6>
+              </div>
+              <div class="projectd_txt">
+                <p><span><i class="fa fa-user"></i></span>Preparer Name
+                </p>
+                <h6><span>-</span>
+                  <%= projectDetails?.contructData?.preparer_name %>
+                </h6>
+              </div>
+              <div class="projectd_txt">
+                <p><span><i class="fa fa-envelope"></i></span>Preparer Email
+                </p>
+                <h6><span>-</span>
+                  <%= projectDetails?.contructData?.preparer_email %>
+                </h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="projectd_box">
+              <div class="projectd_txt">
+                <p><span><i class="fa fa-check"></i></span>Project Type</p>
+                <h6><span>-</span>
+                  <%= projectDetails?.contructData?.projectType?.name %>
+                </h6>
+              </div>
+              <div class="projectd_txt">
+                <p><span><i class="fa fa-check"></i></span>Project-Sub Type</p>
+                <h6><span>-</span>
+                  <%= projectDetails?.subType?.name %>
+                </h6>
+              </div>
+              <div class="projectd_txt">
+                <p><span><i class="fa fa-window-maximize"></i></span>Contruct Name
+                </p>
+                <h6><span>-</span>
+                  <%= projectDetails?.contructData?.contract_name %>
+                </h6>
+              </div>
+              <div class="projectd_txt">
+                <p><span><i class="fa fa-tag"></i></span>Contruct No
+                </p>
+                <h6><span>-</span>
+                  <%= projectDetails?.contructData?.contruct_no %>
+                </h6>
+              </div>
+              <div class="projectd_txt">
+                <p><span><i class="fa fa-credit-card"></i></span>Budget
+                </p>
+                <h6><span>-</span>
+                  <%= projectDetails?.contructData?.budget %>
+                </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- dashboard projects and staff table -->
+      <div class="dashboard_projectbox">
+        <div class="row  mb-5">
+          <div class="card">
+            <div class="sample-container">
+              <!-- Initialize FileManager -->
+              <div id="filemanager" class="e-control e-filemanager e-lib e-fe-cb-select e-keyboard" style="width: 100%; height: 430px;">
+
+                <div class="e-spinner-pane e-spin-hide">
+                  <div class="e-spinner-inner">
+                    <svg class="e-spin-material" id="BmvYY" viewBox="0 0 30 30"
+                      style="height: 30px; width: 30px; transform-origin: 15px 15px 15px;">
+                      <path class="e-path-circle" d="M15,1.5A13.5,13.5 0 1 1 1.5,15" stroke-width="3"
+                        stroke-dasharray="63.61725123519331" stroke-dashoffset="189.97344758066302"
+                        transform="rotate(0 15 15)"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div id="filemanager_toolbar" class="e-control e-toolbar e-lib e-keyboard e-toolpop" role="toolbar"
+                  aria-disabled="false" aria-orientation="horizontal" style="height: auto; width: auto;">
+                  <div class="e-toolbar-items e-tbar-pos">
+                    <div class="e-toolbar-left">
+
+                      <div class="e-toolbar-item" title="New folder"><button class="e-tbar-btn e-tbtn-txt e-control e-btn e-lib newFolderCreateParent" data-parent="0" type="button" id="" tabindex="0" data-tabindex="-1" aria-label="New folder" aria-disabled="false" style="width: auto;"><span class="e-btn-icon e-icons e-fe-newfolder e-icon-left"></span><span class="e-tbar-btn-text">New folder</span></button></div>
+                
+                     
+                    </div>
+                    <div class="e-toolbar-center" style="margin-left: 602.5px;"></div>
+                    
+                  </div>
+                </div>
+                <div class="e-layout e-control e-splitter e-lib e-splitter-horizontal" id="filemanager_layout" style="max-height: 365px; width: 100%;">
+                  <div class="e-navigation e-pane e-pane-horizontal e-scrollable e-static-pane e-resizable" id="filemanager_navigation" style="flex-basis: 30%; order: 0;    overflow-y: scroll;">
+                    <div id="filemanager_tree" class="e-control e-treeview e-lib e-fullrow-wrap e-touch e-keyboard" role="tree" aria-activedescendant="filemanager_tree_active">
+                      <ul class="e-list-parent e-ul " role="group">
+                        <li class="e-list-item e-level-1 e-active" role="treeitem" data-uid="fe_tree" aria-level="1"
+                          title="Files" tabindex="0" id="filemanager_tree_active" aria-expanded="true"
+                          aria-selected="true">
+                          <div class="e-fullrow"></div>
+                          <div class="e-text-content e-icon-wrapper">
+                            <div class="e-icons e-icon-collapsible"></div>
+                            <div class="e-list-icon e-fe-folder"></div>
+                            <span class="e-list-text">
+                              <%=projectDetails?.name??""%>
+                                <%=projectDetails?.project_alt_id??""%>
+                            </span>
+                          </div>
+                          <ul class="e-list-parent e-ul " role="group">
+                            <% if(projectDetails.mainFolders.length){ projectDetails.mainFolders.forEach(element=> {
+
+
+                              %>
+                            <li class="e-list-item e-level-2 mainFolder" data-parent="0" id="parentFolderActive_<%=element?.folder_id %>" data-id="<%=element?.folder_id %>" role="treeitem" data-uid="fe_tree_0" aria-level="2" title="<%=element.name %>" tabindex="-1">
+                              <div class="e-fullrow"></div>
+                              <div class="e-text-content">
+                                <div class="e-list-icon e-fe-folder"></div>
+                                <span class="e-list-text "><%=element.name %></span>
+                              </div>
+                            </li>
+                          <% }); } %>
+                           
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="e-layout-content e-pane e-pane-horizontal e-scrollable e-resizable"
+                    id="filemanager_content" style="order: 2;">
+                    <div class="e-address e-lib e-keyboard" id="filemanager_breadcrumbbar">
+                      <ul class="e-addressbar-ul">
+                        <li class="e-address-list-item" data-utext="/">
+                          <button class="e-tbar-btn e-tbtn-txt e-control e-btn e-lib " type="button" id="newFolderCreateUnderParent" tabindex="0" data-tabindex="-1" aria-label="New folder" data-parent="" aria-disabled="false" style="width: auto;"><span class="fa fa-folder"></span><span class=""> New folder</span></button>
+                          </li>
+                        <li class="e-address-list-item" >
+                          <button class="e-tbar-btn e-tbtn-txt e-control e-btn e-lib" type="button" id="newFile"  data-parent="" tabindex="0" data-tabindex="-1" aria-label="New file" aria-disabled="false" style="width: auto;"><span class="fa fa-file"></span><span class=""> New file</span></button>
+                          </li>
+                      </ul>
+             
+                    </div>
+                    <div id="filemanager_grid" class="e-control e-grid e-lib e-gridhover e-responsive e-default e-droppable e-resize-lines e-tooltip e-keyboard" data-role="grid" tabindex="-1" style="width: 100%;">
+                      <div class="e-gridheader e-lib e-droppable" >
+
+                        <div class="e-headercontent" style="border-right-width: 0px;">
+                          <table class="e-table e-sortfilter" cellspacing="0.25px" role="grid" aria-colcount="5"
+                            aria-rowcount="5">
+                            <colgroup id="filemanager_gridcolgroup">
+                              <col style="width: 26px;">
+                              <col style="width: 46px;">
+                              <col style="width: auto">
+                              <col style="width: 200px;">
+                              <col style="width: 200px;">
+                            </colgroup>
+                            <thead role="rowgroup">
+                              <tr class="e-columnheader">
+                                <th class="e-headercell e-fe-checkbox e-defaultcursor" tabindex="0" data-colindex="0"
+                                  aria-colindex="1" aria-rowspan="1" aria-colspan="1">
+                                  <div e-mappinguid="grid-column0" class="e-headercelldiv e-headerchkcelldiv">
+                                    <div class="e-checkbox-wrapper e-css e-small"><input class="e-checkselectall"
+                                        type="checkbox" aria-label="checkbox" id="checkbox-grid-column0"><span
+                                        class="e-frame e-icons e-uncheck"></span><span class="e-label"> </span></div>
+                                  </div>
+                                  <div class="e-sortfilterdiv e-icons" aria-hidden="true"></div>
+                                  <div class="e-rsuppress" style="height: 32px;"></div>
+                                </th>
+                                <th class="e-headercell e-templatecell e-fe-grid-icon e-mousepointer" tabindex="-1"
+                                  data-colindex="1" aria-colindex="2" aria-sort="none"
+                                  aria-description="Press Enter to sort" aria-rowspan="1" aria-colspan="1">
+                                  <div e-mappinguid="grid-column1" class="e-headercelldiv"><span
+                                      class="e-fe-icon e-fe-folder"></span></div>
+                                  <div class="e-sortfilterdiv e-icons" aria-hidden="true"></div>
+                                  <div class="e-rsuppress" style="height: 32px;"></div>
+                                </th>
+
+                                <th class="e-headercell e-fe-grid-name e-mousepointer" tabindex="-1" data-colindex="2" aria-colindex="3" aria-sort="ascending" aria-description="Press Enter to sort" aria-rowspan="1" aria-colspan="1">
+                                  <div e-mappinguid="grid-column2" class="e-headercelldiv"><span class="e-headertext">Name</span></div>
+                               
+
+                                  <div class="e-rhandler e-rcursor" style="height: 32px;"></div>
+                                </th>
+                                <th class="e-headercell e-mousepointer" tabindex="-1" data-colindex="3"
+                                  aria-colindex="4" aria-sort="none" aria-description="Press Enter to sort"
+                                  aria-rowspan="1" aria-colspan="1">
+                                  <div e-mappinguid="grid-column3" class="e-headercelldiv"><span
+                                      class="e-headertext">Document Name</span></div>
+                                  <div class="e-sortfilterdiv e-icons" aria-hidden="true"></div>
+                                  <div class="e-rhandler e-rcursor" style="height: 32px;"></div>
+                                </th>
+                                <th class="e-headercell e-mousepointer" tabindex="-1" data-colindex="3"
+                                  aria-colindex="4" aria-sort="none" aria-description="Press Enter to sort"
+                                  aria-rowspan="1" aria-colspan="1">
+                                  <div e-mappinguid="grid-column3" class="e-headercelldiv"><span
+                                      class="e-headertext">Modified</span></div>
+                                  <div class="e-sortfilterdiv e-icons" aria-hidden="true"></div>
+                                  <div class="e-rhandler e-rcursor" style="height: 32px;"></div>
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody class="e-hide" role="rowgroup">
+                              <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                              </tr>
+                            </tbody>
+                            <caption class="e-hide">filemanager_grid_header_table</caption>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="e-gridcontent e-lib e-touch">
+                        <div class="e-content e-scrollShow" aria-busy="false" style="height: 288px;">
+                          <table class="e-table" cellspacing="0.25px" role="grid" id="filemanager_grid_content_table"
+                            aria-multiselectable="true" aria-colcount="5">
+                            <colgroup id="content-filemanager_gridcolgroup">
+                              <col style="width: 26px;">
+                              <col style="width: 46px;">
+                              <col style="width: auto">
+                              <col style="width: 200px;">
+                              <col style="width: 200px;">
+                            </colgroup>
+                            <tbody role="rowgroup" id="dynamicSubfolders">
+
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="e-gridpopup" style="display:none;">
+                        <div class="e-uptail e-tail"></div>
+                        <div class="e-content" tabindex="-1"><span></span></div>
+                        <div class="e-downtail e-tail"></div>
+                      </div>
+                      <textarea class="e-clipboard" style="opacity: 0" tabindex="-1" aria-label="clipboard"></textarea>
+                    </div>
+                    <div class="e-large-icons" id="filemanager_largeicons" role="group"></div>
+                    <span class="e-fe-overlay"></span>
+                  </div>
+                  <div class="e-split-bar e-split-bar-horizontal e-resizable-split-bar e-last-bar" tabindex="0"
+                    role="separator" aria-orientation="horizontal" style="width: 1px; order: 1;">
+                    <button tabindex="-1" aria-label="Toggle navigation" type="button"
+                      class="e-navigate-arrow e-arrow-left e-icon-hidden"></button>
+                    <div class="e-resize-handler e-icons" style="width: 1px;"></div>
+                    <button tabindex="-1" aria-label="Toggle navigation" type="button"
+                      class="e-navigate-arrow e-arrow-right e-icon-hidden"></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<%-contentFor('modal')%>
+   <!-- upload document modal -->
+    <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form class="adminFrm" data-action="create-file-or-folder/<%=projectId%>" method="post" id="fileUploadModal" data-class="requiredCheckModalFolder">
+                  <input type="hidden" name="_csrf" value="<%=_csrfToken%>">
+                  <input type="hidden" id="type" name="type" value="">
+                  <input type="hidden" id="parent" name="parent" value="0">
+                  <input type="hidden" name="projectId" value="<%=projectDetails?.id%>">
+                  <div class="modal-body uploaddoc_body"> 
+                    
+                      
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary" >Save</button>
+                  </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<script>
+  var  uploadModal = new bootstrap.Modal(document.getElementById("uploadModal"), {});
+  $(document).on('click','.mainFolder',function() {
+    getSubfolderAndFiles($(this).attr('data-id'));
+    $(".mainFolder").removeClass('active');
+    $("#newFolderCreateUnderParent").attr('data-parent',$(this).attr('data-id'));
+    $("#newFile").attr('data-parent',$(this).attr('data-id'));
+    if($(this).attr('data-parent')!="0"){
+        $("#parentFolderActive_"+$(this).attr('data-parent')).addClass('active')
+    }else{
+      $(this).addClass('active')
+    }
+  })
+   const getSubfolderAndFiles = (id)=>{
+        $.ajax({
+            type:"POST",
+            url:"/get-sub-folders",
+            data:{_csrf:_token,id:id,projectId:"<%=projectDetails?.id%>"},
+            dataType:"JSON",
+            beforeSend:function(){
+              $("#dynamicSubfolders").html(`<tr class="e-row" aria-rowindex="1" data-rowindex="0" data-uid="grid-row5"><td class="e-rowcell e-templatecell" colspan="5">Processing....</td></tr>`);
+            },
+            success:function(resp){
+              let html =``;
+              if(resp.status){
+                  var extensionArr = ["pdf","txt","xls","xlsx","ppt","pptx","doc","docx"];
+                  resp.data.forEach(element => {
+                    var icon = "e-fe-folder";
+                    if(element.type==="file"){
+                      icon =  "e-fe-image";
+                      var fileExtension = getExtension(element.name);
+                      if(extensionArr.includes(fileExtension.toLowerCase())){
+                        icon=`e-fe-${fileExtension.toLowerCase()}`;
+                      }
+                    }
+                    html+=`<tr class="e-row" aria-rowindex="1" data-rowindex="0" data-uid="grid-row5">
+                                <td class="e-rowcell e-gridchkbox e-fe-checkbox" tabindex="-1" aria-label="checkbox" data-colindex="0" aria-colindex="1" index="0">
+                                  <div class="e-checkbox-wrapper e-css e-small"><input class="e-checkselect" type="checkbox" aria-label="checkbox" id="checkbox-grid-row5"><span class="e-frame e-icons"></span><span class="e-label"> </span></div>
+                                </td>
+                                <td class="e-rowcell e-templatecell e-fe-grid-icon" tabindex="-1" aria-label=" is template cell column header type" data-colindex="1" aria-colindex="2" index="0"><span class="e-fe-icon ${icon}"></span></td>
+                                <td class="e-rowcell e-fe-grid-name ${element.type==="folder"?'mainFolder':''}" data-parent="${id}" tabindex="-1" aria-label="Documents column header Name" data-colindex="2" aria-colindex="3" index="0" title="${element.name}" data-id="${element.folder_id}">
+                                  ${element.type==="file"?'<a target="_blank" href="/uploads/project_folders/'+element.name+'">'+element.original_file_name+'</a>':element.name}</td>
+                                <td class="e-rowcell" tabindex="-1" aria-label="${element.document_name} column header Modified" data-colindex="3" aria-colindex="4" index="0">${element.document_name}</td>
+                                <td class="e-rowcell" tabindex="-1" aria-label="${new Date(element.updatedAt)} column header Modified" data-colindex="3" aria-colindex="4" index="0">${new Date(element.updatedAt)}</td>
+                          </tr>`;
+                  });
+                   
+              }else{
+                  html+=`<tr class="e-row" aria-rowindex="1" data-rowindex="0" data-uid="grid-row5"><td class="e-rowcell e-templatecell" colspan="5">No data Found</td></tr>`
+              }
+              $("#dynamicSubfolders").html(html);
+            }
+      })
+    }
+    $(document).on('click','.newFolderCreateParent',function() {
+        $("#type").val('folder');
+        $(".uploaddoc_body").html(`<div class="single-login">
+                          <label class="login-label">Folder Name</label>
+                          <input class="form-control requiredCheckModalFolder" type="text" name="name" id="name" placeholder="" data-check="Folder Name">
+                      </div>`)
+        uploadModal.show();
+    })
+    $(document).on('click','#newFolderCreateUnderParent',function() {
+        $("#type").val('folder');
+        $("#parent").val($(this).attr('data-parent'));
+        $(".uploaddoc_body").html(`<div class="single-login">
+                          <label class="login-label">Folder Name</label>
+                          <input class="form-control requiredCheckModalFolder" type="text" name="name" id="name" placeholder="" data-check="Folder Name">
+                      </div>`)
+        uploadModal.show();
+    })
+    $(document).on('click','#newFile',function() {
+        $("#type").val('file');
+        $("#parent").val($(this).attr('data-parent'));
+        $(".uploaddoc_body").html(`<div class="single-login upload_pdf">
+                          <label class="login-label">Upload File</label>
+                          <input data-check="File" class="requiredCheckModalFolder" name="document" type='file' id="file" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf" />
+                      </div>
+                      <div class="single-login">
+                          <label class="login-label">Document Name</label>
+                          <input class="form-control requiredCheckModalFolder" type="text" name="doument_name" id="doument_name" placeholder="" data-check="Document Name">
+                      </div>`)
+        uploadModal.show();
+    })
+    
+</script>
+

@@ -1,0 +1,418 @@
+{
+  "login": {
+    "title": "تسجيل الدخول",
+    "loginBox": {
+      "header": "أهلا بكم من جديد ، برجاء تسجيل الدخول إلى حسابك",
+      "emailLabel": "اسم المستخدم / معرف البريد الإلكتروني",
+      "emailPlaceHolder": "أدخل اسم المستخدم أو معرف البريد الإلكتروني",
+      "emailDataCheck": "بريد إلكتروني",
+      "passwordLabel": "كلمة المرور",
+      "passwordPlaceHolder": "أدخل كلمة المرور",
+      "passwordDataCheck": "كلمة المرور",
+      "rememberMe": "تذكرنى",
+      "loginButton": "تسجيل الدخول",
+      "resetPassword": "إعادة تعيين كلمة المرور",
+      "dontHaveAccount": "ليس لديك حساب",
+      "signUpButton": "اشتراك",
+      "designedBy": ":صمم بواسطة"
+    }
+  },
+  "dashboard": {
+    "title": "لوحة القيادة",
+    "box": {
+      "header": "مرحباً",
+      "batch": {
+        "NoOfActive": "لا النشطة",
+        "project": "مشروع"
+      },
+      "batch1": {
+        "NoOfActive": "لا النشطة",
+        "Client": "عميل"
+      },
+      "batch2": {
+        "NoOfActive": "لا النشطة",
+        "ServiceRequest": "طلب خدمة"
+      }
+    },
+    "table1": {
+      "RecentProjects": "  مشاريع حديثه",
+      "Status": "حالة",
+      "DropdownMenu": "نشيط",
+      "DropdownItem1": "نشيط",
+      "DropdownItem2": "غير نشط",
+      "ViewAll": "مشاهدة الكل"
+    },
+    "table2": {
+      "Staffs": "الموظفين",
+      "SearchPlaceholder": "البحث عن طريق الإسم...",
+      "ViewAll": "مشاهدة الكل"
+    }
+  },
+
+  "ClientManagement": {
+    "title": {
+      "list": "قائمة العملاء",
+      "add": "إضافة العميل",
+      "edit": "تحرير العميل",
+      "module": "إدارة العملاء",
+      "search": "البحث عن طريق"
+    },
+    "add_edit_box": {
+      "FirstNameLabel": "الاسم الأول",
+      "FirstNamePlaceholder": "أدخل الاسم الأول",
+      "FirstNameCheck": "الاسم الأول",
+      "LastNameLabel": "اسم العائلة",
+      "LastNamePlaceholder": "إدخال اسم آخر",
+      "LastNameCheck": "اسم العائلة",
+      "EmailLabel": "بريد إلكتروني",
+      "EmailPlaceholder": "أدخل معرف البريد الإلكتروني",
+      "EmailCheck": "بريد إلكتروني",
+      "PhoneLabel": "هاتف",
+      "PhonePlaceholder": "أدخل رقم الهاتف",
+      "PhoneCheck": "هاتف",
+      "DobLabel": "تاريخ الميلاد",
+      "DobPlaceholder": "حدد تاريخ",
+      "DobCheck": "تاريخ الميلاد",
+      "GenderLabel": "جنس",
+      "GenderCheck": "جنس",
+      "Male": "ذكر",
+      "Female": "أنثى",
+      "Others": "آحرون",
+      "OrganizationLabel": "منظمة",
+      "OrganizatioPlaceholder": "أدخل المنظمة",
+      "OrganizatioCheck": "منظمة",
+      "CountryLabel": "دولة",
+      "CountryCheck": "دولة",
+      "CountryChoose": "اختر الدولة",
+      "ProvinceLabel": "مقاطعة",
+      "ProvinceCheck": "مقاطعة",
+      "ProvinceChoose": "اختر المقاطعة",
+      "CityLabel": "مدينة",
+      "CityCheck": "مدينة",
+      "CityChoose": "اختر المدينة",
+      "updateButton": "تحديث المستخدم",
+      "saveButton": "حفظ المستخدم"
+    },
+    "UserTable": {
+      "SlNo": "الرقم التسلسلي.",
+      "Name": "اسم",
+      "EmailId": "عنوان الايميل",
+      "PhoneNumber": "رقم التليفون",
+      "Gender": "جنس",
+      "Dob": "تاريخ الميلاد",
+      "Status": "حالة",
+      "Created": "تم إنشاؤها على",
+      "Action": "فعل"
+
+    }
+  },
+
+  "projectManagement": {
+    "title": {
+      "list": "قائمة المشروع",
+      "add": "إضافة مشروع",
+      "edit": "تحرير المشروع",
+      "module": "ادارة مشروع",
+      "search": "البحث عن طريق",
+      "placeHolder": "يبحث"
+    },
+    "addEditSection": {
+      "clientNameLabel": "اسم العميل",
+      "clientNameCheck": "اختيار العميل",
+      "selectClient" : "حدد العميل",
+      "noDataFound" : "لاتوجد بيانات",      
+      "contactNumberLabel": "رقم الاتصال",
+      "emailLabel": "بريد إلكتروني",
+      "projectTypeLabel": "نوع المشروع",
+      "projectTypeCheck": "اختيار العميل",
+      "selectProject" : "حدد نوع المشروع",      
+      "projectNameLabel": "اسم المشروع",
+      "projectNamePlaceholder": "أدخل اسم المشروع",
+      "projectNameCheck": "اسم المشروع",
+      "npmoProjectLabel":"رقم مشروع NPMO",
+      "npmoProjectPlaceholder":"أدخل رقم مشروع NPMO",
+      "npmoProjectCheck":"رقم مشروع NPMO",
+      "entityNameLabel":"اسم الكيان",
+      "entityNamePlaceholder":"أدخل اسم الكيان",
+      "entityNameCheck":"اسم الكيان",
+      "preparerNameLabel":"اسم المُعد",
+      "preparerNamePlaceholder":"أدخل اسم المُعد",
+      "preparerNameCheck":"اسم المُعد",
+      "preparerEmailLabel":"البريد الإلكتروني للمُعد",
+      "preparerEmailPlaceholder":"أدخل البريد الإلكتروني للمُعد",
+      "preparerEmailCheck":"البريد الإلكتروني للمُعد",
+      "registrationDateLabel":"تاريخ التسجيل",
+      "registrationDatePlaceholder":"أدخل تاريخ التسجيل",
+      "registrationDateCheck":"تاريخ التسجيل",
+      "projectObjectivesLabel":"أهداف المشروع",
+      "projectObjectivesCheck":"أهداف المشروع",
+      "projectScopeLabel":"نطاق المشروع",
+      "projectScopeCheck":"نطاق المشروع",
+      "projectStrategicLabel":"السياق الاستراتيجي للمشروع",
+      "projectStrategicCheck":"السياق الاستراتيجي للمشروع",
+      "projectStudiesLabel":"دراسات المشروع / تقييم الاحتياجات / تحليل العرض والطلب",
+      "projectStudiesCheck":"دراسات المشروع / تقييم الاحتياجات / تحليل العرض والطلب",
+      "projectSiteLabel":"موقع موقع المشروع / تفاصيل المسار",
+      "projectSiteCheck":"موقع موقع المشروع / تفاصيل المسار",
+      "projectPotentialImpactLabel":"التأثير المحتمل للمشروع",
+      "projectPotentialImpactCheck":"التأثير المحتمل للمشروع",
+      "descriptionLabel":"وصف",
+      "descriptionCheck":"وصف",
+      "locationLabel":"موقع",
+      "locationPlaceholder":"إدخال الدولة",
+      "locationCheck":"موقع",
+      "budgetLabel":"ميزانية",
+      "budgetPlaceholder":"أدخل الميزانية",
+      "budgetCheck":"ميزانية",
+      "startDateLabel":"تاريخ البدء",
+      "startDatePlaceholder":"حدد تاريخ",
+      "startDateCheck":"تاريخ البدء",
+      "endDateLabel":"تاريخ الانتهاء",
+      "endDatePlaceholder":"حدد تاريخ",
+      "endDateCheck":"تاريخ الانتهاء"
+    },
+    "uploadProjectModal": {
+      "modalTitle": "تحميل وثيقة المشروع",
+      "uploadDocLabel": "قم بتحميل المستند الخاص بك",
+      "uploadDocCheck" :"ملف",
+      "docNameLabel": "اسم الملف",
+      "docNamePlaceholder": "أدخل اسم المستند",
+      "docNameCheck" :"اسم الملف",
+      "closeBtn": "يغلق",
+      "uploadBtn": "رفع"
+    },
+    "projectListtable": {
+      "slNo": "الرقم التسلسلي",
+      "clientName": "اسم العميل",
+      "projectName": "اسم المشروع",
+      "location": "موقع",
+      "budget": "ميزانية",
+      "startDate": "تاريخ البدء",
+      "endDate": "تاريخ الانتهاء",
+      "status": "حالة",    
+      "createdOn": "تم إنشاؤها على",
+      "action": "فعل"
+    }
+  
+  },
+  "controller": {
+    "auth": {
+      "userCheck": {
+        "loginSuccess": "!تسجيل الدخول بنجاح",
+        "emailDoesNotMatch": "!البريد الإلكتروني لا يتطابق",
+        "passwordDoesNotMatch": "كلمة السر غير متطابقة!"
+      }
+    },
+    "generic": {
+      "err": "!هناك خطأ ما",
+      "invalidData": "!بيانات غير صالحة"
+    }
+  },
+  "leftBar": {
+    "Dashboard": "لوحة القيادة",
+    "Project": {
+      "ProjectManagement": "ادارة مشروع",
+      "ProjectList": "قائمة المشروع",
+      "AddNewProject": "أضف مشروع جديد"
+    },
+    "FinancialManagement": "ادارة مالية",
+    "OrderManagement": "إدارة الطلبات",
+    "User": {
+      "UserManagement": "إدارةالمستخدم ",
+      "UserList": "قائمة المستخدم",
+      "AddNewUser": "إضافة مستخدم جديد"
+    },
+
+    "Client": {
+      "ClientManagement": "إدارة العملاء",
+      "ClientList": "قائمة العملاء",
+      "AddNewClient": "إضافة عميل جديد",
+      "allSelectedText": "All selected"
+
+    },
+    "Contractor_Consultant": {
+      "Management": "إدارة المقاول والاستشاري",
+      "List": "قائمة المقاولين والاستشاريين",
+      "AddNew": "إضافة مقاول واستشاري جديد"
+    },
+    "Report": "تقرير",
+    "Notification": "إشعار",
+    "LogOut": "تسجيل خروج"
+  },
+  "topBar": {
+    "settings": {
+      "generalSetting": "الإعداد العام",
+      "action": "فعل",
+      "anotherAction": "عمل آخر",
+      "somethingElseHere": "شيء آخر هنا",
+      "administrativeSetting": "الإعداد الإداري",
+      "profilePermissions": "الملف الشخصي والأذونات",
+      "roles": "الأدوار",
+      "materialManagement": "إدارة المواد"
+    }
+
+
+  },
+  "UserManagement": {
+    "title": {
+      "list": "قائمة المستخدم",
+      "add": "إضافة المستخدم",
+      "edit": "تحرير المستخدم",
+      "module": "إدارةالمستخدم",
+      "search": "البحث عن طريق",
+      "aduser": "إضافة مستخدم"
+    },
+    "search": {
+      "searchNameLabel": "البحث عن طريق الإسم",
+      "searchNamePlaceholder": "أدخل الاسم",
+      "searchEmailLabel": "البحث عن طريق البريد الإلكتروني",
+      "searchEmailPlaceholder": "أدخل البريد الإلكتروني",
+      "searchPhoneLabel": "البحث عن طريق الهاتف",
+      "searchPhonePlaceholder": "أدخل الهاتف"
+    },
+
+    "table": {
+      "slNo": "الرقم التسلسلي.",
+      "name": "اسم",
+      "emailId": "عنوان الايميل",
+      "phoneNumber": "رقم التليفون",
+      "profile": "حساب تعريفي",
+      "role": "دور",
+      "gender": "جنس",
+      "dob": "تاريخ الميلاد",
+      "status": "حالة",
+      "createOn": "تم إنشاؤها على",
+      "action": "فعل"
+    },
+
+    "add_edit_box": {
+      "FirstNameLabel": "الاسم الأول",
+      "FirstNamePlaceholder": "أدخل الاسم الأول",
+      "FirstNameCheck": "الاسم الأول",
+      "LastNameLabel": "اسم العائلة",
+      "LastNamePlaceholder": "إدخال اسم آخر",
+      "LastNameCheck": "اسم العائلة",
+      "EmailLabel": "بريد إلكتروني",
+      "EmailPlaceholder": "أدخل معرف البريد الإلكتروني",
+      "EmailCheck": "بريد إلكتروني",
+      "PhoneLabel": "هاتف",
+      "PhonePlaceholder": "أدخل رقم الهاتف",
+      "PhoneCheck": "هاتف",
+      "DepartmentLabel": "قسم",
+      "DepartmentPlaceholder": "أدخل القسم",
+      "DepartmentCheck": "قسم",
+      "DobLabel": "تاريخ الميلاد",
+      "DobPlaceholder": "حدد تاريخ",
+      "DobCheck": "تاريخ الميلاد",
+      "GenderLabel": "جنس",
+      "GenderCheck": "جنس",
+      "Male": "ذكر",
+      "Female": "أنثى",
+      "Others": "آحرون",
+      "SelectProfile": "اختر صفحة شخصية",
+      "SelectRole": "حدد الدور",
+      "updateButton": "تحديث المستخدم",
+      "saveButton": "حفظ المستخدم"
+    }
+  },
+
+  "consultantManagement": {
+
+    "title": {
+      "heading": "إدارة المقاول والاستشاري",
+      "add": "إضافة مقاول واستشاري",
+      "list": "قائمة المقاولين والاستشاريين",
+      "search": "البحث عن طريق",
+      "select": " لم يتم تحديد أي منها"
+    },
+
+    "table": {
+      "slNo": "الرقم التسلسلي",
+      "type": "يكتب",
+      "name": "اسم",
+      "emailId": "عنوان الايميل",
+      "phoneNumber": "رقم التليفون",
+      "gender": "جنس",
+      "dob": "تاريخ الميلاد",
+      "status": "حالة",
+      "createdOn": "تم إنشاؤها على",
+      "action": "فعل"
+    },
+
+    "add_edit_box": {
+      "typeLabel": "يكتب",
+      "firstNameLabel": "الاسم الأول",
+      "firstNamePlaceholder": "أدخل الاسم الأول",
+      "firstNameCheck": "الاسم الأول",
+      "lastNameLabel": "اسم العائلة ",
+      "lastNamePlaceholder": "إدخال اسم آخر",
+      "lastNameCheck": "اسم العائلة",
+      "emailLabel": "بريد إلكتروني",
+      "emailPlaceholder": "أدخل معرف البريد الإلكتروني",
+      "emailCheck": "بريد إلكتروني",
+      "phoneLabel": "هاتف",
+      "phonePlaceholder": "أدخل رقم الهاتف",
+      "phoneCheck": "هاتف",
+      "dobLabel": "تاريخ الميلاد",
+      "dobCheck": "تاريخ الميلاد",
+      "genderLabel": "جنس",
+      "genderCheck": "جنس",
+      "organizationLabel": "منظمة",
+      "organizationPlaceholder": "أدخل المنظمة",
+      "organizationCheck": "منظمة",
+      "countryLabel": "دولة",
+      "countryCheck": "دولة",
+      "provinceLabel": "مقاطعة",
+      "provinceCheck": "مقاطعة",
+      "cityLabel": "مدينة",
+      "cityCheck": "مدينة"
+
+    }
+  },
+  "materialManagement": {
+    "title": {
+      "module": "إدارة المواد",
+      "list": " قائمة مواد",
+      "add": "إضافة المواد",
+      "addmaterial": "إضافة مادة"
+    },
+    "add_edit_box": {
+      "materialNameLabel": "اسم المادة",
+      "materialNamePlaceholder": "أدخل اسم المادة",
+      "materialNameCheck": "اسم المادة",
+      "materialCodeLabel": "رمز المادة",
+      "materialCodePlaceholder": "أدخل رمز المادة",
+      "materialCodeCheck": "رمز المادة",
+      "materiaUnitLabel": "وحدة المواد",
+      "materialUnitPlaceholder": "أدخل وحدة المواد",
+      "materiaUnitCheck": "وحدة المواد",
+      "materialRateLabel": "معدل المواد",
+      "materialRatePlaceholder": "أدخل معدل المواد",
+      "materialRateCheck": "معدل المواد",
+      "updateButton": "تحديث المواد",
+      "saveButton": "احتفظ بالمواد"
+    },
+    "table": {
+      "slNo": "الرقم التسلسلي.",
+      "name": "اسم",
+      "code": "شفرة",
+      "unit": "وحدة",
+      "rate": "معدل",
+      "status": "حالة",
+      "createdOn": "تم إنشاؤها على",
+      "action": "فعل"
+    }
+  },
+  "multipleSelect": {
+    "allSelect": "كل ما تم تحديده",
+    "selected": "المحدد",
+    "noneSelected": "لم يتم التحديد"
+  },
+  "myProfile": {
+    "title": "ملفي",
+    "details": "تفاصيل الملف الشخصي"
+  },
+  "detailsTable": {
+    "change": "غير الصوره"
+  }
+}

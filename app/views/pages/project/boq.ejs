@@ -1,0 +1,128 @@
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<div class="app-main__outer">
+<div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+                    <h2 class="text_skyblue"><span>Bill of Quantities -</span> (<%=oldData?.name%>)</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+
+                    <!-- project box -->
+                    <div class="projectr_box">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-blue">
+                                    <tr>
+                                        <th scope="col">SL No.</th>
+                                        <th scope="col">Material Description</th>
+                                        <th scope="col">Code</th>
+                                        <th scope="col">Unit</th>
+                                        <th scope="col">Rate</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Tax</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    <% if(oldData.boqs.length){
+                                        oldData.boqs.forEach((item,index) => {
+                                    %>
+                                    <tr>
+                                        <th scope="row"><%=(Number(index)+1)%></th>
+                                        <td><%=item.name%></td>
+                                        <td><%=item.code%></td>
+                                        <td><%=item.unit%></td>
+                                        <td><%=item.rate%></td>
+                                        <td><%=item.qty%></td>
+                                        <td><%=item.tax%></td>
+                                        <td><%=item.total%></td>
+                                        
+                                        <td>
+                                            <div class="action_icon">
+                                                <!-- <a href="#" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a> -->
+                                                <a href="#" class="text-danger change-status" id="<%=item.id%>" data-table="project_boqs" data-status="3" data-key="id" data-id="<%=item.id%>" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                                            </div>
+                                                </td>
+                                    </tr>
+                                    <%   
+                                                    });
+                                                }
+                                                %>
+                                    <tr>
+                                        <form class="adminFrm" id="boqFrm" data-action="project-boq-create/<%=projectId%>" method="post" data-class="requiredCheck">
+                                        <input type="hidden" name="_csrf" value="<%=_csrfToken%>">
+                                        <input type="hidden" name="name" id="name" value="">
+                                            
+                                        <th scope="row"></th>
+                                        <td>
+                                            <select name="material_id" id="material_id" class="form-control requiredCheck select2">
+                                                <option value="">Select Product</option>
+                                                <% if(materialList.length){
+                                                    materialList.forEach(item => {
+                                                %>
+                                                        <option value="<%=item.id%>" data-name="<%=item.name%>" data-code="<%=item.code%>" data-unit="<%=item.unit%>" data-rate="<%=item.rate%>"><%=item.name%> [<%=item.code%>]</option>
+                                                <%   
+                                                    });
+                                                }
+                                                %>
+                                            </select>
+                                        </td>
+                                        <td><input class="form-control" type="text" id="code" name="code" readonly></td>
+                                        <td><input class="form-control" type="text" id="unit" name="unit" readonly></td>
+                                        <td><input class="form-control" type="text"  id="rate" name="rate" readonly></td>
+                                        <td><input class="form-control" type="number" step="1" min="1"  id="qty" name="qty"></td>
+                                        <td><input class="form-control" type="number" step="0.01"  id="tax" name="tax"></td>
+                                        <td><input class="form-control" type="text" id="total"  name="total" readonly></td>
+                                        <td class="text-center">
+                                        <a href="javascript:void(0)" class="add_row" id="saveBtn">     <i class="fas fa-plus-circle"></i></a> 
+                                        </td>
+                                        </form>
+                                    </tr>
+                                                               
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".select2").select2();
+    });
+    $(document).on('change',"#material_id",function() {
+        $('#name').val($(this).find('option:selected').attr('data-name'));
+        $('#code').val($(this).find('option:selected').attr('data-code'));
+        $('#rate').val($(this).find('option:selected').attr('data-rate'));
+        $('#unit').val($(this).find('option:selected').attr('data-unit'));
+        $("#qty").val("1");
+        $("#tax").val("0.00");
+        $("#total").val(((parseFloat($(this).find('option:selected').attr('data-rate'))*parseInt(1))+parseFloat(0)).toFixed(2));
+    })
+    $(document).on("change","#qty",function() {
+        $("#total").val(((parseFloat($("#material_id").find('option:selected').attr('data-rate'))*parseInt($(this).val()))+parseFloat($("#tax").val())).toFixed(2)); 
+    })
+    $(document).on("change","#tax",function() {
+        $("#total").val(((parseFloat($("#material_id").find('option:selected').attr('data-rate'))*parseInt($("#qty").val()))+parseFloat($(this).val())).toFixed(2)); 
+    })
+    $(document).on("click",'#saveBtn',function (e) {
+        e.preventDefault();
+        $("#boqFrm").submit();
+    })
+</script>

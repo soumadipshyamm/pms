@@ -1,0 +1,210 @@
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2><span>
+              <%= translation.projectManagement.title.module %>              
+            </span></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-card mb-3 card">
+          <div class="card-header staff_header">
+            <div class="header_title">
+              <h2>
+                <%= title %>
+              </h2>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="add_newstaff">
+              <form class="adminFrm" data-action="project-contruct-create" method="post">
+                <input type="hidden" name="_csrf" value="<%=_csrfToken%>">
+                <input type="hidden" name="updateId" value="<%=(oldData)?oldData.id:""%>">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="single-login">
+                      <label class="login-label">
+                        <%= "Client Type" %>
+                        <span class="text-danger">*</span></label>
+                      <select name="client_type_id" id="client_type_id" class="form-control requiredCheck"
+                        data-check="Client Type">
+                        <option value="">-<%= "Choose Type" %>-</option>
+                         <% if(clientTypes.length){ 
+                              clientTypes.forEach(element => {
+                              %>
+                            <option value="<%= element.id %>" <%=(oldData && element.id==oldData.client_type_id)?"selected":""%>><%= element.name %></option>
+                            <% }); }else{ %>
+                            <option value=""><%= "No data Found" %></option>
+                          <% } %>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="single-login">
+                      <label class="login-label">
+                        <%= translation.projectManagement.addEditSection.clientNameLabel %>
+                        <span class="text-danger">*</span></label>
+                      <select name="client_id" id="client_id" class="form-control requiredCheck"
+                        data-check="<%= translation.projectManagement.addEditSection.clientNameCheck %>">
+                        <option value="">-<%= translation.projectManagement.addEditSection.selectClient %>-</option>
+                       
+                      </select>
+                    </div>
+                  </div>
+                  <div class=" col-md-3">
+                        <div class="single-login">
+                          <label class="login-label">
+                            <%= translation.projectManagement.addEditSection.contactNumberLabel %>
+                            <span class="text-danger">*</span></label>
+                          <input class="form-control" type="text" name="contact_no_client"
+                            id="contact_no_client" readonly="" />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="single-login">
+                        <label class="login-label">
+                          <%= translation.projectManagement.addEditSection.emailLabel %>
+                          <span class="text-danger">*</span></label>
+                        <input class="form-control" type="text" name="email_client" id="email_client"
+                          readonly="" />
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                    <div class="single-login">
+                      <label class="login-label">
+                        <%= translation.projectManagement.addEditSection.projectTypeLabel %>
+                        <span class="text-danger">*</span></label>
+                      <select name="project_type_id" id="project_type_id" class="form-control requiredCheck"
+                        data-check="<%= translation.projectManagement.addEditSection.projectTypeCheck %>">
+                        <option value="">-<%= translation.projectManagement.addEditSection.selectProject %>-</option>
+                        <% if (projectTypeList.length) { Object.entries(projectTypeList).forEach(([key, value])=> { %>
+                          <option value="<%= value.id %>" 
+                            <%=(oldData && value.id==oldData.project_type_id)?"selected":""%>><%= value.name %>
+                          </option>
+                          <% }) }else{ %>
+                            <option value="">
+                              <%= translation.projectManagement.addEditSection.noDataFound %>
+                            </option>
+                          <% } %>
+                      </select>
+                    </div>
+                  </div>
+                    <div class="col-md-5">
+                      <div class="single-login">
+                        <label class="login-label">
+                          <%= "Contruct Name" %>
+                          <span class="text-danger">*</span>
+                        </label>
+                        <input class="form-control requiredCheck restrictSpecial" type="text" name="contract_name" id="contract_name"
+                          placeholder="Enter Contruct Name" data-check="Contruct Name"
+                          value="<%=(oldData)?oldData.contract_name:""%>" />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="single-login">
+                        <label class="login-label">
+                          <%= "Contruct No." %>
+                          <span class="text-danger">*</span>
+                        </label>
+                        <input class="form-control requiredCheck restrictSpecial" type="text" name="contruct_no" id="contruct_no"
+                          placeholder="Enter Contruct no" data-check="Contruct No."
+                          value="<%=(oldData)?oldData.contruct_no:""%>" />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="single-login">
+                        <label class="login-label">
+                          <%= translation.projectManagement.addEditSection.preparerNameLabel %>
+                          <span class="text-danger">*</span>
+                        </label>
+                        <input class="form-control requiredCheck allowOnlyLetterSpace" type="text" name="preparer_name" id="preparer_name"
+                          placeholder="<%= translation.projectManagement.addEditSection.preparerNamePlaceholder %>" data-check="<%= translation.projectManagement.addEditSection.preparerNameCheck %>"
+                          value="<%=(oldData)?oldData.preparer_name:_sessionUser?.name%>" />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="single-login">
+                        <label class="login-label">
+                          <%= translation.projectManagement.addEditSection.preparerEmailLabel %> <span class="text-danger">*</span>
+                        </label>
+                        <input class="form-control requiredCheck " type="text" name="preparer_email" id="preparer_email"
+                          placeholder="<%= translation.projectManagement.addEditSection.preparerEmailPlaceholder %>" data-check=" <%= translation.projectManagement.addEditSection.preparerEmailCheck %>"
+                          value="<%=(oldData)?oldData.preparer_email:_sessionUser?.email%>" />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="single-login">
+                        <label class="login-label">
+                          <%= translation.projectManagement.addEditSection.registrationDateLabel %>
+                          <span class="text-danger">*</span>
+                        </label>
+                        <input class="form-control requiredCheck" type="date" name="registration_date" id="registration_date"
+                          placeholder="<%= translation.projectManagement.addEditSection.registrationDatePlaceholder %>" data-check="<%= translation.projectManagement.addEditSection.registrationDateCheck %>"
+                          value="<%=(oldData)?oldData.registration_date:""%>" />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="single-login">
+                        <label class="login-label"> <%= translation.projectManagement.addEditSection.budgetLabel %> <span class="text-danger">*</span></label>
+                        <input class="form-control requiredCheck checkDecimal" type="text" name="budget" id="budget"
+                          placeholder="<%= translation.projectManagement.addEditSection.budgetPlaceholder %>" data-check="<%= translation.projectManagement.addEditSection.budgetCheck %>" value="<%=(oldData)?oldData.budget:""%>" />
+                      </div>
+                    </div>
+                   
+                    <div class="col-12 mt-4 text-right">
+                      <button type="submit" class="btn-shadow btn btn-info btn_dashboard">
+                       NEXT
+                      </button>
+                    </div>
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  var oldType = "";
+    $(document).on('change','#client_type_id',function() {
+      getClientList($(this).find('option:selected').val());
+     
+    })
+    $(document).on('change', '#client_id', function (e) {
+      $('#contact_no_client').val($(this).find('option:selected').attr('client-phone'));
+      $('#email_client').val($(this).find('option:selected').attr('client-email'));
+    });
+    const getClientList = (id)=>{
+        $.ajax({
+            type:"POST",
+            url:"/client-list-by-type",
+            data:{_csrf:_token,id:id},
+            dataType:"JSON",
+            beforeSend:function(){
+              $("#client_id").html(`<option value="">Processing...</option>`);
+            },
+            success:function(resp){
+              let html =``;
+              if(resp.status){
+                  resp.data.forEach(element => {
+                    html+=`<option value="${element.id}" ${(element.id==oldType)?"selected":""} client-email="${element?.email}" client-phone="${element?.phone}">${element?.first_name} ${element?.last_name}</option>`;
+                  });
+                   
+              }else{
+                  html+=`<option value="">No Data Found!</option>`
+              }
+              $("#client_id").html(html);
+              $("#client_id").trigger('change');
+            }
+        })
+    }
+</script>

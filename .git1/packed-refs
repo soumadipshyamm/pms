@@ -1,0 +1,8 @@
+# pack-refs with: peeled fully-peeled sorted 
+d001ce8e27ae621bf8285587f188bbaded17853a refs/remotes/origin/development
+76f14e90c9d38b1a155e42c957e8513956783def refs/remotes/origin/feature/ankita
+1bc8a23ecfa1a0516734bb0bbdf6a3a14a0c30b4 refs/remotes/origin/feature/diksha
+c45112fd9227820ab52f3cc9e9507fd8706d3238 refs/remotes/origin/feature/samanta
+f83f073571a3490694b9bee02ee702dd94f96b46 refs/remotes/origin/feature/somnath
+f83f073571a3490694b9bee02ee702dd94f96b46 refs/remotes/origin/feature/soumadip
+24187a0a334e54237632f6ee7fd49deca2f656bc refs/remotes/origin/master

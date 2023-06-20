@@ -1,0 +1,868 @@
+<link href="/assets/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="/assets/css/fixedColumns.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2><span>
+                <%= translation.projectManagement.title.module %>
+              </span></h2>
+          </div>
+        </div>
+        <div class="page-title-actions">
+          <div class="d-inline-block dropdown">
+            <a href="/project-add" class="btn-shadow btn btn-info btn_dashboard">
+              <%= translation.projectManagement.title.add %> <span><i class="fa-solid fa-plus"></i></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-card mb-3 card">
+          <!-- <div class="card-header staff_header">
+            <div class="cardsub_heading">
+              <div class="header_title">
+                <h2>   <%= title %></h2>
+              </div>
+              
+              <div class="staff_headerright">
+                <div class="projectlist_search">
+                  <form method="">
+                    <input
+                      class="form-control"
+                      type="text"
+                      name=""
+                      idf=""
+                      placeholder=" <%= translation.projectManagement.title.placeHolder %>"
+                      required=""
+                    />
+                    <button type="submit" class="Fbtn btn-subscribe">
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                  </form>
+                </div>
+                <div class="dropdown stafftable_dropdown">
+                  <button
+                    class="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                  <%= translation.projectManagement.title.search %>    
+                    <span><i class="fa-solid fa-magnifying-glass"></i></span>
+                  </button>
+                  <ul
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton1"
+                  >
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li>
+                      <a class="dropdown-item" href="#">Another action</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="stafftable_select">
+                  <select class="select_box" multiple>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                    <option value="4">Four</option>
+                    <option value="5">Five</option>
+                    <option value="6">Six</option>
+                    <option value="7">Seven</option>
+                    <option value="8">Eight</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+          <!-- new -->
+          <div class="pr-listhead mt-4">
+            <div class="header_title">
+              <h2>
+                <%=title%>
+              </h2>
+            </div>
+
+            <!-- <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label> SEARCH BY CLIENT </label>
+                  <select name="client_id" id="client_id"
+                    class="form-control requiredCheck select2"
+                    data-check="<%= translation.projectManagement.addEditSection.clientNameCheck %>">
+                    <option value>-Choose Client-</option>
+                    <% if (clientList.length) {
+                    Object.entries(clientList).forEach(([key, value])=> { %>
+                    <option value="<%= value.id %>">
+                      <%= value.first_name+" "+value.last_name %>
+                    </option>
+                    <% }) }else{ %>
+                    <option value><%=
+                      translation.projectManagement.addEditSection.noDataFound
+                      %></option>
+                    <% } %>
+                  </select>
+                </div>
+              </div>
+            </div> -->
+            <div class="project-list">
+              <div class="pr-listbox">
+                <div class="pr-listboxcon">
+                  <div class="form-group">
+                    <label>Project Name </label>
+                    <input class="form-control" id="searchProjectName" type="text" placeholder="Project Name">
+                  </div>
+                </div>
+                <div class="pr-listboxcon">
+                  <div class="form-group">
+                    <label>Project Type </label>
+                    <select name="project_type_id" id="project_type_id" class="form-control requiredCheck select2"
+                      data-check="projectType">
+                      <option value>-Choose Type-</option>
+                      <% if (projectTypeList.length) { Object.entries(projectTypeList).forEach(([key, value])=> { %>
+                        <option value="<%= value.id %>">
+                          <%= value.name %>
+                        </option>
+                        <% }) }else{ %>
+                          <option value>
+                            <%= translation.projectManagement.addEditSection.noDataFound %>
+                          </option>
+                          <% } %>
+                    </select>
+                  </div>
+                </div>
+                <div class="pr-listboxcon">
+                  <div class="form-group">
+                    <label>Project Sub Type </label>
+                    <select name="project_typenew" id="project_sub_type" class="form-control requiredCheck select2"
+                      data-check="projectType">
+                      <option value>-Choose Sub Type-</option>
+                      <% if (projectTypeList.length) { Object.entries(projectTypeList).forEach(([key, value])=> { %>
+                        <option value="<%= value.id %>">
+                          <%= value.name %>
+                        </option>
+                        <% }) }else{ %>
+                          <option value>
+                            <%= translation.projectManagement.addEditSection.noDataFound %>
+                          </option>
+                          <% } %>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="pr-listboxcon">
+                  <div class="form-group">
+                    <label>Project Code</label>
+                    <input class="form-control" id="searchProjectCode" type="text" placeholder="Project Code">
+                  </div>
+                </div>
+
+                <div class="pr-listboxcon reset-box">
+                  <a href="javascript:void(0)" class="btn_dashboard" title="reset" id="resetSearch">
+                    <i class="fa-solid fa-rotate"></i>
+                  </a>
+
+                  <a href="javascript:void(0)" class="btn_dashboard" title="serach" id="search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                  </a>
+                </div>
+              </div>
+
+
+              <div class="staff_headerright">
+                <div class="stafftable_select">
+                  <span class="multiselect-native-select"><select class="select_box" multiple id="tableColums"
+                      tabindex="-1">
+                      <option value="0" selected data-multiselectid="multiselect_t8by05a6qac_0_0">Sl. No.
+                      </option>
+                      <option value="1" selected data-multiselectid="multiselect_t8by05a6qac_0_1">Name
+                      </option>
+                      <option value="2" selected data-multiselectid="multiselect_t8by05a6qac_0_2">Email
+                        ID
+                      </option>
+                      <option value="3" selected data-multiselectid="multiselect_t8by05a6qac_0_3">Phone
+                        Number </option>
+                      <option value="4" selected data-multiselectid="multiselect_t8by05a6qac_0_4">Profile
+                      </option>
+                      <option value="5" selected data-multiselectid="multiselect_t8by05a6qac_0_5">Role
+                      </option>
+                      <option value="6" selected data-multiselectid="multiselect_t8by05a6qac_0_6">Gender
+                      </option>
+                      <option value="7" selected data-multiselectid="multiselect_t8by05a6qac_0_7">Date Of
+                        Birth </option>
+                      <option value="8" selected data-multiselectid="multiselect_t8by05a6qac_0_8">Status
+                      </option>
+                      <option value="9" selected data-multiselectid="multiselect_t8by05a6qac_0_9">Created
+                        On </option>
+                      <option value="10" selected data-multiselectid="multiselect_t8by05a6qac_0_10">
+                        Action
+                      </option>
+                    </select>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- tabs table (project management) -->
+
+          <div class="card-body project_tabs">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="pills-ongoing-tab" data-bs-toggle="pill" data-bs-target="#pills-ongoing"
+                  role="tab" aria-controls="pills-ongoing" aria-selected="true">Running Projects</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="pills-initially-tab" data-bs-toggle="pill" data-bs-target="#pills-initially"
+                  role="tab" aria-controls="pills-initially" aria-selected="false">Preliminary Handed Over Projects
+                </a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="pills-finally-tab" data-bs-toggle="pill" data-bs-target="#pills-finally"
+                  role="tab" aria-controls="pills-finally" aria-selected="false">Finally Handed Over Projects
+                </a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="pills-withdrawn-tab" data-bs-toggle="pill" data-bs-target="#pills-withdrawn"
+                  role="tab" aria-controls="pills-withdrawn" aria-selected="false">Withdrawn Projects</a>
+              </li>
+            </ul>
+
+            <div class="tab-content" id="pills-tabContent">
+              <div class="tab-pane fade show active" id="pills-ongoing" role="tabpanel"
+                aria-labelledby="pills-ongoing-tab">
+                <div class="staffmanage_table">
+                  <table id="ongoingProject" class="stripe row-border order-column" style="width: 100%">
+                    <thead>
+                      <tr>
+                        <th>Sl. No.</th>
+                        <th>Project Name</th>
+                        <th>Project Code</th>
+                        <th>Contruct Name</th>
+                        <th>Contruct No.</th>
+                        <th>Project Type </th>
+                        <th>Project Sub-type </th>
+                        <th>Client Type</th>
+                        <th>Client Name</th>
+                        <th>Location</th>
+                        <th>Budget</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Status</th>
+                        <th>Created On</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
+              <!-- initiallyDeliveredProject -->
+              <div class="tab-pane fade" id="pills-initially" role="tabpanel" aria-labelledby="pills-initially-tab">
+                <div class="staffmanage_table">
+                  <table id="initiallyDeliveredProject" class="stripe row-border order-column" style="width: 100%">
+                    <thead>
+                      <tr>
+                        <th>Sl. No.</th>
+                        <th>Project Name</th>
+                        <th>Project Code</th>
+                        <th>Contruct Name</th>
+                        <th>Contruct No.</th>
+                        <th>Project Type </th>
+                        <th>Project Sub-type </th>
+                        <th>Client Type</th>
+                        <th>Client Name</th>
+                        <th>Location</th>
+                        <th>Budget</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Status</th>
+                        <th>Created On</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
+              <!-- finallyDeliveredProject -->
+              <div class="tab-pane fade" id="pills-finally" role="tabpanel" aria-labelledby="pills-finally-tab">
+                <div class="staffmanage_table">
+                  <table id="finallyDeliveredProject" class="stripe row-border order-column" style="width: 100%">
+                    <thead>
+                      <tr>
+                        <th>Sl. No.</th>
+                        <th>Project Name</th>
+                        <th>Project Code</th>
+                        <th>Contruct Name</th>
+                        <th>Contruct No.</th>
+                        <th>Project Type </th>
+                        <th>Project Sub-type </th>
+                        <th>Client Type</th>
+                        <th>Client Name</th>
+                        <th>Location</th>
+                        <th>Budget</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Status</th>
+                        <th>Created On</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
+              <!-- withdrawnProject -->
+              <div class="tab-pane fade" id="pills-withdrawn" role="tabpanel" aria-labelledby="pills-withdrawn-tab">
+                <div class="staffmanage_table">
+                  <table id="withdrawnProject" class="stripe row-border order-column" style="width: 100%">
+                    <thead>
+                      <tr>
+                        <th>Sl. No.</th>
+                        <th>Project Name</th>
+                        <th>Project Code</th>
+                        <th>Contruct Name</th>
+                        <th>Contruct No.</th>
+                        <th>Project Type </th>
+                        <th>Project Sub-type </th>
+                        <th>Client Type</th>
+                        <th>Client Name</th>
+                        <th>Location</th>
+                        <th>Budget</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Status</th>
+                        <th>Created On</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%-contentFor('modal')%>
+    <!-- upload document modal -->
+    <div class="modal fade" id="customPopUpModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content" id="dropdownItems">
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="/assets/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/assets/js/dataTables.fixedColumns.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        $(".select2").select2();
+      });
+      var customPopUpModal = new bootstrap.Modal(document.getElementById("customPopUpModal"), {});
+      var projectName = '';
+      var projectType = '';
+      var projectCode = '';
+      var clientId = "<%=clientId??''%>";
+      var groupColumnContruct = 3;
+      var groupColumnContruct_no = 4;
+      // *****************************ongoingProject*********************************************
+      $("#ongoingProject").DataTable().destroy();
+      var ongoingProjectTable = $('#ongoingProject').DataTable({
+        dom: 'Bfrtip',
+        processing: true,
+        serverSide: true,
+        searching: false,
+        scrollY: false,
+        scrollX: true,
+        scrollCollapse: true,
+        fixedColumns: {
+          left: 2,
+        },
+
+        // *************************Grouping************************************    
+        columnDefs: [{ visible: false, targets: groupColumnContruct }],
+        order: [[groupColumnContruct, 'asc']],
+        displayLength: 25,
+        drawCallback: function (settings) {
+          var api = this.api();
+          var rows = api.rows({ page: 'current' }).nodes();
+          // console.log(rows);
+          var last = null;
+          // alert(groupColumn);
+          var tetstt = api.column(groupColumnContruct_no, { page: 'current' })
+            .data();
+          console.log(tetstt[0]);
+
+          api.column(groupColumnContruct, { page: 'current' })
+            .data()
+            .each(function (group, i) {
+              if (last !== group) {
+                $(rows)
+                  .eq(i)
+                  .before('<tr class="group"><td colspan="15"><b> Contruct Name : [ ' + group + ' ] , Contruct No :[ ' + tetstt[i] + ' ]<b></td></tr>');
+                last = group;
+              }
+            });
+        },
+
+        ajax: {
+          url: baseUrl + "project-ajax-datatable",
+          type: 'post',
+          data: function (data) {
+            if ($('#searchProjectName').val()) {
+              projectName = $('#searchProjectName').val();
+            }
+            if ($('#project_sub_type').val()) {
+              projectType = $('#project_sub_type').find('option:selected').val();
+            }
+            if ($('#searchProjectCode').val()) {
+              projectCode = $('#searchProjectCode').val();
+            }
+
+            data._csrf = _token,
+              data.clientId = clientId
+            data.projectName = projectName
+            data.projectType = projectType
+            data.projectCode = projectCode
+            data.currentStatus = "1"
+
+          }
+        },
+        columns: [
+          { data: 'id' },
+          { data: 'name' },
+          { data: 'project_alt_id' },
+          { data: 'project_contruct_id' },
+          { data: 'contruct_no' },
+          { data: 'project_type' },
+          { data: 'project_sub_type' },
+          { data: 'client_type' },
+          { data: 'client_name' },
+          { data: 'location' },
+          { data: 'budget' },
+          { data: 'start_date' },
+          { data: 'end_date' },
+          { data: 'status' },
+          { data: 'created_at' },
+          { data: 'action' }
+        ],
+        columnDefs: [
+          { orderable: false, targets: [3, 4, 5, 6, 7, 8, 13, 15] }
+        ],
+      });
+    
+// **************************************************************************************
+      $(document).on('change', '#project_type_id', function () {
+        let typeId = $(this).find('option:selected').val();
+        if (typeId == '') {
+          $("#project_sub_type").html("");
+          return false;
+        }
+        $.ajax({
+          type: "POST",
+          url: "/project-sub-type",
+          data: { _csrf: _token, id: typeId },
+          dataType: "JSON",
+          beforeSend: function () {
+            $("#project_sub_type").html(`<option value="">Processing...</option>`);
+          },
+          success: function (resp) {
+            let html = ``;
+            if (resp.status) {
+              resp.data.forEach(element => {
+                html += `<option value="${element.id}" >${element?.name} </option>`;
+              });
+            } else {
+              html += `option value="">No Data Found!</option>`
+            }
+            $("#project_sub_type").html(html);
+          }
+        })
+      });
+      //search
+      $(document).on('click', '#search', function (e) {
+        e.preventDefault();
+        // table.destroy();
+        ongoingProjectTable.draw()
+      })
+      $(document).on('click', '#resetSearch', function (e) {
+        e.preventDefault();
+        location.reload();
+      })
+      // **************************initiallyDeliveredProject***************************************
+      $("#initiallyDeliveredProject").DataTable().destroy();
+      var initiallyDeliveredProjectTable = $('#initiallyDeliveredProject').DataTable({
+        dom: 'Bfrtip',
+        processing: true,
+        serverSide: true,
+        searching: false,
+        scrollY: false,
+        scrollX: true,
+        scrollCollapse: true,
+        fixedColumns: {
+          left: 2,
+        },
+
+        ajax: {
+          url: baseUrl + "project-ajax-datatable",
+          type: 'post',
+          data: function (data) {
+            if ($('#searchProjectName').val()) {
+              projectName = $('#searchProjectName').val();
+            }
+            if ($('#project_sub_type').val()) {
+              projectType = $('#project_sub_type').find('option:selected').val();
+            }
+            if ($('#searchProjectCode').val()) {
+              projectCode = $('#searchProjectCode').val();
+            }
+
+            data._csrf = _token,
+              data.clientId = clientId
+            data.projectName = projectName
+            data.projectType = projectType
+            data.projectCode = projectCode
+            data.currentStatus = "2"
+          }
+        },
+        columns: [
+          { data: 'id' },
+          { data: 'name' },
+          { data: 'project_alt_id' },
+          { data: 'project_contruct_id' },
+          { data: 'contruct_no' },
+          { data: 'project_type' },
+          { data: 'project_sub_type' },
+          { data: 'client_type' },
+          { data: 'client_name' },
+          { data: 'location' },
+          { data: 'budget' },
+          { data: 'start_date' },
+          { data: 'end_date' },
+          { data: 'status' },
+          { data: 'created_at' },
+          { data: 'action' }
+        ],
+        columnDefs: [
+          { orderable: false, targets: [3, 4, 5, 6, 7, 8, 13, 15] }
+        ],
+        // *************************Grouping************************************       
+
+        drawCallback: function (settings) {
+          var api = this.api();
+          var rows = api.rows({ page: 'current' }).nodes();
+          // console.log(rows);
+          var last = null;
+          // alert(groupColumn);
+          var tetstt = api.column(groupColumnContruct_no, { page: 'current' })
+            .data();
+          console.log(tetstt[0]);
+
+          api.column(groupColumnContruct, { page: 'current' })
+            .data()
+            .each(function (group, i) {
+              if (last !== group) {
+                $(rows)
+                  .eq(i)
+                  .before('<tr class="group"><td colspan="15"><b> Contruct Name : [ ' + group + ' ] ,  Contruct No :[ ' + tetstt[i] + ' ]<b></td></tr>');
+                last = group;
+              }
+            });
+        },
+
+      });
+
+      $(document).on('change', '#project_type_id', function () {
+        let typeId = $(this).find('option:selected').val();
+        if (typeId == '') {
+          $("#project_sub_type").html("");
+          return false;
+        }
+        $.ajax({
+          type: "POST",
+          url: "/project-sub-type",
+          data: { _csrf: _token, id: typeId },
+          dataType: "JSON",
+          beforeSend: function () {
+            $("#project_sub_type").html(`<option value="">Processing...</option>`);
+          },
+          success: function (resp) {
+            let html = ``;
+            if (resp.status) {
+              resp.data.forEach(element => {
+                html += `<option value="${element.id}" >${element?.name} </option>`;
+              });
+            } else {
+              html += `option value="">No Data Found!</option>`
+            }
+            $("#project_sub_type").html(html);
+          }
+        })
+      });
+      // ************************finallyDeliveredProject*******************************************
+      $("#finallyDeliveredProject").DataTable().destroy();
+      var finallyDeliveredProjectTable = $('#finallyDeliveredProject').DataTable({
+        dom: 'Bfrtip',
+        processing: true,
+        serverSide: true,
+        searching: false,
+        scrollY: false,
+        scrollX: true,
+        scrollCollapse: true,
+        fixedColumns: {
+          left: 2,
+        },
+
+        ajax: {
+          url: baseUrl + "project-ajax-datatable",
+          type: 'post',
+          data: function (data) {
+            if ($('#searchProjectName').val()) {
+              projectName = $('#searchProjectName').val();
+            }
+            if ($('#project_sub_type').val()) {
+              projectType = $('#project_sub_type').find('option:selected').val();
+            }
+            if ($('#searchProjectCode').val()) {
+              projectCode = $('#searchProjectCode').val();
+            }
+
+            data._csrf = _token,
+              data.clientId = clientId
+            data.projectName = projectName
+            data.projectType = projectType
+            data.projectCode = projectCode
+            data.currentStatus = "3"
+          }
+        },
+        columns: [
+          { data: 'id' },
+          { data: 'name' },
+          { data: 'project_alt_id' },
+          { data: 'project_contruct_id' },
+          { data: 'contruct_no' },
+          { data: 'project_type' },
+          { data: 'project_sub_type' },
+          { data: 'client_type' },
+          { data: 'client_name' },
+          { data: 'location' },
+          { data: 'budget' },
+          { data: 'start_date' },
+          { data: 'end_date' },
+          { data: 'status' },
+          { data: 'created_at' },
+          { data: 'action' }
+        ],
+        columnDefs: [
+          { orderable: false, targets: [3, 4, 5, 6, 7, 8, 13, 15] }
+        ],
+        // *************************Grouping************************************          
+        drawCallback: function (settings) {
+          var api = this.api();
+          var rows = api.rows({ page: 'current' }).nodes();
+          var last = null;
+          var tetstt = api.column(groupColumnContruct_no, { page: 'current' })
+            .data();
+          api.column(groupColumnContruct, { page: 'current' })
+            .data()
+            .each(function (group, i) {
+              if (last !== group) {
+                $(rows)
+                  .eq(i)
+                  .before('<tr class="group"><td colspan="15"><b> Contruct Name : [ ' + group + ' ]  , Contruct No :[ ' + tetstt[i] + ' ]<b></td></tr>');
+                last = group;
+              }
+            });
+        },
+      });
+      $(document).on('change', '#project_type_id', function () {
+        let typeId = $(this).find('option:selected').val();
+        if (typeId == '') {
+          $("#project_sub_type").html("");
+          return false;
+        }
+        $.ajax({
+          type: "POST",
+          url: "/project-sub-type",
+          data: { _csrf: _token, id: typeId },
+          dataType: "JSON",
+          beforeSend: function () {
+            $("#project_sub_type").html(`<option value="">Processing...</option>`);
+          },
+          success: function (resp) {
+            let html = ``;
+            if (resp.status) {
+              resp.data.forEach(element => {
+                html += `<option value="${element.id}" >${element?.name} </option>`;
+              });
+            } else {
+              html += `option value="">No Data Found!</option>`
+            }
+            $("#project_sub_type").html(html);
+          }
+        })
+      });
+
+      // *********************************withdrawnProject**********************************
+      $("#withdrawnProject").DataTable().destroy();
+      var withdrawnProjectTable = $('#withdrawnProject').DataTable({
+        dom: 'Bfrtip',
+        processing: true,
+        serverSide: true,
+        searching: false,
+        scrollY: false,
+        scrollX: true,
+        scrollCollapse: true,
+        fixedColumns: {
+          left: 2,
+        },
+
+        ajax: {
+          url: baseUrl + "project-ajax-datatable",
+          type: 'post',
+          data: function (data) {
+            if ($('#searchProjectName').val()) {
+              projectName = $('#searchProjectName').val();
+            }
+            if ($('#project_sub_type').val()) {
+              projectType = $('#project_sub_type').find('option:selected').val();
+            }
+            if ($('#searchProjectCode').val()) {
+              projectCode = $('#searchProjectCode').val();
+            }
+
+            data._csrf = _token,
+              data.clientId = clientId
+            data.projectName = projectName
+            data.projectType = projectType
+            data.projectCode = projectCode
+            data.currentStatus = "4"
+          }
+        },
+        columns: [
+          { data: 'id' },
+          { data: 'name' },
+          { data: 'project_alt_id' },
+          { data: 'project_contruct_id' },
+          { data: 'contruct_no' },
+          { data: 'project_type' },
+          { data: 'project_sub_type' },
+          { data: 'client_type' },
+          { data: 'client_name' },
+          { data: 'location' },
+          { data: 'budget' },
+          { data: 'start_date' },
+          { data: 'end_date' },
+          { data: 'status' },
+          { data: 'created_at' },
+          { data: 'action' }
+        ],
+        columnDefs: [
+          { orderable: false, targets: [3, 4, 5, 6, 7, 8, 13, 15] }
+        ],
+        // *************************Grouping************************************          
+        drawCallback: function (settings) {
+          var api = this.api();
+          var rows = api.rows({ page: 'current' }).nodes();
+          // console.log(rows);
+          var last = null;
+          // alert(groupColumn);
+          var tetstt = api.column(groupColumnContruct_no, { page: 'current' })
+            .data();
+          console.log(tetstt[0]);
+
+          api.column(groupColumnContruct, { page: 'current' })
+            .data()
+            .each(function (group, i) {
+              if (last !== group) {
+                $(rows)
+                  .eq(i)
+                  .before('<tr class="group"><td colspan="15"><b> Contruct Name : [ ' + group + ' ],   Contruct No :[ ' + tetstt[i] + ' ]<b></td></tr>');
+                last = group;
+              }
+            });
+        },
+      });
+
+      $(document).on('change', '#project_type_id', function () {
+        let typeId = $(this).find('option:selected').val();
+        if (typeId == '') {
+          $("#project_sub_type").html("");
+          return false;
+        }
+        $.ajax({
+          type: "POST",
+          url: "/project-sub-type",
+          data: { _csrf: _token, id: typeId },
+          dataType: "JSON",
+          beforeSend: function () {
+            $("#project_sub_type").html(`<option value="">Processing...</option>`);
+          },
+          success: function (resp) {
+            let html = ``;
+            if (resp.status) {
+              resp.data.forEach(element => {
+                html += `<option value="${element.id}" >${element?.name} </option>`;
+              });
+            } else {
+              html += `option value="">No Data Found!</option>`
+            }
+            $("#project_sub_type").html(html);
+          }
+        })
+      });
+      // *******************************************************************
+      $(document).on('click', '.customPopup', function (e) {
+        let encryptedID = $(this).attr("data-id");
+        let encryptedContructID = $(this).attr('data-contruct-id')
+        $("#dropdownItems").html('');
+        $("#dropdownItems").append(`<ul>
+                    <li><a class="dropdown-item" href="/project-folders/${encryptedID}"><span><i class="fa fa-folder"></i></span>Project Details</a></li>
+                    <li><a class="dropdown-item" href="/project-edit/${encryptedID}/${encryptedContructID}"><span><i class="fa-solid fa-pen-to-square"></i></span>Edit</a></li>
+                    <li><a class="dropdown-item change-status" href="javascript:void(0)" id="${encryptedID}" data-table="projects" data-status="3" data-key="id" data-id="${encryptedID}"><span><i class="fa-solid fa-trash text-danger"></i></span>Delete </a></li>
+                  </ul>`);
+        customPopUpModal.show();
+      })
+       //search
+      $(document).on('click', '#search', function (e) {
+        e.preventDefault();
+        // table.destroy();
+        initiallyDeliveredProjectTable.draw()
+        finallyDeliveredProjectTable.draw()
+        withdrawnProjectTable.draw()
+      })
+      $(document).on('click', '#resetSearch', function (e) {
+        e.preventDefault();
+        location.reload();
+      })
+    </script>
+
+
+
+    <!-- <li><a class="dropdown-item" href="/project-details/${encryptedID}"><span><i class="fa-regular fa-note-sticky"></i></span>Project Details</a></li>
+<li><a class="dropdown-item" href="/project-time-table-and-schedule/${encryptedID}"><span><i class="fa-regular fa-map"></i></span>Time Table & Schedule</a></li>
+<li><a class="dropdown-item" href="/project-resources/${encryptedID}"><span><i class="fa-solid fa-users"></i></span>Resources</a></li>
+<li><a class="dropdown-item" href="/project-safety-and-security/${encryptedID}"><span><i class="fa-regular fa-clipboard"></i></span>Safety & Security</a></li>
+<li><a class="dropdown-item" href="/project-cost/${encryptedID}"><span><i class="fa-sharp fa-solid fa-circle-info"></i></span>Cost Information</a></li>
+<li><a class="dropdown-item" href="/project-stakeholder-and-risk/${encryptedID}"><span><i class="fa-sharp fa-solid fa-circle-info"></i></span>Stakeholder & Major Risks</a></li>
+<li><a class="dropdown-item" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#qualityModal"><span><i class="fa-regular fa-rectangle-list"></i></span>Quality Plan</a></li>
+<li><a class="dropdown-item" href="/project-boq/${encryptedID}"><span><i class="fa-solid fa-boxes-stacked"></i></span>BOQ</a></li> -->

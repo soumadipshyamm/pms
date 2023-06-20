@@ -1,0 +1,78 @@
+<link href="/assets/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="/assets/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2><span>Client Type Management</span></h2>
+          </div>
+        </div>
+        <div class="page-title-actions">
+          <div class="d-inline-block dropdown">
+            <a href="/client-type-add" class="btn-shadow btn btn-info btn_dashboard">
+              ADD CLIENT TYPE <span><i class="fa-solid fa-plus"></i></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-card mb-3 card">
+          <div class="card-header staff_header">
+            <div class="header_title">
+              <h2>Client type List</h2>
+            </div>
+
+          </div>
+
+          <div class="staffmanage_table">
+            <table id="profileManage" class="stripe row-border order-column" style="width: 100%">
+              <thead>
+                <tr>
+                  <th>Sl. No.</th>
+                  <th>Name</th>
+                  <th>Status</th>
+                  <th>Created On</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- dashboard main footer -->
+
+  <script type="text/javascript" src="/assets/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="/assets/js/dataTables.fixedColumns.min.js"></script>
+  <script>
+    $("#profileManage").DataTable().destroy();
+    var table = $("#profileManage").DataTable({
+      dom: "Bfrtip",
+      processing: true,
+      serverSide: true,
+      searching: false,
+
+      ajax: {
+        url: baseUrl + "client-type-ajax-datatable",
+        type: "post",
+        data: function (data) {
+          data._csrf = _token;
+        },
+      },
+      columns: [
+        { data: "id" },
+        { data: "name" },
+        { data: "status" },
+        { data: "created_at" },
+        { data: "action" },
+      ],
+      columnDefs: [{ orderable: false, targets: [2, 4] }],
+    });
+  </script>

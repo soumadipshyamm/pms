@@ -1,0 +1,198 @@
+<div class="app-main__outer">
+<div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2><span>Project Management</span></h2>
+          </div>
+        </div>
+        <div class="page-title-actions">
+          <div class="d-inline-block dropdown">
+            <a href="/project-edit/<%= projectId %>" class="btn-shadow btn btn-info btn_dashboard">
+                EDIT PROJECT <span><i class="fa-solid fa-plus"></i></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-header staff_header">
+                    <div class="cardsub_heading">
+                        <div class="header_title">
+                            <h2><%= title %></h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- project details -->
+                    <div class="projectdetails_sec">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="projectd_box">
+                                    <div class="projectd_txt">
+                                        <p><span><i class="fa-solid fa-user-tie"></i></span> Client
+                                            Name</p>
+                                        <h6><span>-</span> <%= oldData?.clientInfo?.first_name+" "+oldData?.clientInfo?.last_name %></h6>
+                                    </div>
+                                    <div class="projectd_txt">
+                                        <p><span><i
+                                                    class="fa-solid fa-mobile-screen-button"></i></span>
+                                            Contact Number</p>
+                                        <h6><span>-</span> <%= oldData?.clientInfo?.phone %></h6>
+                                    </div>
+                                    <div class="projectd_txt">
+                                        <p><span><i class="fa-regular fa-envelope"></i></span> Email
+                                            ID</p>
+                                        <h6><span>-</span> <%= oldData?.clientInfo?.email %></h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <%  const dateFormatDDMMYYYY = (dateToBeFormatted) => {
+                                    let date =
+                                        new Date().getDate().toString().padStart(2, "0") +
+                                        "-" +
+                                        (new Date().getMonth() + 1).toString().padStart(2, "0") +
+                                        "-" +
+                                        new Date().getFullYear();
+
+                                    if (dateToBeFormatted != "") {
+                                        date =
+                                        new Date(dateToBeFormatted).getDate().toString().padStart(2, "0") +
+                                        "-" +
+                                        (new Date(dateToBeFormatted).getMonth() + 1).toString().padStart(2, "0") +
+                                        "-" +
+                                        new Date(dateToBeFormatted).getFullYear();
+                                    }
+                                    return date;
+                                    }; 
+                            %>
+                            <div class="col-md-6">
+                                <div class="projectd_box">
+                                    <div class="projectd_txt">
+                                        <p><span><i class="fa-solid fa-user-tie"></i></span>Location
+                                        </p>
+                                        <h6><span>-</span><%= oldData?.location %> </h6>
+                                    </div>
+                                    <div class="projectd_txt">
+                                        <p><span><i
+                                                    class="fa-solid fa-mobile-screen-button"></i></span>
+                                            Start Date</p>
+                                        <h6><span>-</span><%= dateFormatDDMMYYYY(oldData?.start_date) %></h6>
+                                    </div>
+                                    <div class="projectd_txt">
+                                        <p><span><i class="fa-regular fa-envelope"></i></span> End
+                                            Date</p>
+                                        <h6><span>-</span><%= dateFormatDDMMYYYY(oldData?.end_date) %></h6>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="projectd_name">
+                                    <div class="projectd_txt">
+                                        <p><span><i class="fa-solid fa-briefcase"></i></span>Project Name :</p>
+                                        <h6><%=oldData?.name %></h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- replace this sec -->
+                            <div class="col-12 mt-3">
+                                <h6>Documents : <%=(!oldData.projectDocument.length)?"N/A":''%></h6>
+                            </div>
+                            <% 
+                      function getExtension(path) {
+                        var basename = path.split(/[\\/]/).pop(), // extract file name from full path ...
+                          // (supports `\\` and `/` separators)
+                          pos = basename.lastIndexOf("."); // get last position of `.`
+                        if (basename === "" || pos < 1){
+                          // if file name is empty or ...
+                          return ""; //  `.` not found (-1) or comes first (0)
+                        }
+                        return basename.slice(pos + 1); // extract extension ignoring `.`
+                      }
+
+                    if(oldData.projectDocument.length){ %>
+                      <div class="col-md-12 upload_docs">
+                            <div  class="row">
+                                <% oldData.projectDocument.forEach((item, index)=>{
+                                      var fileTypeImage = "/assets/images/icon-img/img_icon.png";
+                                      var fileExtension = getExtension(item.filename);
+                                      if(fileExtension.toLowerCase()==="pdf"){
+                                        fileTypeImage = "/assets/images/icon-img/pdf_icon.png";
+                                      }
+                                      if(fileExtension.toLowerCase()==="txt"){
+                                        fileTypeImage = "/assets/images/icon-img/txt_icon.png";
+                                      }
+                                      if(fileExtension.toLowerCase()==="xls"){
+                                        fileTypeImage = "/assets/images/icon-img/xls_icon.png";
+                                      }
+                                      if(fileExtension.toLowerCase()==="xlsx"){
+                                        fileTypeImage = "/assets/images/icon-img/xlsx_icon.png";
+                                      }
+                                      if(fileExtension.toLowerCase()==="ppt"){
+                                        fileTypeImage = "/assets/images/icon-img/ppt_icon.png";
+                                      }
+                                      if(fileExtension.toLowerCase()==="pptx"){
+                                        fileTypeImage = "/assets/images/icon-img/pptx_icon.png";
+                                      }
+                                      if(fileExtension.toLowerCase()==="doc"){
+                                        fileTypeImage = "/assets/images/icon-img/doc_icon.png";
+                                      }
+                                      if(fileExtension.toLowerCase()==="docx"){
+                                        fileTypeImage = "/assets/images/icon-img/docx_icon.png";
+                                      }
+                                  %>
+                                      <%-`<div class="col-md-3">
+                                          <div class="docs_img">
+                                              <img class="profile-pic img-fluid"
+                                                  src="${fileTypeImage}">
+                                              <div class="docs_imgoverlay">
+                                                  <a href="${baseUrl}uploads/project_documents/${item.filename}" target="_blank">
+                                                      <i class="fa-regular fa-eye"></i>
+                                                  </a>
+                                                  <a href="javascript:void(0)" data-id="${item.id}" class="deleteProjectDocumentFile">
+                                                      <i class="fa-regular fa-trash-can"></i>
+                                                  </a>
+                                              </div>
+                                          </div>
+                                          <h6>${item.document_name}</h6>
+                                      </div>`%>  
+                                <% }) %>
+                                
+                            </div>
+                        </div>
+                    <% } %>
+                   
+                            <div class="col-12 ">
+                                 <hr>
+                                <div class="projectd_viewbtn">
+
+                                    <a href="javascript:void(0)" class="btn-shadow btn btn-info btn_dashboard">
+                                        VIEW QUALITY PLAN
+                                    </a>
+                                    <a href="/project-boq/<%=projectId%>" class="btn-shadow btn btn-info btn_dashboard">
+                                        VIEW BOQ
+                                    </a>
+                                    <a href="/project-time-table-and-schedule/<%=projectId%>" class="btn-shadow btn btn-info btn_dashboard">
+                                        VIEW TIME TABLE & SCHEDULE
+                                    </a>
+                                    <a href="/project-resources/<%=projectId%>"  class="btn-shadow btn btn-info btn_dashboard">
+                                        VIEW RESOURCES
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>

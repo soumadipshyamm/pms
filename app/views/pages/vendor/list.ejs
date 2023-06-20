@@ -1,0 +1,174 @@
+<link href="assets/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="assets/css/fixedColumns.dataTables.min.css" rel="stylesheet">
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2><span><%= translation.consultantManagement.title.heading %>  </span></h2>
+          </div>
+        </div>
+        <div class="page-title-actions">
+          <div class="d-inline-block dropdown">
+            <a href="/vendor-add" class="btn-shadow btn btn-info btn_dashboard">
+              <%= translation.consultantManagement.title.add %> <span><i class="fa-solid fa-plus"></i></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-card mb-3 card">
+          <div class="card-header staff_header">
+            <div class="header_title">
+              <h2><%= translation.consultantManagement.title.list %></h2>
+            </div>
+            <div class="staff_headerright">
+              <div class="dropdown stafftable_dropdown">
+                <button
+                  class="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                <%= translation.consultantManagement.title.search %>   
+                  <span><i class="fa-solid fa-magnifying-glass"></i></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="stafftable_select">
+               
+                  <select class="select_box" multiple id="tableColums">
+                    <option value="0" selected><%= translation.consultantManagement.table.slNo %> </option>
+                    <option value="1" selected><%= translation.consultantManagement.table.type %> </option>
+                    <option value="1" selected><%= "Sub-type" %> </option>
+                    <option value="2" selected><%= translation.consultantManagement.table.name %>  </option>
+                    <option value="3" selected><%= translation.consultantManagement.table.emailId %> </option>
+                    <option value="4" selected><%= translation.consultantManagement.table.phoneNumber %> </option>
+                    <option value="5" selected><%= translation.consultantManagement.table.gender %>  </option>
+                    <option value="6" selected><%= translation.consultantManagement.table.dob %>  </option>
+                    <option value="7" selected><%= translation.consultantManagement.table.status %>  </option>
+                    <option value="8" selected><%= translation.consultantManagement.table.createdOn %>  </option>
+                    <option value="9" selected><%= translation.consultantManagement.table.action %> </option>
+                  
+                
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="staffmanage_table">
+            <table
+              id="clientManage"
+              class="stripe row-border order-column"
+              style="width: 100%"
+            >
+              <thead>
+                <tr>
+                  <th><%= translation.consultantManagement.table.slNo %> </th>
+                  <th><%= translation.consultantManagement.table.type %>  </th>
+                  <th><%= "Sub-type" %>  </th>
+                  <th><%= translation.consultantManagement.table.name %>  </th>
+                  <th><%= translation.consultantManagement.table.emailId %>  </th>
+                  <th><%= translation.consultantManagement.table.phoneNumber %>  </th>
+                  
+                  <th><%= translation.consultantManagement.table.status %>  </th>
+                  <th><%= translation.consultantManagement.table.createdOn %>  </th>
+                  <th><%= translation.consultantManagement.table.action %>  </th>
+                </tr>
+              </thead>
+           
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+<script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="assets/js/dataTables.fixedColumns.min.js"></script>
+<script>
+    $("#clientManage").DataTable().destroy();
+    var table = $('#clientManage').DataTable({
+      dom: 'Bfrtip',
+      processing: true,
+      serverSide: true,
+      searching:  false,
+			scrollY: "600px",
+			scrollX: true,
+			scrollCollapse: true,
+			fixedColumns: {
+				left: 2,
+			},
+       ajax: {
+              url: baseUrl+"vendor-ajax-datatable",
+              type:'post',
+              data: function(data){
+               // if($('#searchEmail').val()!=""){
+               //    searchEmail = $('#searchEmail').val();
+               // }
+               // if($('#searchName').val()!=""){
+               //    searchName = $('#searchName').val();
+               // }
+               // if($('#searchFormDate').val()!=""){
+               //    searchFormDate = $('#searchFormDate').val();
+               // }
+               // if($('#searchToDate').val()!=""){
+               //    searchToDate = $('#searchToDate').val();
+               // }
+               data._csrf      = _token
+               // data.searchEmail  = searchEmail,
+               // data.searchName      = searchName,
+               // data.searchFormDate  = searchFormDate,
+               // data.searchToDate = searchToDate
+              }
+          },
+            columns: [
+                 { data: 'id' },
+                 { data: 'type' },
+                 { data: 'sub_type'},
+                 { data: 'first_name' },
+                 { data: 'email' },
+                 { data: 'phone'},
+                 { data: 'status' },
+                 { data: 'created_at' },
+                 { data: 'action' }
+             ],
+            columnDefs: [
+            { orderable: false, targets: [1,2,6,8] }
+         ]
+		});
+
+    $(document).on('change','#tableColums',function(e) {
+       e.preventDefault();
+        $('#tableColums option').each(function() {
+          if($(this).filter(':selected').val()!=undefined){
+            table.column(Number($(this).val())).visible(true);
+
+          }else{
+            table.column(Number($(this).val())).visible(false);
+          }
+           
+        });
+    })
+
+    $('#tableColums').multiselect({
+    allSelectedText: '<%= translation.multipleSelect.allSelect %>',
+    nSelectedText: '<%= translation.multipleSelect.selected %>',
+    nonSelectedText: '<%= translation.multipleSelect.noneSelected %>'
+  });
+</script>
+

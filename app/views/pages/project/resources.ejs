@@ -1,0 +1,334 @@
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2><span>Project Management</span></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-card mb-3 card">
+          <div class="card-header staff_header">
+            <div class="header_title">
+              <h2><%= title %> Of <%= oldData?oldData.name:"" %></h2>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="projectn_box">
+              <!-- <div class="project_boxhead">
+                    <h4>Project Name:</h4>
+                </div> -->
+              <div class="projectnew_box">
+                <div class="addnew_project">
+                  <form
+                    class="adminFrm"
+                    data-action="project-resource-save"
+                    method="post"
+                    data-class="requiredCheck"
+                  >
+                    <input type="hidden" name="project_id" id="project_id"
+                    value="<%=(oldData)?oldData.id:""%>">
+                    <input type="hidden" name="_csrf" value="<%=_csrfToken%>" />
+                    <div class="row align-items-center">
+                      <div class="col-md-5">
+                        <div class="single-login">
+                          <label class="login-label">Project Designation</label>
+                          <input
+                            class="form-control requiredCheck allowOnlyLetterSpace"
+                            type="text"
+                            name="designation_name"
+                            id="designation_name"
+                            placeholder="Enter Designation Name"
+                            data-check="Project
+                                            Designation"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="single-login">
+                          <label class="login-label">Choose Parent Designation</label>
+                          <select class="form-control requiredCheck" name="parent" id="parent" data-check="Parent Designation">
+                              <option value="0">Parent</option>
+                              <% if(existingResources.length){
+                                Object.entries(existingResources).forEach(([key, value])=> { 
+                              %>
+                              <option value="<%=value?.id%>"><%=value?.designation_name%></option>
+                              <% }) }%>
+                          </select>
+                      </div>
+                      </div>
+                      <div class="col-md-4 mt-5">
+                        <button class="btn btn-primary">
+                          <span><i class="fa-solid fa-plus"></i></span> Add
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- project box -->
+            <% if(existingResources.length){
+            Object.entries(existingResources).forEach(([key, value])=> { %>
+            <div class="projectr_box mt-4">
+              <div class="project_boxhead">
+                <h4><%=value?.designation_name%></h4>
+              </div>
+
+              <div class="projectr_boxbtn">
+                <button
+                  type="button"
+                  class="btn btn-primary chooseTeam"
+                  data-id="<%=value?.id%>"
+                >
+                  CHOOSE TEAM
+                </button>
+              </div>
+              <div class="projectr_boxtable">
+                <div class="table-responsive">
+                  <table class="table table-bordered table-hover">
+                    <thead class="thead-blue">
+                      <tr>
+                        <th scope="col">SL No.</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Contact Number</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% if(value.resources.length){
+                      Object.entries(value.resources).forEach(([key2, value2])=>
+                      { %>
+                      <tr>
+                        <th scope="row"><%=(Number(key2)+1)%></th>
+                        <td>
+                          <%=`${value2?.first_name} ${value2?.last_name}` %>
+                        </td>
+                        <td><%=value2?.email %></td>
+                        <td><%=value2?.phone %></td>
+                        <td>
+                          <a href="javascript:void(0)" class="text-danger  delete-team" data-id="<%=value2?.id %>" data-designation-id="<%=value?.id%>">
+                            <i class="fa-regular fa-trash-can"></i>
+                          </a>
+                        </td>
+                      </tr>
+                      <% }) }%>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <% }) } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%-contentFor('modal')%>
+  <!-- upload document modal -->
+  <!-- quality team -->
+  <div
+    class="modal fade"
+    id="qualityModal"
+    tabindex="-1"
+    aria-labelledby="qualityModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header qualitym_head">
+          <h5 class="modal-title" id="qualityModalLabel">QUALITY TEAM</h5>
+          <div class="modal_search">
+              <input
+                class="form-control"
+                type="text"
+                name="searchName"
+                id="searchName"
+                placeholder="Search By Name"
+                required=""
+              />
+              <button type="button" id="searchTeam" class="Fbtn btn-subscribe">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+          </div>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+        <form class="adminFrm"
+                    data-action="project-resource-update"
+                    method="post"
+                    data-class="requiredCheckModalTeam">
+        <input type="hidden" id="designationId" name="designationId" value="">
+        <input type="hidden" name="_csrf" value="<%=_csrfToken%>" />
+         <input type="hidden" name="project_id" id="project_id"
+                    value="<%=(oldData)?oldData.id:""%>">
+          <div class="quality_teamlist">
+            <ul id="loadTeams">
+              
+            </ul>
+          </div>
+        
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">SELECT</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js" integrity="sha512-JZSo0h5TONFYmyLMqp8k4oPhuo6yNk9mHM+FY50aBjpypfofqtEWsAgRDQm94ImLCzSaHeqNvYuD9382CEn2zw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script>
+    var teamModal = new bootstrap.Modal(
+      document.getElementById("qualityModal"),
+      {}
+    );
+    $(document).on("click", ".chooseTeam", function () {
+      $("#designationId").val($(this).attr('data-id'));
+      getTeams($(this).attr('data-id'));
+      teamModal.show();
+    });
+    function getTeams(designationId,searchName="") {
+      $.ajax({
+        type:"POST",
+        url:baseUrl+"project-get-teams",
+        data:{_csrf:_token,designationId:designationId,searchName:searchName},
+        dataType:"JSON",
+        beforeSend:function(){
+           $("#loadTeams").html(`<li>
+                       No record found!
+                    </li>`);
+        },
+        success:function(resp){
+            $("#loadTeams").html('');
+            if(resp.status){
+                let selectedItems = [];
+                if(resp?.data?.selectedItems?.resource_ids){
+                    selectedItems = resp.data.selectedItems.resource_ids.split(",");
+                }
+                $.each(resp.data.records, function(k, v) {
+                    $("#loadTeams").append(`<li>
+                        <div class="check_box">
+                        <input type="checkbox" id="empName${v?.id}"  name="resource_ids" value="${v?.id}" ${(selectedItems.includes(String(v.id)))?'checked':''} />
+                        <label for="empName${v?.id}">${v?.first_name} ${v?.last_name} [${v?.email}]</label>
+                        </div>
+                    </li>`);
+                });
+            }else{
+                 $("#loadTeams").append(`<li>
+                       No record found!
+                    </li>`);
+            }       
+        }
+      })
+    }
+    $(document).on('keyup','#searchName',$.debounce(800, function(e) {
+        getTeams($("#designationId").val(),$(this).val());
+    }))
+    $(document).on('click','#searchTeam',function(params) {
+        getTeams($("#designationId").val(),$("#searchName").val());
+    })
+    $(document).on('click','.delete-team',function(e) {
+        e.preventDefault()
+        var rtl = false;
+        var title = "Confirm!";
+        var content = "Do you really want to do this ?";
+        var btnTextConfirm = "Confirm";
+        var btnTextCancel = "Cancel";
+        var resourceId = $(this).attr('data-id');
+        var designationId = $(this).attr('data-designation-id');
+        var projectId    = $("#project_id").val();
+        if (lang === "ar") {
+          rtl = true;
+          title = "يتأكد";
+          content = "هل تريد حقا أن تفعل هذا";
+          btnTextConfirm="تایید";
+          btnTextCancel="انصراف";
+        }
+        $.confirm({
+          icon: "fa fa-spinner fa-spin",
+          title: title,
+          content: content,
+          type: "orange",
+          rtl:rtl,
+          typeAnimated: true,
+          buttons: {
+            confirm: {
+              text: btnTextConfirm,
+              btnClass: 'btn-blue',
+              action:function () {
+              
+                  $.ajax({
+                    type: "POST",
+                    url: baseUrl + "project-team-delete",
+                    data: {_csrf:_token,resourceId:resourceId,designationId:designationId},
+                    dataType: "JSON",
+                    success: function (data) {
+                      var rtl = false;
+                      var warning = "Warning!";
+                      var success = "Success!";
+                      var deleteContent = "Data has been deleted !";
+                      if (lang === "ar") {
+                        rtl = true;
+                        warning = "!تحذير";
+                        success = "!نجاح";
+                        deleteContent = "تم حذف البيانات!";
+                      }
+                      if (data.status) {
+                        $.alert({
+                            icon: "fa fa-check",
+                            title: success,
+                            rtl: rtl,
+                            content: deleteContent,
+                            type: "green",
+                            typeAnimated: true,
+                          
+                          });
+                           setTimeout(function () {
+                              location.reload();
+                            }, 2000);
+                      }
+                    },
+                  });
+                
+              },
+            },
+            cancel:{
+              text: btnTextCancel,
+              btnClass: 'btn-red',
+              action:function () {
+                  var rtl = false;
+                  var title = "Canceled!";
+                  var content = "Process canceled!";
+                  if (lang === "ar") {
+                    rtl = true;
+                    title = "ألغيت!";
+                    content = "تم إلغاء العملية!";
+                  }
+                  $.alert({
+                    icon: "fa fa-times",
+                    title: title,
+                    content: content,
+                    type: "purple",
+                    rtl: rtl,
+                    typeAnimated: true,
+                  });
+              }
+            }
+          },
+        });
+    })
+  </script>
+</div>

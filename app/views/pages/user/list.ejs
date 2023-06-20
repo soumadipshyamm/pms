@@ -1,0 +1,201 @@
+<link href="assets/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="assets/css/fixedColumns.dataTables.min.css" rel="stylesheet">
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2><span><%= translation.UserManagement.title.module %> </span></h2>
+          </div>
+        </div>
+        <div class="page-title-actions">
+          <div class="d-inline-block dropdown">
+            <a href="/user-add" class="btn-shadow btn btn-info btn_dashboard">
+              <%= translation.UserManagement.title.aduser %>   <span><i class="fa-solid fa-plus"></i></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-card mb-3 card">
+          <div class="card-header staff_header mt-4">
+            <div class="header_title">
+              <h2>  <%= translation.UserManagement.title.add %> </h2>
+            </div>
+   
+            <div class="row">
+              <div class="col-md-4">
+                  <div class="form-group">
+                    <label> <%= translation.UserManagement.search.searchNameLabel %>  </label>
+                    <input class="form-control" id="searchName" type="text" placeholder="<%= translation.UserManagement.search.searchNamePlaceholder %>">
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="form-group">
+                    <label><%= translation.UserManagement.search.searchEmailLabel %>  </label>
+                    <input class="form-control" id="searchEmail" type="text" placeholder="<%= translation.UserManagement.search.searchEmailPlaceholder %>">
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="form-group">
+                    <label><%= translation.UserManagement.search.searchPhoneLabel %> </label>
+                    <input class="form-control" id="searchPhone" type="text" placeholder="<%= translation.UserManagement.search.searchPhonePlaceholder %>">
+                  </div>
+              </div>
+            </div>
+            <div class="staff_headerright">
+              <div class="stafftable_select" >
+                <select class="select_box" multiple id="tableColums">
+                  <option value="0" selected><%= translation.UserManagement.table.slNo %>  </option>
+                  <option value="1" selected><%= translation.UserManagement.table.name %>  </option>
+                  <option value="2" selected><%= translation.UserManagement.table.emailId %>  </option>
+                  <option value="3" selected><%= translation.UserManagement.table.phoneNumber %> </option>
+                  <option value="4" selected><%= translation.UserManagement.table.profile %> </option>
+                  <option value="5" selected><%= translation.UserManagement.table.role %>  </option>
+                  <option value="6" selected><%= translation.UserManagement.table.gender %> </option>
+                  <option value="7" selected><%= translation.UserManagement.table.dob %> </option>
+                  <option value="8" selected><%= translation.UserManagement.table.status %> </option>
+                  <option value="9" selected><%= translation.UserManagement.table.createOn %> </option>
+                  <option value="10" selected><%= translation.UserManagement.table.action %> </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="staffmanage_table">
+            <table
+              id="userManage"
+              class="stripe row-border order-column"
+              style="width: 100%"
+            >
+              <thead>
+                <tr>
+                  <th><%= translation.UserManagement.table.slNo %> </th>
+                  <th><%= translation.UserManagement.table.name %>  </th>
+                  <th><%= translation.UserManagement.table.emailId %> </th>
+                  <th><%= translation.UserManagement.table.phoneNumber %> </th>
+                  <th><%= translation.UserManagement.table.profile %> </th>
+                  <th><%= translation.UserManagement.table.role %> </th>                  
+                  <th><%= translation.UserManagement.table.status %> </th>
+                  <th><%= translation.UserManagement.table.createOn %> </th>
+                  <th><%= translation.UserManagement.table.action %> </th>
+                </tr>
+              </thead>
+           
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js" integrity="sha512-JZSo0h5TONFYmyLMqp8k4oPhuo6yNk9mHM+FY50aBjpypfofqtEWsAgRDQm94ImLCzSaHeqNvYuD9382CEn2zw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="assets/js/dataTables.fixedColumns.min.js"></script>
+<script>
+    let searchEmail=searchName=searchPhone="";
+    $("#userManage").DataTable().destroy();
+    var table = $('#userManage').DataTable({
+      dom: 'Bfrtip',
+      serverSide: true,
+      processing: true,
+      searching:  false,
+			scrollY: "600px",
+			scrollX: true,
+			scrollCollapse: true,
+			fixedColumns: {
+				left: 2,
+			},
+       ajax: {
+              url: baseUrl+"user-ajax-datatable",
+              type:'post',
+              data: function(data){
+               if($('#searchEmail').val()!=" "){
+                  searchEmail = $('#searchEmail').val();
+               }
+               if($('#searchName').val()!=" "){
+                  searchName = $('#searchName').val();
+               }
+               if($('#searchPhone').val()!=" "){
+                  searchPhone = $('#searchPhone').val();
+               }
+                data._csrf       = _token,
+                data.searchEmail = searchEmail,
+                data.searchName  = searchName,
+                data.searchPhone = searchPhone
+              }
+          },
+            columns: [
+                 { data: 'id' },
+                 { data: 'first_name' },
+                 { data: 'email' },
+                 { data: 'phone'},
+                 { data: 'profile' },
+                 { data: 'role' },
+                 { data: 'status' },
+                 { data: 'created_at' },
+                 { data: 'action' }
+             ],
+            columnDefs: [
+            { orderable: false, targets: [6,8] }
+         ]
+		});
+    $('#searchName').keyup($.debounce(800, function(e) {
+         table.draw();
+    }))
+    $('#searchName').keydown($.debounce(800, function(e) {
+        if(e.keyCode == 8 || e.keyCode == 46) {
+          if($(this).val()==""){
+            $('#searchName').val("")
+          }
+        }
+         table.draw();
+    }));
+    $('#searchPhone').keyup($.debounce(800, function(e) {
+         table.draw();
+    }));
+     $('#searchPhone').change($.debounce(800, function(e) {
+        if(e.keyCode == 8 || e.keyCode == 46) {
+          if($(this).val()==""){
+            $('#searchPhone').val("")
+          }
+        }
+         table.draw();
+    }));
+     $('#searchEmail').keyup($.debounce(800, function(e) {
+         table.draw();
+    }));
+    $('#searchEmail').keydown($.debounce(800, function(e) {
+        if(e.keyCode == 8 || e.keyCode == 46) {
+          if($(this).val()==""){
+            $('#searchEmail').val("")
+          }
+        }
+        table.draw();
+    }));
+    $(document).on('change','#tableColums',function(e) {
+       e.preventDefault();
+        $('#tableColums option').each(function() {
+          if($(this).filter(':selected').val()!=undefined){
+            table.column(Number($(this).val())).visible(true);
+
+          }else{
+            table.column(Number($(this).val())).visible(false);
+          }
+           
+        });
+    })
+
+    $('#tableColums').multiselect({
+    allSelectedText: '<%= translation.multipleSelect.allSelect %>',
+    nSelectedText: '<%= translation.multipleSelect.selected %>',
+    nonSelectedText: '<%= translation.multipleSelect.noneSelected %>'
+  });
+  
+</script>
+

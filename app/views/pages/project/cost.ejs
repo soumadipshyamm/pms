@@ -1,0 +1,348 @@
+<div class="app-main__outer">
+<div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div>
+                    <h2 class="text_skyblue"><span>PROJECT COST INFORMATION (<%=oldData?.name%>)</span></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+
+                    <!-- project box -->
+                    <div class="projectr_box project_costtable">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-blue">
+                                    <tr>
+                                        <th scope="col">CAPEX (SAR, MILLIONS)</th>
+                                        <th scope="col">YEAR 1</th>
+                                        <th scope="col">YEAR 2</th>
+                                        <th scope="col">YEAR 3</th>
+                                        <th scope="col">YEAR 4</th>
+                                        <th scope="col">YEAR 5</th>
+                                        <th scope="col">TOTAL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <% if(oldData?.costInfo.length){ 
+                                    oldData?.costInfo.forEach((val,key) => {
+                                        
+                                    
+                                    %>
+                                     <tr>
+                                        <th scope="row"><input type="hidden" name="capex[0]" value="<%=val.capex%>"><%=val.capex%></th>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year1[0]" readonly value="<%=val.year1%>">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year2[0]" readonly value="<%=val.year2%>">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year3[0]" readonly value="<%=val.year3%>">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year4[0]" readonly value="<%=val.year4%>">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year5[0]" readonly value="<%=val.year5%>">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal  sub-totals" type="text" id="" name="sub_total[0]" readonly  value="<%=val.sub_total%>">
+                                        </td>
+                                    </tr>
+                                <% }); %>
+                                <tr class="bg_blue">
+                                        <th colspan="6">TOTAL PROJECT CAPEX (SAR, MILLIONS)</th>
+                                        <td >
+                                            <input class="form-control checkDecimal" type="text" id="total_project_capex" name="total_project_capex" readonly value="<%=oldData?.costInfo[0]?.total_project_capex%>">
+                                        </td>  
+                                    </tr>
+                                    <tr class="bg_blue">
+                                        <th colspan="6">ESTIMATE TYPE AND ACCURACY</th>
+                                        <td>
+                                            <input class="form-control checkDecimal" type="text" id="estimate_type_and_accuracy" name="estimate_type_and_accuracy" readonly value="<%=oldData?.costInfo[0]?.estimate_type_and_accuracy%>">
+                                        </td>  
+                                    </tr>
+                                    <tr class="bg_blue">
+                                        <th colspan="6">ESTIMATE BASIS</th>
+                                        <td>
+                                            <input class="form-control checkDecimal" type="text" id="estimated_basis" name="estimated_basis" readonly value="<%=oldData?.costInfo[0]?.estimated_basis%>">
+                                        </td>  
+                                    </tr>
+                                    <tr class="bg_blue">
+                                        <th colspan="6">CONTINGENCY (SAR, MILLIONS)</th>
+                                        <td>
+                                            <input class="form-control checkDecimal" type="text" id="contigency" name="contigency" readonly value="<%=oldData?.costInfo[0]?.contigency%>">
+                                        </td>  
+                                    </tr>
+                                    <tr class="bg_blue">
+                                        <th colspan="6">TOTAL ASSET OPEX (SAR, MILLIONS)</th>
+                                        <td>
+                                            <input class="form-control" type="text" id="total_asset_opex" name="total_asset_opex" readonly value="<%=oldData?.costInfo[0]?.total_asset_opex%>">
+                                        </td>  
+                                    </tr>
+                                <% }else{ %>
+                                <form class="adminFrm" id="costFrm"  data-action="project-cost-create/<%=projectId%>" method="post">
+                                    <input type="hidden" name="_csrf" value="<%=_csrfToken%>">
+                                    <tr>
+                                        <th scope="row"><input type="hidden" name="capex[0]" value="Project Registration">Project Registration</th>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year1[0]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year2[0]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year3[0]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year4[0]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year5[0]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal  sub-totals" type="text" id="" name="sub_total[0]" readonly>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row"><input type="hidden" name="capex[1]" value="Initial Planning">Initial Planning</th>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year1[1]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year2[1]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year3[1]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year4[1]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year5[1]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal  sub-totals" type="text" id="" name="sub_total[1]" readonly>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row"><input type="hidden" name="capex[2]" value="Tender for Design">Tender for Design</th>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year1[2]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year2[2]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year3[2]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year4[2]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year5[2]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal  sub-totals" type="text" id="" name="sub_total[2]" readonly>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row"><input type="hidden" name="capex[3]" value="Design">Design</th>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year1[3]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year2[3]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year3[3]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year4[3]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year5[3]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal  sub-totals" type="text" id="" name="sub_total[3]" readonly>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"><input type="hidden" name="capex[4]" value="Tender for Construction">Tender for Construction</th>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year1[4]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year2[4]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year3[4]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year4[4]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year5[4]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal  sub-totals" type="text" id="" name="sub_total[4]" readonly>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row"><input type="hidden" name="capex[5]" value="Construction">Construction</th>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year1[5]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year2[5]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year3[5]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year4[5]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year5[5]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal  sub-totals" type="text" id="" name="sub_total[5]" readonly>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row"><input type="hidden" name="capex[6]" value="Testing and Commissioning">Testing and Commissioning</th>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year1[6]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year2[6]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year3[6]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year4[6]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year5[6]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal  sub-totals" type="text" id="" name="sub_total[6]" readonly>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"><input type="hidden" name="capex[7]" value="Handover and Completion">Handover and Completion</th>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year1[7]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year2[7]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year3[7]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year4[7]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal numberInputs" type="text" id="" name="year5[7]">
+                                        </td>
+                                        <td>
+                                            <input class="form-control checkDecimal  sub-totals" type="text" id="" name="sub_total[7]" readonly>
+                                        </td>
+                                    </tr>
+                                    <tr class="bg_blue">
+                                        <th colspan="6">TOTAL PROJECT CAPEX (SAR, MILLIONS)</th>
+                                        <td >
+                                            <input class="form-control checkDecimal" type="text" id="total_project_capex" name="total_project_capex" readonly>
+                                        </td>  
+                                    </tr>
+                                    <tr class="bg_blue">
+                                        <th colspan="6">ESTIMATE TYPE AND ACCURACY</th>
+                                        <td>
+                                            <input class="form-control checkDecimal" type="text" id="estimate_type_and_accuracy" name="estimate_type_and_accuracy">
+                                        </td>  
+                                    </tr>
+                                    <tr class="bg_blue">
+                                        <th colspan="6">ESTIMATE BASIS</th>
+                                        <td>
+                                            <input class="form-control checkDecimal" type="text" id="estimated_basis" name="estimated_basis">
+                                        </td>  
+                                    </tr>
+                                    <tr class="bg_blue">
+                                        <th colspan="6">CONTINGENCY (SAR, MILLIONS)</th>
+                                        <td>
+                                            <input class="form-control checkDecimal" type="text" id="contigency" name="contigency">
+                                        </td>  
+                                    </tr>
+                                    <tr class="bg_blue">
+                                        <th colspan="6">TOTAL ASSET OPEX (SAR, MILLIONS)</th>
+                                        <td>
+                                            <input class="form-control" type="text" id="total_asset_opex" name="total_asset_opex">
+                                        </td>  
+                                    </tr>
+                                
+                                </form>
+                                <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                         <% if(!oldData?.costInfo.length){ %>
+                        <div class=" text-right">
+                            <button type="submit" class="btn-shadow btn btn-info btn_dashboard" id="costSave">
+                                SAVE
+                            </button>
+                        </div>
+                        <% } %>
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+        $(document).on('click','#costSave',function(e) {
+            e.preventDefault();
+            $('#costFrm').submit();
+        })
+        $(document).on('blur','.numberInputs',function(e) {
+            var subtotal= 0;
+            var elementVal = parseFloat($(this).val());
+            $(this).closest('td').siblings().find('.numberInputs').each(function(){
+                console.log($(this).val());
+                subtotal += parseFloat(!isNaN($(this).val())?$(this).val():0);
+                var showSubTotal = (subtotal+elementVal);
+                $(this).closest('td').siblings().find('.sub-totals').val(parseFloat(!isNaN(showSubTotal)?showSubTotal:0).toFixed(2));
+
+            })
+            var totalCapex = 0;
+            $('.sub-totals').each(function(){
+                if($(this).val()===""){
+                    totalCapex+=0;
+                }else{
+                    totalCapex+=parseFloat($(this).val());
+                }
+                $("#total_project_capex").val(parseFloat(!isNaN(totalCapex)?totalCapex:0).toFixed(2))
+            })
+        })
+</script>

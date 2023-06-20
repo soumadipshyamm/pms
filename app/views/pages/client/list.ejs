@@ -1,0 +1,170 @@
+<link href="assets/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="assets/css/fixedColumns.dataTables.min.css" rel="stylesheet">
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2><span><%= translation.ClientManagement.title.module %> </span></h2>
+          </div>
+        </div>
+        <div class="page-title-actions">
+          <div class="d-inline-block dropdown">
+            <a href="/client-add" class="btn-shadow btn btn-info btn_dashboard">
+              <%= translation.ClientManagement.title.add %>   <span><i class="fa-solid fa-plus"></i></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-card mb-3 card">
+          <div class="card-header staff_header">
+            <div class="header_title">
+              <h2><%= title %></h2>
+            </div>
+            <div class="staff_headerright">
+              <div class="dropdown stafftable_dropdown">
+                <button
+                  class="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                <%= translation.ClientManagement.title.search %>    
+                  <span><i class="fa-solid fa-magnifying-glass"></i></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="stafftable_select">
+               <select class="select_box" multiple id="tableColums">
+                    <option value="0" selected><%= translation.ClientManagement.UserTable.SlNo %> </option>
+                    <option value="1" selected><%= translation.ClientManagement.UserTable.Name %>   </option>
+                    <option value="2" selected><%= translation.ClientManagement.UserTable.EmailId %>  </option>
+                    <option value="3" selected><%= translation.ClientManagement.UserTable.PhoneNumber %> </option>
+                    <option value="4" selected><%= translation.ClientManagement.UserTable.Gender %> </option>
+                    <option value="5" selected><%= translation.ClientManagement.UserTable.Dob %>   </option>
+                    <option value="6" selected><%= translation.ClientManagement.UserTable.Status %> </option>
+                    <option value="7" selected><%= translation.ClientManagement.UserTable.Created %> </option>
+                    <option value="8" selected><%= translation.ClientManagement.UserTable.Action %> </option>
+                   
+                  </select> 
+              
+              </div>
+            </div>
+          </div>
+
+          <div class="staffmanage_table">
+            <table
+              id="clientManage"
+              class="stripe row-border order-column"
+              style="width: 100%"
+            >
+              <thead>
+                <tr>
+                  <th><%= translation.ClientManagement.UserTable.SlNo %>  </th>
+                  <th><%= "Type" %>  </th>
+                  <th><%= translation.ClientManagement.UserTable.Name %>  </th>
+                  <th><%= translation.ClientManagement.UserTable.EmailId %>  </th>
+                  <th><%= translation.ClientManagement.UserTable.PhoneNumber %>  </th>
+                  <th><%= translation.ClientManagement.UserTable.Status %>  </th>
+                  <th><%= translation.ClientManagement.UserTable.Created %> </th>
+                  <th><%= translation.ClientManagement.UserTable.Action %>  </th>
+                </tr>
+              </thead>
+           
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+<script type="text/javascript" src="assets/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="assets/js/dataTables.fixedColumns.min.js"></script>
+<script>
+    $("#clientManage").DataTable().destroy();
+    var table = $('#clientManage').DataTable({
+      dom: 'Bfrtip',
+      processing: true,
+      serverSide: true,
+      searching:  false,
+			scrollY: "600px",
+			scrollX: true,
+			scrollCollapse: true,
+			fixedColumns: {
+				left: 2,
+			},
+       ajax: {
+              url: baseUrl+"client-ajax-datatable",
+              type:'post',
+              data: function(data){
+               // if($('#searchEmail').val()!=""){
+               //    searchEmail = $('#searchEmail').val();
+               // }
+               // if($('#searchName').val()!=""){
+               //    searchName = $('#searchName').val();
+               // }
+               // if($('#searchFormDate').val()!=""){
+               //    searchFormDate = $('#searchFormDate').val();
+               // }
+               // if($('#searchToDate').val()!=""){
+               //    searchToDate = $('#searchToDate').val();
+               // }
+               data._csrf      = _token
+               // data.searchEmail  = searchEmail,
+               // data.searchName      = searchName,
+               // data.searchFormDate  = searchFormDate,
+               // data.searchToDate = searchToDate
+              }
+          },
+            columns: [
+                 { data: 'id' },
+                 { data: 'type' },
+                 { data: 'first_name' },
+                 { data: 'email' },
+                 { data: 'phone'},
+                
+                 { data: 'status' },
+                 { data: 'created_at' },
+                 { data: 'action' }
+             ],
+            columnDefs: [
+            { orderable: false, targets: [4,6] }
+         ]
+		});
+
+    $(document).on('change','#tableColums',function(e) {
+       e.preventDefault();
+        $('#tableColums option').each(function() {
+          if($(this).filter(':selected').val()!=undefined){
+            table.column(Number($(this).val())).visible(true);
+
+          }else{
+            table.column(Number($(this).val())).visible(false);
+          }
+           
+        });
+    })
+    
+    $('#tableColums').multiselect({
+    allSelectedText: '<%= translation.multipleSelect.allSelect %>',
+    nSelectedText: '<%= translation.multipleSelect.selected %>',
+    nonSelectedText: '<%= translation.multipleSelect.noneSelected %>'
+  });
+  
+</script>
+

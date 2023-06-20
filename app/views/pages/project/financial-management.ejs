@@ -1,0 +1,287 @@
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2><span>Project Management</span></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-card mb-3 card">
+          <div class="card-header staff_header">
+            <div class="header_title">
+              <h2><%= title %> Of <%= oldData?oldData.name:"" %></h2>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="projectn_box">
+              <!-- <div class="project_boxhead">
+                    <h4>Project Name:</h4>
+                </div> -->
+              <div class="projectnew_box">
+                <div class="addnew_project">
+                  <form
+                    class="adminFrm"
+                    data-action="project-invoice-save/<%=projectId%>"
+                    method="post"
+                    data-class="requiredCheck"
+                  >
+                    
+                    <input type="hidden" name="_csrf" value="<%=_csrfToken%>" />
+                    <div class="row align-items-center">
+                      <div class="col-md-6">
+                        <div class="single-login">
+                          <label class="login-label">Invoice Name</label>
+                          <input
+                            class="form-control requiredCheck allowOnlyLetterSpace"
+                            type="text"
+                            name="invoice_name"
+                            id="invoice_name"
+                            placeholder="Enter Invoice Name"
+                            data-check="Invoice Name"
+                          />
+                        </div>
+                      </div>
+                        <div class="col-md-6 uploaddoc_body">
+                            <div class="single-login upload_pdf">
+                                <label class="login-label">Choose file</label>
+                                <input data-check="File" class="requiredCheckModal" name="document" type="file" id="file" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="single-login">
+                            <label class="login-label">Invoice Amount</label>
+                            <input
+                                class="form-control requiredCheck checkDecimal"
+                                type="number"
+                                name="invoice_amount"
+                                id="invoice_amount"
+                                step="0.01"
+                                placeholder="Enter Invoice Amount"
+                                data-check="Invoice Amount"
+                            />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="single-login">
+                            <label class="login-label">Invoice Date</label>
+                            <input
+                                class="form-control requiredCheck "
+                                type="date"
+                                name="invoice_date"
+                                id="invoice_date"
+                                step="0.01"
+                                placeholder="Enter Invoice Date"
+                                data-check="Invoice Date"
+                            />
+                            </div>
+                        </div>
+                      <div class="col-md-3 mt-5">
+                        <button class="btn btn-primary">
+                          <span><i class="fa-solid fa-plus"></i></span> Add
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- project box -->
+            <div class="projectr_box mt-4">
+             
+              <div class="projectr_boxtable">
+                <div class="table-responsive">
+                  <table class="table table-bordered table-hover">
+                    <thead class="thead-blue">
+                      <tr>
+                        <th scope="col">SL No.</th>
+                        <th scope="col">Invoice Name</th>
+                        <th scope="col">Invoice Amount</th>
+                        <th scope="col">Invoice Date</th>
+                        <th scope="col">Invoice Document</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% if(invoices.length){
+                      Object.entries(invoices).forEach(([key2, value2])=>
+                      { %>
+                      <tr>
+                        <th scope="row"><%=(Number(key2)+1)%></th>
+                        <td>
+                          <%=value2?.invoice_name %>
+                        </td>
+                        <td><%=value2?.invoice_amount %></td>
+                        <td><%=value2?.invoice_date %></td>
+                        <td><a href="/uploads/project_invoices/<%=value2?.file_name%>" class="" target="_blank">
+                            <i class="fa-solid fa-eye"></i>
+                            </a>
+                        </td>
+                        <td>
+                          <a class="text-danger change-status" href="javascript:void(0)" id="<%=value2?.id%>" data-table="project_invoices" data-status="3" data-key="id" data-id="<%=value2?.id%>" >
+                            <i class="fa-regular fa-trash-can"></i>
+                          </a>
+                        </td>
+                      </tr>
+                      <% }) }%>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+    var teamModal = new bootstrap.Modal(
+      document.getElementById("qualityModal"),
+      {}
+    );
+    $(document).on("click", ".chooseTeam", function () {
+      $("#designationId").val($(this).attr('data-id'));
+      getTeams($(this).attr('data-id'));
+      teamModal.show();
+    });
+    function getTeams(designationId,searchName="") {
+      $.ajax({
+        type:"POST",
+        url:baseUrl+"project-get-teams",
+        data:{_csrf:_token,designationId:designationId,searchName:searchName},
+        dataType:"JSON",
+        beforeSend:function(){
+           $("#loadTeams").html(`<li>
+                       No record found!
+                    </li>`);
+        },
+        success:function(resp){
+            $("#loadTeams").html('');
+            if(resp.status){
+                let selectedItems = [];
+                if(resp?.data?.selectedItems?.resource_ids){
+                    selectedItems = resp.data.selectedItems.resource_ids.split(",");
+                }
+                $.each(resp.data.records, function(k, v) {
+                    $("#loadTeams").append(`<li>
+                        <div class="check_box">
+                        <input type="checkbox" id="empName${v?.id}"  name="resource_ids" value="${v?.id}" ${(selectedItems.includes(String(v.id)))?'checked':''} />
+                        <label for="empName${v?.id}">${v?.first_name} ${v?.last_name} [${v?.email}]</label>
+                        </div>
+                    </li>`);
+                });
+            }else{
+                 $("#loadTeams").append(`<li>
+                       No record found!
+                    </li>`);
+            }       
+        }
+      })
+    }
+    $(document).on('keyup','#searchName',$.debounce(800, function(e) {
+        getTeams($("#designationId").val(),$(this).val());
+    }))
+    $(document).on('click','#searchTeam',function(params) {
+        getTeams($("#designationId").val(),$("#searchName").val());
+    })
+    $(document).on('click','.delete-team',function(e) {
+        e.preventDefault()
+        var rtl = false;
+        var title = "Confirm!";
+        var content = "Do you really want to do this ?";
+        var btnTextConfirm = "Confirm";
+        var btnTextCancel = "Cancel";
+        var resourceId = $(this).attr('data-id');
+        var designationId = $(this).attr('data-designation-id');
+        var projectId    = $("#project_id").val();
+        if (lang === "ar") {
+          rtl = true;
+          title = "يتأكد";
+          content = "هل تريد حقا أن تفعل هذا";
+          btnTextConfirm="تایید";
+          btnTextCancel="انصراف";
+        }
+        $.confirm({
+          icon: "fa fa-spinner fa-spin",
+          title: title,
+          content: content,
+          type: "orange",
+          rtl:rtl,
+          typeAnimated: true,
+          buttons: {
+            confirm: {
+              text: btnTextConfirm,
+              btnClass: 'btn-blue',
+              action:function () {
+              
+                  $.ajax({
+                    type: "POST",
+                    url: baseUrl + "project-team-delete",
+                    data: {_csrf:_token,resourceId:resourceId,designationId:designationId},
+                    dataType: "JSON",
+                    success: function (data) {
+                      var rtl = false;
+                      var warning = "Warning!";
+                      var success = "Success!";
+                      var deleteContent = "Data has been deleted !";
+                      if (lang === "ar") {
+                        rtl = true;
+                        warning = "!تحذير";
+                        success = "!نجاح";
+                        deleteContent = "تم حذف البيانات!";
+                      }
+                      if (data.status) {
+                        $.alert({
+                            icon: "fa fa-check",
+                            title: success,
+                            rtl: rtl,
+                            content: deleteContent,
+                            type: "green",
+                            typeAnimated: true,
+                          
+                          });
+                           setTimeout(function () {
+                              location.reload();
+                            }, 2000);
+                      }
+                    },
+                  });
+                
+              },
+            },
+            cancel:{
+              text: btnTextCancel,
+              btnClass: 'btn-red',
+              action:function () {
+                  var rtl = false;
+                  var title = "Canceled!";
+                  var content = "Process canceled!";
+                  if (lang === "ar") {
+                    rtl = true;
+                    title = "ألغيت!";
+                    content = "تم إلغاء العملية!";
+                  }
+                  $.alert({
+                    icon: "fa fa-times",
+                    title: title,
+                    content: content,
+                    type: "purple",
+                    rtl: rtl,
+                    typeAnimated: true,
+                  });
+              }
+            }
+          },
+        });
+    })
+  </script>
+</div>

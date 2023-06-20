@@ -1,0 +1,122 @@
+<link rel="stylesheet" href="/assets/css/dhtmlxgantt.css?v=8.0.0">
+<style>
+  .gantt_grid{
+			text-align: right;
+		}
+
+		.gantt_task_progress {
+			text-align: right;
+			padding-left: 10px;
+			box-sizing: border-box;
+			color: white;
+			font-weight: bold;
+		}
+</style>
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2><span>Project Management</span></h2>
+          </div>
+        </div>
+        <div class="page-title-actions">
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-card mb-3 card">
+          <div class="card-header staff_header">
+            <div class="header_title">
+              <h2><%= title %></h2>
+            </div>
+
+          </div>
+          <div class="card-body">
+            <div class="staffmanage_table">
+              <div id="gantt_here" style='width:100%; min-height:500px;'></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ <script src="/assets/js/dhtmlxgantt.js?v=8.0.0"></script>
+ <script>
+    if(lang==='ar'){
+      gantt.i18n.setLocale("ar");
+      gantt.config.rtl = true;
+      gantt.config.scale_height = 50;
+      gantt.config.scales = [
+        {unit: "month", step: 1, date: "%F, %Y"},
+        {unit: "day", step: 1, date: "%j, %D"}
+      ];
+      gantt.templates.progress_text = function (start, end, task) {
+        return "<span style='text-align:right;'>" + Math.round(task.progress * 100) + "% </span>";
+      };
+      gantt.templates.rightside_text = function (start, end, task) {
+        if (task.type == gantt.config.types.milestone) {
+          return task.text;
+        }
+        return "";
+      };
+      gantt.config.lightbox.sections = [
+        {name: "description", height: 70, map_to: "text", type: "textarea", focus: true},
+        {name: "type", type: "typeselect", map_to: "type"},
+        {name: "time", type: "duration", map_to: "auto"}
+      ];
+      gantt.config.layout = {
+        css: "gantt_container",
+        rows: [
+          {
+            cols: [
+              {view: "scrollbar", id: "scrollVer"},
+              {view: "timeline", scrollX: "scrollHor", scrollY: "scrollVer"},
+              {resizer: true, width: 1},
+              {view: "grid", scrollX: "scrollHor", scrollY: "scrollVer"}
+            ]
+          },
+          {view: "scrollbar", id: "scrollHor", height: 20}
+        ]
+      };
+    }else{
+      gantt.i18n.setLocale("en");
+      gantt.config.rtl = false;
+       gantt.templates.progress_text = function (start, end, task) {
+        return "<span style='text-align:right;'>" + Math.round(task.progress * 100) + "% </span>";
+      };
+    }
+    gantt.config.date_format = "%Y-%m-%d";
+		gantt.init("gantt_here");
+    gantt.load("/project-gnatt?projectId=<%=projectId%>");
+		const dataProcessor = new gantt.dataProcessor("/project-gnatt");
+    dataProcessor.setTransactionMode({
+          mode:"POST",
+          headers:{
+              "Content-Type": "application/x-www-form-urlencoded",
+          },
+          payload:{
+              projectId:"<%=projectId%>",
+              _csrf:_token
+          }
+    }, true);
+    dataProcessor.defineAction("error",function(response){
+      jqueryConfirmAlert(response.message, 'warning');
+    });
+    dataProcessor.defineAction("inserted",function(response){
+      jqueryConfirmAlert(response.message, 'success');
+    });
+    dataProcessor.defineAction("deleted",function(response){
+      jqueryConfirmAlert(response.message, 'success');
+    });
+    dataProcessor.defineAction("updated",function(response){
+      jqueryConfirmAlert(response.message, 'success');
+    });
+    dataProcessor.init(gantt);
+    dataProcessor.setTransactionMode("REST");
+	</script>

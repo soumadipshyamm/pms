@@ -1,0 +1,168 @@
+<div class="app-main__outer">
+  <div class="app-main__inner">
+    <!-- dashboard main header -->
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div>
+            <h2 class="text_skyblue">
+              <span>PROJECT STAKEHOLDERS & MAJOR RISKS (<%=oldData?.name%>)</span>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="main-card mb-3 card">
+          <div class="card-body">
+            <!-- project box -->
+            <div class="projectr_box project_costtable">
+                <div class="header_title pb-2">
+                    <h2>
+                        Stakeholder 
+                    </h2>
+                </div>
+                <div class="table-responsive">
+                  <table class="table table-bordered table-hover">
+                    <thead class="thead-blue">
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Type</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                         <% if(oldData.stakeHolders.length){
+                                        oldData.stakeHolders.forEach((item,index) => {
+                                    %>
+                            <tr>
+                                
+                                <td><%=item.name%></td>
+                                <td><%=item.stake_holder_and_risk_type%></td>
+                                <td>
+                        
+                                </td>
+                            </tr>
+                        <%   });
+                            }
+                        %>
+                      <tr>
+                        <form class="adminFrm" id="stakeHolderFrm" data-action="project-stakeholder-and-risk-create/<%=projectId%>" method="post" data-class="requiredCheck1">
+                            <input type="hidden" name="_csrf" value="<%=_csrfToken%>">
+                            <input type="hidden" name="type" value="S">
+
+                        <td>
+                          <input 
+                            class="form-control requiredCheck1"
+                            type="text"
+                            id=""
+                            name="name"
+                            placeholder="Enter Stakeholder Name"
+                            data-check="Stakeholder"
+                          />
+                        </td>
+                        <td>
+                          <select name="stake_holder_and_risk_type" id="" class="form-control requiredCheck1" data-check="Stakeholder Type">
+                            <option value="Public">Public</option>
+                            <option value="Private">Private</option>
+                            <option value="Others">Others</option>
+                          </select>
+                        </td>
+                        <td class="text-center">
+                          <a
+                            href="javascript:void(0)"
+                            class="add_row"
+                            id="stakeHolderAdd"
+                          >
+                            <i class="fas fa-plus-circle" aria-hidden="true"></i
+                          ></a>
+                          
+                        </td>
+                        </form>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                  <div class="header_title pb-2">
+                    <h2>
+                        Major Risk
+                    </h2>
+                </div>
+                <div class="table-responsive">
+                  <table class="table table-bordered table-hover">
+                    <thead class="thead-blue">
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Type</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                        <tbody>
+                            <% if(oldData.risks.length){
+                                        oldData.risks.forEach((item,index) => {
+                                    %>
+                            <tr>
+                                
+                                <td><%=item.name%></td>
+                                <td><%=item.stake_holder_and_risk_type%></td>
+                                <td>
+                        
+                                </td>
+                            </tr>
+                        <%   });
+                            }
+                        %>
+                       <tr>
+                        <form class="adminFrm" id="riskFrm" data-action="project-stakeholder-and-risk-create/<%=projectId%>" method="post" data-class="requiredCheck2">
+                            <input type="hidden" name="_csrf" value="<%=_csrfToken%>">
+                            <input type="hidden" name="type" value="R">
+                        <td>
+                          <input 
+                            class="form-control requiredCheck2"
+                            type="text"
+                            id=""
+                            name="name"
+                            placeholder="Enter Risk Name"
+                            data-check="Risk"
+                          />
+                        </td>
+                        <td>
+                          <select name="stake_holder_and_risk_type" id="" class="form-control requiredCheck2" data-check="Risk Type">
+                            <option value="Investment">Investment</option>
+                            <option value="Delivery">Delivery</option>
+                          </select>
+                        </td>
+                        <td class="text-center">
+                          <a
+                            href="javascript:void(0)"
+                            class="add_row"
+                            id="riskAdd"
+                          >
+                            <i class="fas fa-plus-circle" aria-hidden="true"></i
+                          ></a>
+                          
+                        </td>
+                        </form>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                           
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <script>
+    $(document).on("click",'#stakeHolderAdd',function (e) {
+        e.preventDefault();
+        $("#stakeHolderFrm").submit();
+    })
+    $(document).on("click",'#riskAdd',function (e) {
+        e.preventDefault();
+        $("#riskFrm").submit();
+    })
+  </script>
+</div>

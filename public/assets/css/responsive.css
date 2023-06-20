@@ -1,0 +1,54 @@
+
+/* large Desktop */
+@media only screen and (min-width: 1550px) {
+
+}
+
+/* desktop 1200px to 1399px */
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+
+}
+
+
+/* normal desktop */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+
+}
+
+/* tablet view */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+}
+
+
+/* mobile view */
+@media only screen and (max-width: 767px) {
+  .new-crd{
+    min-height: auto;
+  }
+  /* notification page */
+  .notfication_box{
+    flex-direction: column;
+  }
+  .notfication_boxleft{
+    width: 100%;
+  }
+  .notfication_boxright{
+    width: 100%;
+
+  }
+  /* datatable section */
+  .staffmanage_table div.dataTables_wrapper{
+    width: 270px;
+  }
+  .closed-sidebar .staffmanage_table div.dataTables_wrapper{
+    width: 270px;
+
+  }
+  .card-body{
+    padding: 1rem 1rem 1rem 0.7rem;
+  }
+}
+
+
+

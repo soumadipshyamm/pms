@@ -1,0 +1,423 @@
+{
+  "login": {
+    "title": "Sign In",
+    "loginBox": {
+      "header": "Welcome Back, Please Login Your Account",
+      "emailLabel": "Username / Email ID",
+      "emailPlaceHolder": "Enter User Name or Email ID",
+      "emailDataCheck": "Email",
+      "passwordLabel": "Password",
+      "passwordPlaceHolder": "Enter Password",
+      "passwordDataCheck": "Password",
+      "rememberMe": "Remember Me",
+      "loginButton": "Sign In",
+      "resetPassword": "Reset Password?",
+      "dontHaveAccount": "Don’t have an account?",
+      "signUpButton": "SIGN UP",
+      "designedBy": "Designed by :"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "box": {
+      "header": "Welcome",
+      "batch": {
+        "NoOfActive": "No of Active",
+        "project": "PROJECT"
+      },
+      "batch1": {
+        "NoOfActive": "No of Active",
+        "Client": "CLIENT"
+      },
+      "batch2": {
+        "NoOfActive": "No of Active",
+        "ServiceRequest": "SERVICE REQUEST"
+      }
+    },
+    "table1": {
+      "RecentProjects": "RECENT PROJECTS",
+      "Status": "Status",
+      "DropdownMenu": "Active",
+      "DropdownItem1": "Active",
+      "DropdownItem2": "Inactive",
+      "ViewAll": "View All"
+    },
+    "table2": {
+      "Staffs": "STAFFS",
+      "SearchPlaceholder": "Search By Name...",
+      "ViewAll": "View All"
+    }
+  },
+
+
+  "ClientManagement": {
+    "title": {
+      "list": "Client list",
+      "add": "ADD CLIENT",
+      "edit": "Client Edit",
+      "module": "Client Management",
+      "search": "SEARCH BY"
+    },
+    "add_edit_box": {
+      "FirstNameLabel": "First Name",
+      "FirstNamePlaceholder": "Enter First Name",
+      "FirstNameCheck": "First Name",
+      "LastNameLabel": "Last Name",
+      "LastNamePlaceholder": "Enter Last Name",
+      "LastNameCheck": "Last Name",
+      "EmailLabel": "Email",
+      "EmailPlaceholder": "Enter Email ID",
+      "EmailCheck": "Email",
+      "PhoneLabel": "Phone",
+      "PhonePlaceholder": "Enter Phone Number",
+      "PhoneCheck": "Phone",
+      "DobLabel": "Date Of Birth",
+      "DobPlaceholder": "Select Date",
+      "DobCheck": "Date Of Birth",
+      "GenderLabel": "Gender",
+      "GenderCheck": "Gender",
+      "Male": "Male",
+      "Female": "Female",
+      "Others": "Others",
+      "OrganizationLabel": "Organization",
+      "OrganizatioPlaceholder": "Enter Organization",
+      "OrganizatioCheck": "Organization",
+      "CountryLabel": "Country",
+      "CountryCheck": "Country",
+      "CountryChoose": " -Choose Country-",
+      "ProvinceLabel": "Province",
+      "ProvinceCheck": "Province",
+      "ProvinceChoose": "Choose Province",
+      "CityLabel": "City",
+      "CityCheck": "City",
+      "CityChoose": "Choose City",
+      "updateButton": "UPDATE USER",
+      "saveButton": "SAVE USER"
+    },
+    "UserTable": {
+      "SlNo": "Sl. No.",
+      "Name": "Name",
+      "EmailId": "Email ID",
+      "PhoneNumber": "Phone Number",
+      "Gender": "Gender",
+      "Dob": "Date Of Birth",
+      "Status": "Status",
+      "Created": "Created On",
+      "Action": "Action"
+    }
+  },
+
+
+  "projectManagement": {
+    "title": {
+      "list": "Project list",
+      "add": "ADD PROJECT",
+      "edit": "Project Edit",
+      "module": "Project Management",
+      "search": "SEARCH BY",
+      "placeHolder": "Search"
+    },
+    "addEditSection": {
+      "clientNameLabel": "Client Name",
+      "clientNameCheck": "Client Selection",
+      "selectClient": "Select Client",
+      "noDataFound": "No Data Found",
+      "contactNumberLabel": "Contact Number",
+      "emailLabel": "Email",
+      "projectTypeLabel": "Project Type",
+      "projectTypeCheck": "Client Selection",
+      "selectProject": "Select Project Type",
+      "projectNameLabel": "Project Name",
+      "projectNamePlaceholder": "Enter Project Name",
+      "projectNameCheck": "Project Name",
+      "npmoProjectLabel": "NPMO Project Number",
+      "npmoProjectPlaceholder": "Enter NPMO Project Number",
+      "npmoProjectCheck": "NPMO Project Number",
+      "entityNameLabel": "Entity Name",
+      "entityNamePlaceholder": "Enter Entity Name",
+      "entityNameCheck": "Entity Name",
+      "preparerNameLabel": "Preparer Name",
+      "preparerNamePlaceholder": "Enter Preparer Name",
+      "preparerNameCheck": "Preparer Name",
+      "preparerEmailLabel": "Preparer Email",
+      "preparerEmailPlaceholder": "Enter Preparer Email",
+      "preparerEmailCheck": "Preparer Email",
+      "registrationDateLabel": "Registration Date",
+      "registrationDatePlaceholder": "Enter Registration Date",
+      "registrationDateCheck": "Registration Date",
+      "projectObjectivesLabel": "Project Objectives",
+      "projectObjectivesCheck": "Project Objectives",
+      "projectScopeLabel": "Project Scope",
+      "projectScopeCheck": "Project Scope",
+      "projectStrategicLabel": "Project Strategic Context",
+      "projectStrategicCheck": "Project Strategic Context",
+      "projectStudiesLabel": "Project Studies / Needs Assesment / Supply & Demand Analysis",
+      "projectStudiesCheck": "Project Studies / Needs Assesment / Supply & Demand Analysis",
+      "projectSiteLabel": "Project Site Location / Route Detail",
+      "projectSiteCheck": "Project Site Location / Route Detail",
+      "projectPotentialImpactLabel": "Project Potential Impact",
+      "projectPotentialImpactCheck": "Project Potential Impact",
+      "descriptionLabel": "Description",
+      "descriptionCheck": "Description",
+      "locationLabel": "Location",
+      "locationPlaceholder": "Enter Location",
+      "locationCheck": "Location",
+      "budgetLabel": "Budget",
+      "budgetPlaceholder": "Enter Budget",
+      "budgetCheck": "Budget",
+      "startDateLabel": "Start Date",
+      "startDatePlaceholder": "Select Date",
+      "startDateCheck": "Start Date",
+      "endDateLabel": "End Date",
+      "endDatePlaceholder": "Select Date",
+      "endDateCheck": "End Date"
+    },
+    "uploadProjectModal": {
+      "modalTitle": "Upload Project Document",
+      "uploadDocLabel": "Upload Your Document",
+      "uploadDocCheck": "File",
+      "docNameLabel": "Document Name",
+      "docNamePlaceholder": "Enter Document Name",
+      "docNameCheck": "Document Name",
+      "closeBtn": "Close",
+      "uploadBtn": "Upload"
+    },
+    "projectListTabName": {
+      "onGoing": "On Going",
+      "initiallyDelivered":"Initially Delivered"
+    },
+    "projectListtable": {
+      "slNo": "Sl. No.",
+      "clientName": "Client Name",
+      "projectName": "Project Name",
+      "location": "Location",
+      "budget": "Budget",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "status": "Status",
+      "createdOn": "Created On",
+      "action": "Action"
+    }
+  },
+
+
+  "controller": {
+    "auth": {
+      "userCheck": {
+        "loginSuccess": "Log In successfull!",
+        "emailDoesNotMatch": "Email Does not match!",
+        "passwordDoesNotMatch": "Password Does not match!"
+      }
+    },
+    "generic": {
+      "err": "Something Went wrong!",
+      "invalidData": "Invalid Data!"
+    }
+  },
+
+
+  "leftBar": {
+    "Dashboard": "Dashboard",
+    "Project": {
+      "ProjectManagement": "Project Management",
+      "ProjectList": "Project List",
+      "AddNewProject": "Create Project"
+    },
+    "FinancialManagement": "Financial Management",
+    "OrderManagement": "Order Management",
+    "User": {
+      "UserManagement": "User Management",
+      "UserList": "User List",
+      "AddNewUser": "Add New User"
+    },
+    "Client": {
+      "ClientManagement": "Client Management",
+      "ClientList": "Client List",
+      "AddNewClient": "Add New Client"
+    },
+    "Contractor_Consultant": {
+      "Management": "Vendor Management",
+      "List": "Vendor List",
+      "AddNew": "Add New Vendor"
+    },
+    "Report": "Report",
+    "Notification": "Notification",
+    "LogOut": "Log Out"
+  },
+
+
+  "topBar": {
+    "settings": {
+      "generalSetting": "General Setting",
+      "action": "Action",
+      "anotherAction": "Another action",
+      "somethingElseHere": "Something else here",
+      "administrativeSetting": "Administrative Setting",
+      "profilePermissions": "Profile & Permissions",
+      "roles": "Roles",
+      "materialManagement": "Material Management"
+    }
+  },
+
+
+  "UserManagement": {
+    "title": {
+      "list": "User list",
+      "add": "USER ADD",
+      "edit": "User Edit",
+      "module": "User Management",
+      "search": "SEARCH BY",
+      "aduser": "ADD USER "
+    },
+    "search": {
+      "searchNameLabel": "SEARCH BY NAME",
+      "searchNamePlaceholder": "Enter Name",
+      "searchEmailLabel": "SEARCH BY EMAIL",
+      "searchEmailPlaceholder": "Enter Email",
+      "searchPhoneLabel": "SEARCH BY PHONE",
+      "searchPhonePlaceholder": "Enter Phone"
+    },
+    "table": {
+      "slNo": "Sl. No.",
+      "name": "Name",
+      "emailId": "Email ID",
+      "phoneNumber": "Phone Number",
+      "profile": "Profile",
+      "role": "Role",
+      "gender": "Gender",
+      "dob": "Date Of Birth",
+      "status": "Status",
+      "createOn": "Created On",
+      "action": "Action"
+    },
+    "add_edit_box": {
+      "FirstNameLabel": "First Name",
+      "FirstNamePlaceholder": "Enter First Name",
+      "FirstNameCheck": "First Name",
+      "LastNameLabel": "Last Name",
+      "LastNamePlaceholder": "Enter Last Name",
+      "LastNameCheck": "Last Name",
+      "EmailLabel": "Email",
+      "EmailPlaceholder": "Enter Email ID",
+      "EmailCheck": "Email",
+      "PhoneLabel": "Phone",
+      "PhonePlaceholder": "Enter Phone Number",
+      "PhoneCheck": "Phone",
+      "DepartmentLabel": "Department",
+      "DepartmentPlaceholder": "Enter Department",
+      "DepartmentCheck": "Department",
+      "DobLabel": "Date Of Birth",
+      "DobPlaceholder": "Select Date",
+      "DobCheck": "Date Of Birth",
+      "GenderLabel": "Gender",
+      "GenderCheck": "Gender",
+      "Male": "Male",
+      "Female": "Female",
+      "Others": "Others",
+      "SelectProfile": "Select Profile",
+      "SelectRole": "Select Role",
+      "updateButton": "UPDATE USER",
+      "saveButton": "SAVE USER"
+    }
+  },
+
+
+  "consultantManagement": {
+    "title": {
+      "heading": "Vendor Management",
+      "add": "ADD Vendor",
+      "list": "Vendor LIST",
+      "search": "SEARCH BY",
+      "select": " None selected"
+    },
+    "table": {
+      "slNo": "Sl. No.",
+      "type": "Type",
+      "name": "Name",
+      "emailId": "Email ID",
+      "phoneNumber": "Phone Number",
+      "gender": "Gender",
+      "dob": "Date Of Birth",
+      "status": "Status",
+      "createdOn": "Created On",
+      "action": "Action"
+    },
+    "add_edit_box": {
+      "typeLabel": "Type",
+      "firstNameLabel": "First Name ",
+      "firstNamePlaceholder": "Enter First Name",
+      "firstNameCheck": "First Name",
+      "lastNameLabel": "Last Name ",
+      "lastNamePlaceholder": "Enter Last Name",
+      "lastNameCheck": "Last Name",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter Email ID",
+      "emailCheck": "Email",
+      "phoneLabel": "Phone",
+      "phonePlaceholder": "Enter Phone Number",
+      "phoneCheck": "Phone",
+      "dobLabel": "Date Of Birth",
+      "dobCheck": "Date Of Birth",
+      "genderLabel": "Gender",
+      "genderCheck": "Gender",
+      "organizationLabel": "Organization",
+      "organizationPlaceholder": "Enter Organization",
+      "organizationCheck": "Organization",
+      "countryLabel": "Country",
+      "countryCheck": "Country",
+      "provinceLabel": "Province",
+      "provinceCheck": "Province",
+      "cityLabel": "City",
+      "cityCheck": "City"
+
+    }
+  },
+
+  "materialManagement": {
+    "title": {
+      "module": "Material Management",
+      "list": "Material List",
+      "add": "MATERIAL ADD",
+      "addmaterial": "ADD Material"
+    },
+    "add_edit_box": {
+      "materialNameLabel": "Material Name",
+      "materialNamePlaceholder": "Enter Material Name",
+      "materialNameCheck": "Material Name",
+      "materialCodeLabel": "Material Code",
+      "materialCodePlaceholder": "Enter Material Code",
+      "materialCodeCheck": "Material Code",
+      "materiaUnitLabel": "Material Unit",
+      "materialUnitPlaceholder": "Enter Material Unit ",
+      "materiaUnitCheck": "Material Unit",
+      "materialRateLabel": "Material Rate",
+      "materialRatePlaceholder": "Enter Material Rate",
+      "materialRateCheck": "Material Rate",
+      "updateButton": "UPDATE MATERIAL",
+      "saveButton": "SAVE MATERIAL"
+    },
+    "table": {
+      "slNo": "Sl. No.",
+      "name": "Name",
+      "code": "Code",
+      "unit": "Unit",
+      "rate": "Rate",
+      "status": "Status",
+      "createdOn": "Created On",
+      "action": "Action"
+    }
+  },
+
+  "multipleSelect": {
+    "allSelect": "All Selected",
+    "selected": "Selected",
+    "noneSelected": "None Selected"
+  },
+  "myProfile": {
+    "title": "My Profile",
+    "details": "Profile Details"
+  },
+  "detailsTable": {
+    "change": "Change Photo"
+  }
+}
